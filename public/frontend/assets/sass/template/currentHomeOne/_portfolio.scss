@@ -1,0 +1,54 @@
+/* Portfolio Css Start */
+
+.homeC-portfolio {
+    &__left {
+        width: 61%;
+        @media (max-width: 1299px) {
+            width: 52%;
+        }
+        @media (max-width: 991px) {
+            width: 42%;
+        }
+    }
+    &__bg {
+        position: absolute;
+        inset-inline-start: 0;
+        width: inherit;
+        top: 0;
+        height: 100% !important;
+        object-fit: cover;
+    }
+    &__data {
+        position: absolute;
+        bottom: 0;
+        max-width: 416px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        inset-inline-start: 12%;
+    }
+    &__right {
+        width: 50%;
+        padding: 60px 0;
+        @media (max-width: 1299px) {
+            width: 60%;
+        }
+        @media (max-width: 991px) {
+            width: 70%;
+        }
+        @media (max-width: 767px) {
+            width: 100%;
+            padding: 0;
+        }
+    }
+}
+.padding-from-left {
+    padding-inline-start: 23%;
+    @media (max-width: 767px) {
+        padding-inline-start: 16px;
+    }
+}
+
+/* Portfolio Css End */

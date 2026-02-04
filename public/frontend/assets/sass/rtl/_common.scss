@@ -1,0 +1,21 @@
+.sub-title:after, .sub-title:before {
+    margin-inline-start: 12px;
+    margin-inline-end: 0;
+}
+.sub-title:after {
+    margin-inline-start: 0;
+    margin-inline-end: 12px;
+}
+.slick-dots li {
+    margin-inline-start: 18px;
+    margin-inline-end: 0;
+}
+.slick-dots li:last-child {
+    margin-inline-start: 0;
+}
+
+.global-btn img {
+    margin-inline-end: 10px;
+    margin-inline-start: 0;
+    transform: rotateY(180deg);
+}

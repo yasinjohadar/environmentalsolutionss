@@ -1,0 +1,87 @@
+/* Process Area 2 ---------------------------------- */
+.process-card-wrap2 {
+    position: relative;
+    &:after {
+        content: url(../img/icon/process-arrow-5-1.svg);
+        position: absolute;
+        display: inline-block;
+       inset-inline-end: 0;
+        inset-inline-end: 0;
+        transform: translate(50%, -5px);
+        width: 190px;
+        height: 41px;
+    }
+    &:nth-child(even) {
+        .process-card.style2 {
+            transform: translate(0, -30px);
+            border-color: $theme-color2;
+            .process-card_number {
+                -webkit-text-stroke: 1px $theme-color2;
+            }
+        }
+        &:after {
+            inset-inline-end: auto;
+            inset-block-start: -20px;
+            transform: translate(50%, -5px) rotateX(180deg);
+        }
+    }
+
+    &:last-child {
+        &:after {
+            display: none;
+        }
+    }
+
+    @include xl {
+        &:after {
+            display: none;
+        }
+        .process-card.style2 {
+            margin: 0;
+        }
+    }
+    @include lg {
+        .process-card.style2 {
+            transform: translate(0, 0px);
+        }
+        &:nth-child(even) {
+            .process-card.style2 {
+                transform: translate(0, 0px);
+                border-color: $theme-color;
+                .process-card_number {
+                    -webkit-text-stroke: 1px $theme-color;
+                }
+            }
+        }
+    }
+}
+
+.process-card.style2 {
+    border: 1px solid $theme-color;
+    border-radius: 20px;
+    padding: 30px;
+    background: transparent;
+    margin: 55px 0;
+    .process-card_number {
+        display: inline-block;
+        font-size: 60px;
+        font-weight: 700;
+        color: transparent;
+        margin-bottom: 20px;
+        -webkit-text-stroke: 1px #AEB8A7;
+    }
+    .process-card-title {
+        color: $white-color;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .process-card-text {
+        color: $white-color;
+        font-size: 18px;
+        opacity: 0.7;
+        margin-bottom: 10px;
+        display: block;
+    }
+}

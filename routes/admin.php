@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\WhatsAppMessageController;
 use App\Http\Controllers\Admin\WhatsAppWebController;
 use App\Http\Controllers\Admin\WhatsAppWebSettingsController;
 use App\Http\Controllers\Admin\WhatsAppWebhookController;
+use App\Http\Controllers\Admin\HeroSlideController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ use App\Http\Controllers\Admin\WhatsAppWebhookController;
 */
 
 Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.')->group(function () {
+    // Hero Slider routes
+    Route::resource('hero-slides', HeroSlideController::class);
+
     // Categories routes
     Route::resource('categories', CategoryController::class);
     

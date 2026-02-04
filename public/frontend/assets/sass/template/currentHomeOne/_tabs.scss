@@ -1,0 +1,14 @@
+/* =================== Common Tabs Css Start ======================= */
+.common-tabs {
+    .nav-link {
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: var(--neutral-500) !important;
+        font-weight: 600;
+        &.active {
+            background-color: var(--theme-color);
+            color: var(--theme-color2) !important;
+        }
+    }
+}
+/* =================== Common Tabs Css End ======================= */

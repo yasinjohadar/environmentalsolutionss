@@ -1,0 +1,18 @@
+/* Counter Section Css Start */
+.counter-two-section {
+    @media (min-width: 992px) {
+        transform: translateY(140px);
+        margin-top: -140px;
+    }
+    @media (max-width: 991px) {
+        margin-bottom: 80px;
+    }
+    &__inner {
+        padding: 80px 60px;
+        border-radius: 8px;
+        @media (max-width: 1199px) {
+            padding: 80px 40px;
+        }
+    }
+}
+/* Counter Section Css End */

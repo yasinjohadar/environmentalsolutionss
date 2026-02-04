@@ -1,0 +1,35 @@
+/* =========================== upcoming event section start ==========================*/
+.upcoming-event-item {
+    gap: 30px;
+    padding-bottom: 32px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid hwb(0 82% 18% / 0.2);
+    &:last-child {
+        margin-bottom: 0;
+    }
+    @media (max-width: 1199px) {
+        gap: 16px;
+    }
+    &.active .upcoming-event-item {
+        &__button {
+            background: var(--theme-color2);
+            color: var(--dark-color) !important;
+            i:before {
+                content: "\f078";
+            }
+        }
+    }
+    &__button {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--theme-color2);
+        color: var(--white-color);
+    }     
+    &__title {
+        color: var(--white-color);
+    }
+    &__hidden {
+        display: none;
+    }
+}
+/* =========================== upcoming event section End ==========================*/

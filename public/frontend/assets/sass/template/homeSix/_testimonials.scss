@@ -1,0 +1,171 @@
+/*---------------------------------------------
+    :: Testimonial
+-----------------------------------------------*/
+
+.testimonial-area {
+    padding-top: 50px;
+    padding-bottom: 180px;
+    @media #{$xs-to-md-max} {
+        padding-bottom: 80px;
+     }
+    &.testimonial-bg {
+        background-color: #18191d;
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("../../assets/img/homeSix/testimonial.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
+            opacity: 0.1;
+        }
+    }
+    .single-testimonial {
+        padding-left: 250px;
+        @media #{$xs-to-md-max} {
+           padding-left: 0;
+         }
+        .client-info {
+            .ratting {
+                i {
+                    color: #f1bd06;
+                }
+            }
+            .pera {
+                margin-top: 32px;
+                color: var(--white-color);
+                font-size: 28px;
+                font-weight: 500;
+                line-height: 1.28;
+                @media #{$xs-to-md-max} {
+                    font-size: 20px;
+                 }
+            }
+        }
+        .client-details {
+            display: flex;
+            gap: 43px;
+            margin-top: 16px;
+            .name {
+                color: var(--white-color);
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 1.66;
+            }
+        }
+    }
+    .testimonial-slider-active {
+        padding: 100px 0px;
+        @media #{$xs-to-md-max} {
+            padding: 70px 0px;
+         }
+        .swiper-button-next,
+        .swiper-button-prev {
+            &::after {
+                content: "";
+            }
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--base);
+            inset-block-start: 122%;
+            inset-inline-end: 48px;
+            svg {
+                width: unset;
+                height: unset;
+                path {
+                    fill: var(--white-color);
+                }
+            }
+        }
+        .swiper-button-prev {
+            inset-inline-end: 104px;
+            inset-inline-start: unset;
+        }
+        .swiper-button-prev.swiper-button-disabled,
+        .swiper-button-next.swiper-button-disabled {
+            opacity: 1;
+            background-color: var(--white-color);
+            svg {
+                width: unset;
+                height: unset;
+                path {
+                    fill: #000;
+                }
+            }
+        }
+        .swiper-pagination-bullets.swiper-pagination-horizontal {
+            padding-left: 80px;
+            @media #{$xs-to-md-max} {
+                display: none;
+             }
+        }
+
+        .swiper-pagination-bullet {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            opacity: 0.6;
+            background-color: transparent;
+            transition: opacity 0.3s ease, bottom 0.3s ease;
+
+            .testimonial-img-horizontal {
+                width: 80px;
+                height: 80px;
+                border: 2px solid var(--white-color);
+                border-radius: 50%;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .swiper-pagination-bullet-active {
+            position: absolute;
+            top: -135px;
+            left: 6px;
+            width: 150px;
+            height: 150px;
+            opacity: 1;
+            z-index: 2;
+            .testimonial-img-horizontal {
+                width: 150px;
+                height: 150px;
+                border: 2px solid var(--base);
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+            z-index: 1;
+            opacity: 1;
+            position: relative;
+            transform: translate(-600px, 36px);
+            @media #{$xs-to-xl-max} {
+                transform: translate(-510px, 36px);
+            }     
+            @media #{$xs-to-lg-max} {
+                transform: translate(-410px, 36px);
+            } 
+        }
+    }
+}
+

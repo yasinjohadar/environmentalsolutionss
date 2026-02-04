@@ -1,0 +1,12 @@
+.homeC-service-item {
+    &:hover {
+        .homeC-service-item {
+            &__icon {
+                transform: rotate(90deg);
+            }
+        }
+    }
+    &__icon {
+        transition: .4s;
+    }
+}

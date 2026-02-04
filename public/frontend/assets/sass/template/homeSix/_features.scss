@@ -1,0 +1,77 @@
+/*---------------------------------------------
+    :: Feature
+-----------------------------------------------*/
+
+.feature-area {
+    padding-top: 130px;
+    padding-bottom: 110px;
+    @media (max-width: 991px) {
+        padding: 70px 0px;
+    }
+    .feature-title {
+        max-width: 600px;
+        .title {
+            @extend .text-heading;
+            font-size: 45px;
+            font-weight: 700;
+            line-height: normal;
+            text-transform: capitalize;
+            margin-bottom: 0;
+            @media (max-width: 991px) {
+                font-size: 26px;
+            }
+        }
+    }
+    .feature-content{
+        .pera{
+            @extend .text-para;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.6;
+            text-transform: capitalize;
+            @media (max-width: 991px) {
+                font-size: 14px;
+            }
+        }
+    }
+    .feature-item{
+        .title{
+            @extend .text-heading;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.08;
+            text-transform: capitalize;
+            margin-bottom: 0;
+            @media (max-width: 991px) {
+                font-size: 16px;
+            }
+        }
+        .feature-items-header{
+            display: flex;
+            gap: 20px;
+            padding-bottom: 18px;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .feature-content{
+            .pera{
+               margin-top: 24px; 
+               line-height: 1.87;
+            }
+            .feature-points{
+                margin-top: 16px;
+                .single-list{
+                    @extend .text-heading;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 1.87;
+                    text-transform: capitalize;
+                    i{
+                        font-size: 20px;
+                        @extend .text-baseee;
+                    }
+                }
+            }
+        }
+    }
+}

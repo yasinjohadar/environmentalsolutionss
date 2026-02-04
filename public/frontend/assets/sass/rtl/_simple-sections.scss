@@ -1,0 +1,31 @@
+.checklist.style-white li i, .checklist.style-white li svg {
+    margin-inline-start: 20px;
+    margin-inline-end: 0;
+}
+.checklist li i, .checklist li svg {
+    margin-inline-start: 20px;
+    margin-inline-end: 0;
+}
+.checklist.style2 ul li i {
+    margin-inline-start: 15px;
+    margin-inline-end: 0;
+}
+.mobile-menu-wrapper .mobile-menu-area {
+   inset-inline-end: -110%;
+    inset-inline-start: auto;
+}
+.mobile-menu-wrapper.body-visible .mobile-menu-area {
+   inset-inline-end: 0;
+}
+.mobile-menu-wrapper .mobile-logo {
+    padding: 0 30px 0 0;
+}
+.mobile-menu-wrapper .menu-toggle {
+    border-inline-end: 1px solid var(--theme-color);
+}
+.mobile-menu {
+    text-align: end;
+}
+.mobile-menu ul .submenu-item-has-children > a .mean-expand-class:before {
+    content: "\f104";
+}

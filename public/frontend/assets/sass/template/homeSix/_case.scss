@@ -1,0 +1,74 @@
+/*---------------------------------------------
+    :: Case Studies
+-----------------------------------------------*/
+
+.case-studies-area {
+    padding-top: 110px;
+    padding-bottom: 120px;
+    @media #{$xs-to-md-max} {
+        padding-top: 60px;
+        padding-bottom: 70px;
+    }
+    .section-title {
+        max-width: 720px;
+        margin: auto;
+        margin-bottom: 67px;
+        @media #{$xs-to-md-max} {
+            margin-bottom: 35px;
+        }
+        .highlight-title {
+            margin-bottom: 10px;
+        }
+    }
+    .image-wrapper{
+        position: relative;
+        cursor: pointer;
+        height: 100%;
+        @media #{$xs} {
+            height: 300px;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            object-fit: cover;
+            
+        }
+        transition: .3s linear;
+        &:hover{
+            .image-tags{
+                opacity: 1;
+            }
+        }
+        .image-tags{
+            position: absolute;
+            bottom: 12px;
+            inset-inline-start: 24px;
+            z-index: 1;
+            opacity: 0;
+            transition: .3s linear;
+            .first-tag{
+                background-color: var(--white-color);
+                color: var(--black);
+                font-size: 18px;
+                font-family: var(--Mulish);
+                text-transform: capitalize;
+                font-weight: 600;
+                line-height: normal;
+                padding: 8px 68px 11px 14px;
+            }
+            .second-tag{
+                background-color: var(--base);
+                color: var(--white-color);
+                font-size: 16px;
+                font-family: var(--Mulish);
+                text-transform: capitalize;
+                font-weight: 500;
+                line-height: normal;
+                padding: 12px 38px;
+                text-align: center;
+                width: fit-content;
+            }
+        }
+    }
+}

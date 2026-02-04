@@ -1,0 +1,178 @@
+/*---------------------------------------------
+    :: Contact Us
+-----------------------------------------------*/
+
+.contact-us-area {
+    padding-top: 80px;
+    padding-bottom: 120px;
+    position: relative;
+    z-index: 1;
+    @media #{$xs-to-md-max} {
+        padding-top: 40px;
+        padding-bottom: 50px;
+    }
+    .section-title {
+        max-width: 632px;
+        text-transform: capitalize;
+        position: relative;
+        .highlight-title {
+            font-size: 20px;
+            font-weight: 500;
+            @media #{$xs-to-md-max} {
+                font-size: 16px;
+            }
+            &::before {
+                display: none;
+            }
+        }
+        .title{
+            font-size: 45px;
+            margin-bottom: 24px;
+            @media #{$xs-to-md-max} {
+                font-size: 26px;
+                margin-bottom: 18px;
+            }
+        }
+        .pera{
+            font-size: 16px;
+            @media #{$xs-to-md-max} {
+                font-size: 14px;
+            }
+        }
+    }
+    .section-pera {
+        position: relative;
+        max-width: 545px;
+        .pera {
+            font-size: 16px;
+            @extend .text-heading; 
+            font-weight: 400;
+            line-height: 1.81;
+            @media #{$xs-to-md-max} {
+                font-size: 14px;
+            }
+        }
+    }
+    .contact-point{
+        margin-top: 31px;
+        @media #{$xs-to-md-max} {
+            margin-bottom: 20px;
+        }
+        .single-point{
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+            .icon{
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: var(--base);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .title{
+                color: var(--secondary-color);
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 1.87;
+                margin-bottom: 0;
+                @media #{$xs-to-md-max} {
+                    font-size: 14px;
+                }
+            }
+
+        }
+    }
+    .contact-details{
+        display: flex;
+        gap: 26px;
+        margin-top: 42px;
+        @media #{$xs-to-lg-max} {
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        .contact-card{
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            .content{
+                .highlight{
+                    font-size: 16px;
+                    color: var(--base);
+                    font-weight: 500;
+                    line-height: 1.81;
+                    margin-bottom: 9px;
+                    @media #{$xs-to-md-max} {
+                        font-size: 14px;
+                    }
+                }
+                .pera{
+                    font-size: 22px;
+                    @extend .text-heading; 
+                    font-weight: 500;
+                    line-height: 1.6;
+                    @media #{$xs-to-md-max} {
+                        font-size: 16px;
+                    }
+                }
+            }
+            .icon{
+                width: 90px;
+                height: 90px;
+                border-radius: 5px;
+                background-color: var(--base);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @media #{$xs-to-md-max} {
+                   width: 60px;
+                   height: 60px;
+                   svg{
+                    width: 30px;
+                   }
+                }
+            }
+        }
+    }
+    .contact-form{
+        margin-top: -184px;
+        border-radius: 10px;
+        background-color: var(--white-color);
+        box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.10);
+        padding: 60px 79px 83px 79px;
+        @media #{$xs-to-md-max} {
+            padding: 30px;
+            margin-top: 0;
+        }
+        .section-title{
+            .title{
+                margin-bottom: 30px;
+            }
+        }
+        .form-control{
+            border-radius: 5px;
+            background-color: var(--gray);
+            padding: 17px 20px;
+            margin-bottom: 15px;
+            border: 1px solid var(--gray);
+            &::placeholder{
+                color: rgba(112, 112, 112, 0.60);
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 1.71;
+            }
+            &:focus{
+                box-shadow: none;
+            }
+
+        }
+        textarea{
+            resize:none;
+            height: 140px;
+        }
+
+    }
+
+}

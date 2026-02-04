@@ -1,0 +1,120 @@
+/*---------------------------------------------
+    :: Work Process
+-----------------------------------------------*/
+
+.work-process-area {
+    z-index: 1;
+    padding-top: 108px;
+    padding-bottom: 174px;
+    @media #{$xs-to-md-max} {
+        padding-top: 60px;
+        padding-bottom: 70px;
+    }
+    &.work-process-bg {
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("../../assets/img/homeSix/shapes/work-process-bg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: top center;
+        }
+    }
+    .section-title {
+        max-width: 540px;
+        text-transform: capitalize;
+        position: relative;
+    }
+    .section-pera {
+        position: relative;
+        max-width: 545px;
+        .pera {
+            font-size: 16px;
+            @extend .text-heading; 
+            font-weight: 400;
+            text-transform: capitalize;
+            line-height: 1.6;
+        }
+    }
+    .process-point {
+        position: relative;
+        padding-top: 44px;
+        @media #{$xs-to-md-max} {
+            padding-top: 24px;
+        }
+        .single-point {
+            padding-bottom: 32px;
+            @media #{$xs-to-md-max} {
+                padding-bottom: 18px;
+            }
+            .number {
+                font-size: 30px;
+                color: var(--base);
+                font-weight: 600;
+                text-transform: capitalize;
+                line-height: normal;
+                margin-inline-end: 15px;
+                @media #{$xs-to-md-max} {
+                    font-size: 20px;
+                }
+            }
+            .title {
+                font-size: 24px;
+                color: var(--secondary-color);
+                font-weight: 600;
+                text-transform: capitalize;
+                line-height: normal;
+                margin-bottom: 0;
+                @media #{$xs-to-md-max} {
+                    font-size: 18px;
+                }
+            }
+            .pera {
+                font-size: 16px;
+                @extend .text-heading; 
+                font-weight: 400;
+                text-transform: capitalize;
+                line-height: 1.87;
+                margin-top: 10px;
+                @media #{$xs-to-md-max} {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    .work-gallery {
+        padding-top: 100px;
+        position: relative;
+        @media #{$xs-to-md-max} {
+            padding-top: 60px;
+        }
+        .image-one {
+            @media #{$xs} {
+                height: 300px;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .image-two {
+            @media #{$xs} {
+                height: 300px;
+            }
+            margin-top: 40px;
+            @media #{$xs-to-md-max} {
+                margin-top: 0;
+            }
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}

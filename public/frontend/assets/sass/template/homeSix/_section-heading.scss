@@ -1,0 +1,46 @@
+/* Section Heading Css Start  */
+.highlight-title {
+    font-family: var(--Mulish);
+    color: var(--base) !important;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 30px;
+    position: relative;
+    &::before {
+        content: "";
+        display: inline-block;
+        border-top: 2px solid var(--base);
+        width: 90px;
+        transform: translateY(-5px);
+    }
+}
+.dotted-highlight {
+    color: var(--base);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 30px;
+    position: relative;
+    i {
+        color: var(--base);
+        font-size: 20px;
+        margin-right: 15px;
+    }
+}
+
+.section-title {
+    .big-title {
+        color: var(--white-color);
+        font-size: 68px;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .title {
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 1.14;
+        margin-bottom: 30px;
+    }
+}
+/* Section Heading Css End */

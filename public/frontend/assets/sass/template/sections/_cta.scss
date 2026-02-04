@@ -1,0 +1,28 @@
+/* CTA Area 3 ---------------------------------- */
+.cta-area-3 {
+    border-radius: 20px;
+    padding: 80px 60px;
+    margin-top: -140px;
+    .newsletter-form.style2 .form-group {
+        border-color: $theme-color;
+    }
+    @include ml {
+        padding: 60px 38px;
+    }
+    @include md {
+        padding: 50px 50px 60px;
+    }
+    @include xs {
+        padding: 30px;
+        .newsletter-form {
+            margin: 0px 0 80px 0;
+        }
+    }
+}
+
+
+.cta-one {
+    margin-bottom: -70px;
+    position: relative;
+    z-index: 1;
+}

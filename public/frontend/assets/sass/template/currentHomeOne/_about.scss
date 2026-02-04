@@ -1,0 +1,13 @@
+/* ============== Home Current About Css Start ======================== */
+.homeC-about {
+    &__bg  {
+        width: 100vw;
+        height: 920px;
+        margin-bottom: -400px;
+        @media (max-width: 991px) {
+            height: 390px;
+            margin-bottom: -100px;
+        }
+    }
+}
+/* ============== Home Current About Css End ======================== */

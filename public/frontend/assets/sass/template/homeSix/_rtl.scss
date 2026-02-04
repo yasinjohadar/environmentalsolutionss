@@ -1,0 +1,16 @@
+/* Home Six RTL css start */
+[dir="rtl"] {
+    .fa-chevron-right:before {
+        content: "\f053";
+    }
+    .event-area {
+        &.event-area-bg::before {
+            transform: scaleX(-1);
+        }
+    }
+    .testimonial-area .testimonial-slider-active .swiper-button-next, .testimonial-area .testimonial-slider-active .swiper-button-prev {
+        inset-block-start: 130%;
+    }
+}
+
+/* Home Six RTL css End */

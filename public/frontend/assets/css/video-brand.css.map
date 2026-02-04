@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,+EAA+E;AAM/E,6EAA6E",
+    "sources": [
+        "../sass/template/sections/video-brand.scss"
+    ],
+    "names": [],
+    "file": "video-brand.css"
+}

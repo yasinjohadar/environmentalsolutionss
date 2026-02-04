@@ -1,0 +1,130 @@
+/* ============================ Banner Css Start ================================= */
+.animation-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0 260px;
+    &__item  {
+        position: relative;
+        width: 1.2px;
+        height: 100%;
+        display: inline-block;
+        background-color: #e1fe6e0c;
+        mix-blend-mode: difference;
+        &:nth-child(2) {
+            &::before {
+                animation: upDownTwo 24s linear infinite;
+            }
+        }
+        &:nth-child(3) {
+            // left: auto;
+            // right: 261px;
+            &::before {
+                animation: upDownThree 22s linear infinite;
+            }
+        }
+        &:nth-child(4) {
+            // left: auto;
+            // right: 261px;
+            &::before {
+                animation: upDownTwo 22s linear infinite;
+                animation-delay: 4s;
+            }
+        }
+        &::before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(0deg, rgba(225, 254, 110, 0.1) 0%, rgba(225, 254, 110, 0.2) 15%, rgba(225, 254, 110, 0.5) 27%, rgba(225, 254, 110, .8) 52%, rgba(225, 254, 110, 0.5) 74%, rgba(225, 254, 110, 0.2) 88%, rgba(225, 254, 110, 0) 100%);
+            top: 50%;
+            transform: translateY(-50%);
+            animation: upDown 24s linear infinite;
+            z-index: 1;
+        }
+    }
+}
+  @keyframes upDown {
+    0% {
+      top: calc(0% - 100px);
+    }
+    100% {
+      top: calc(100% + 100px);
+    }
+  }
+  
+@keyframes upDownTwo {
+    0% {
+      top: 50%;
+    }
+    33% {
+      top: calc(100% + 200px);
+      visibility: visible;
+      opacity: 1;
+    }
+    34% {
+        visibility: hidden;
+        opacity: 0;
+        top: calc(0% - 200px);
+    }
+    35% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    36% {
+        visibility: visible;
+        opacity: 1;
+    }
+    66% {
+      top: 0%;
+    }
+    100% {
+      top: 50%;
+    }
+  }
+  
+@keyframes upDownThree {
+    0% {
+      top: 90%;
+    }
+    23% {
+      top: calc(100% + 200px);
+      visibility: visible;
+    opacity: 1;
+    }
+    24% {
+        visibility: hidden;
+        opacity: 0;
+        top: calc(0% - 200px);
+    }
+    25% {
+        visibility: hidden;
+        opacity: 0;
+    }
+    26% {
+        visibility: visible;
+        opacity: 1;
+    }
+    56% {
+      top: 0%;
+    }
+    90% {
+      top: 50%;
+    }
+    100% {
+      top: 100%;
+    }
+  }
+  
+  .element {
+    animation: upDownTwo 6s ease-in-out infinite;
+  }
+/* ============================ Banner Css End ================================= */

@@ -1,0 +1,106 @@
+/*---------------------------------------------
+    :: Team
+-----------------------------------------------*/
+
+.team-area {
+    padding-bottom: 84px;
+    @media #{$xs-to-md-max} {
+        padding-bottom: 60px;
+    }
+    .section-title {
+        max-width: 720px;
+        margin: auto;
+        margin-bottom: 55px;
+        .highlight-title {
+            margin-bottom: 10px;
+        }
+    }
+    .team-card {
+        padding: 30px 20px;
+        background-color: var(--white-color);
+        border: 1px solid rgba(2, 6, 38, 0.1);
+        box-shadow: 0px 10px 60px rgba(149, 149, 149, 0.1);
+        transition: .3s linear;
+        &:hover .team-img {
+            height: 280px;
+        }
+        &:hover .team-img .expand {
+            opacity: 0;
+        }
+        &:hover .team-img .social-icon-list {
+            opacity: 1;
+        }
+        &:hover .team-content {
+            padding-top: 20px;
+        }
+        .team-img {
+            position: relative;
+            height: 260px;
+            transition: .3s linear;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .expand {
+                width: 55px;
+                height: 55px;
+                border-radius: 50%;
+                background-color: var(--secondary-color);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 3px solid #f6f2ed;
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                cursor: pointer;
+                transition: .3s linear;
+                i {
+                    font-size: 20px;
+                    color: var(--white-color);
+                }
+            }
+            .social-icon-list {
+                opacity: 0;
+                background-color: var(--base);
+                position: absolute;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                bottom: 0;
+                width: 70%;
+                padding: 8px 24px;
+                display: flex;
+                gap: 9px;
+                justify-content: center;
+                cursor: pointer;
+                transition: .3s linear;
+                i {
+                    font-size: 18px;
+                    opacity: 0.8;
+                    color: var(--white-color);
+                }
+            }
+        }
+        .team-content {
+            padding: 45px 20px 0px 20px;
+            transition: .3s linear;
+            .title {
+                color: var(--secondary-color);
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 1.5;
+                text-transform: capitalize;
+                letter-spacing: -0.6px;
+                margin-bottom: 0px;
+            }
+            .pera {
+                @extend .text-para; 
+                font-size: 16px;
+                font-weight: 500;
+                line-height: normal;
+                text-transform: capitalize;
+            }
+        }
+    }
+}

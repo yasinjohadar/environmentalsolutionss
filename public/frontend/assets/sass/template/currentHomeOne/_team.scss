@@ -1,0 +1,49 @@
+/* ======================== team Section start ============================== */
+.expert-team-item {
+    &__thumb {
+        position: relative;
+        &::before {
+            position: absolute;
+            content: "";
+            width: 4px;
+            height: 56px;
+            inset-inline-start: 24px;
+            bottom: 0;
+            @extend .bg-brand;
+        }
+    }
+}
+
+.expert-team-slider div[class*="col"]:nth-child(even) {
+    margin-top: 80px;
+    @media (max-width: 991px) {
+        margin-top: 60px;
+    }
+    @media (max-width: 768px) {
+        margin-top: 40px;
+    }
+    @media (max-width: 424px) {
+        margin-top: 0px;
+    }
+}
+
+.social-infos {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-end: 24px;
+    padding: 8px;
+    border-radius: 50rem;
+    z-index: 1;
+    &__button {
+        &.active i::before {
+            content: "\f068";
+          }
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    .social-list {
+        display: none;
+    }
+  }
+/* ======================== team Section End ============================== */

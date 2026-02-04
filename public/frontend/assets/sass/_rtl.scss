@@ -1,0 +1,75 @@
+
+
+/* =========================== RTl Css Start ================================= */
+[dir="rtl"] {
+    .header-one-wrapper, .about-one-thumb::before, .video-content__title, .popup-search-box, .feature-bg-line, .team-card.style4 .global-social {
+        transform: translateX(50%);
+    }
+    
+    .service-two-item::before {
+        transform: rotate(-45deg);
+    }
+    
+    .service-amount__content {
+        transform: translate(50%, -50%) rotate(-45deg);
+    }
+
+    .popup-search-box form {
+        transform: translate(50%, -50%);
+    }
+
+    .arrow-btn, .global-btn, .link-btn {
+        display: inline-flex !important;
+        flex-direction: row-reverse !important;
+    }
+
+    .team-card.style3 .team-card-bg-shape, .testi-area-slider4 .icon-box .slick-arrow img{
+        transform: scale(-1);
+    }
+
+    .process-card-wrap2 {
+        &:after {
+            transform: translate(50%, -5px) scaleX(-1);
+        }
+        &:nth-child(even):after {
+            transform: translate(50%, -5px) rotateX(180deg) scaleX(-1);
+        }
+    }
+    
+    .shadow-shape-right {
+        display: none;
+    }
+
+    .marquee-area {
+        direction: ltr;
+    }
+
+    .portfolio-card-4 .portfolio-card-details .icon-btn img {
+        transform: scaleX(-1);
+    }
+
+
+    .gradient-overlay::before {
+        background: linear-gradient(to left, #001c29 0%, #001c29cc 20%, rgba(0, 28, 41, 0.7) 48%, rgba(0, 28, 41, 0.4) 61%, rgba(0, 28, 41, 0.2) 80%);
+    }
+    .bg-img {
+        background-position: right;
+    }
+    .slick-arrows {
+        flex-direction: row-reverse;
+        &.justify-content-start {
+            justify-content: flex-end !important;
+        }
+    }
+    .padding-from-left.slick-arrows {
+        justify-content: start !important;
+    }
+
+    .homeC-work-process-item__shape {
+        display: none !important;
+    }
+    .padding-from-left {
+        padding-inline-start: 27%;
+    }
+}
+/* =========================== RTl Css End ================================= */

@@ -1,0 +1,32 @@
+/***********feature area 4**********/
+.feature-wrap4 {
+    position: relative;
+    .feature-bg-line {
+        position: absolute;
+        inset-inline-start: 50%;
+        inset-block-start: 80px;
+        transform: translateX(-50%);
+        @include ml {
+            display: none;
+        }
+    }
+}
+.feature-thumb4-1 {
+    border-radius: 20px;
+    overflow: hidden;
+    display: inline-block;
+    img {
+        width: 100%;
+    }
+}
+.feature-content {
+    .feature-content-title {
+        font-size: 30px;
+    }
+    .feature-content-subtitle {
+        font-size: 22px;
+    }
+    .feature-content-text {
+        font-size: 18px;
+    }
+}

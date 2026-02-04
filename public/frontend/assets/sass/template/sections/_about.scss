@@ -1,0 +1,153 @@
+/* About Area 4 ---------------------------------- */
+.about-grid-wrap {
+    background: #121212;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 34px 30px;
+    .about-grid-icon {
+        flex: none;
+        height: 80px;
+        width: 80px;
+        line-height: 80px;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        background: #060606;
+        img {
+            transition: 0.4s;
+        }
+    }
+    .about-grid-title {
+        margin-bottom: 0;
+        font-size: 22px;
+        font-weight: 700;
+    }
+    &:hover {
+        .about-grid-icon {
+            img {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+}
+
+/* About Area 5 ---------------------------------- */
+.about-thumb5 {
+    display: inline-block;
+    position: relative;
+    .img1 {
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    .about-counter-wrap {
+        background: $theme-color;
+        padding: 20px 40px;
+        display: inline-block;
+        position: absolute;
+        inset-block-end: 50px;
+        inset-inline-start: 30px;
+        border-radius: 20px;
+        text-align: center;
+        .about-counter {
+            font-size: 60px;
+            font-weight: 700;
+            color: $white-color;
+            margin-bottom: 5px;
+        }
+        .sec-desc {
+            font-size: 18px;
+            font-weight: 400;
+            color: $white-color;
+            margin-bottom: 0;
+        }
+    }
+}
+
+
+/* ========================== Home one about page css start ========================= */
+.about-one {
+    &__content {
+        padding: 20px 24px;
+        border: 2px dashed var(--dark-color);
+        position: absolute;
+        inset-block-end: 56px;
+        inset-inline-start: 22%;
+        z-index: 1;
+        border-radius: 10px;
+    }
+}
+
+.about-one-thumb {
+    position: relative;
+    z-index: 1;
+    &::before {
+        position: absolute;
+        content: "";
+        width: 270px;
+        height: 275px;
+        inset-block-start: 40px;
+        inset-inline-start: 50%;
+        transform: translateX(-50%);
+        background-color: var(--theme-color2);
+        z-index: -1;
+        @media (max-width: 768px) {
+            display: none;
+        }
+    }
+}
+/* ========================== Home one about page css End ========================= */
+
+/* ========================== Home Two about Section css Start ========================= */
+.about-count {
+    &__icon {
+        width: 64px;
+        height: 64px;
+    }
+}
+
+
+/* Floating Label Progress bar */
+.progress {
+    background-color: #F3F5F4; 
+    height: 3px;
+}
+
+.animated-bar {
+    animation-name: animateBar;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-duration: 2s
+}
+
+@keyframes animateBar {
+    0% {
+        transform: translateX(-100%)
+    }
+
+    100% {
+        transform: translateX(0)
+    }
+}
+
+.floating-label {
+    transform: translateX(-25px);
+    inset-inline-start: 0;
+    inset-block-end: 100%;
+    animation-name: animateFloatingLabel;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-duration: 2s
+}
+
+@keyframes animateFloatingLabel {
+    from {
+        inset-inline-start: 0
+    }
+
+    to {
+        inset-inline-start: var(--left-percentage)
+    }
+}
+/* ========================== Home Two about Section css End ========================= */

@@ -1,0 +1,30 @@
+/* =========================== Choose Us section css start ============================== */
+.choose-us {
+    &__inner {
+        padding: 186px 90px 120px;
+        @media (max-width: 1599px) {
+            padding: 186px 44px 120px;
+        }
+        @media (max-width: 991px) {
+            width: 100% !important;
+        }
+        @media (max-width: 768px) {
+            padding: 186px 16px 120px;
+        }
+    }
+}
+.choose-us-item {
+    gap: 20px;
+    &__icon {
+        width: 90px;
+        height: 90px;
+        @media (max-width: 768px) {
+            width: 56px;
+            height: 56px;
+        }
+    }
+    &__content {
+        max-width: 306px;
+    }
+}
+/* =========================== Choose Us section css End ============================== */

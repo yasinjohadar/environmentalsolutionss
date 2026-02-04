@@ -1,0 +1,347 @@
+/* Hero Global ---------------------------------- */
+.hero-wrapper {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+/* Hero 4 ---------------------------------- */
+.hero-4 {
+    position: relative;
+    .hero-thumb4-1 {
+        position: absolute;
+       inset-inline-end: 0;
+        inset-block-start: 0;
+        inset-inline-end: 0;
+        width: 55%;
+        z-index: -1;
+        img {
+            height: 100%;
+            object-fit: cover;
+            object-position: left;
+        }
+        @include md {
+            position: initial;
+            width: 100%;
+        }
+    }
+    @include md {
+        background: #121212;
+        background-image: none !important;
+    }
+}
+.hero-style4 {
+    padding: 100px 0 80px;
+    .hero-text {
+        color: #F3F5F4;
+        max-width: 530px;
+        line-height: 1.888;
+    }
+    .hero-tag {
+        display: inline-block;
+        position: relative;
+        margin-inline-start: auto;
+        margin-top: -55px;
+        margin-bottom: -28px;
+        .hero-tag_icon {
+            position: absolute;
+            inset-inline-start: 50%;
+            inset-block-start: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            color: $theme-color2;
+            z-index: 1;
+            font-size: 22px;
+        }
+    }
+    .btn-wrap {
+        align-items: start;
+    }
+    @include md {
+        text-align: center;
+        padding: 100px 0 120px;
+        .hero-text {
+            margin-inline-start: auto;
+            margin-inline-end: auto;
+        }
+        .btn-wrap {
+            display: block;
+            .hero-tag {
+                display: block;
+                margin-top: 10px;
+            }
+        }
+    }
+    @include xs {
+        padding: 80px 0 100px;
+    }
+}
+.about-experience-tag {
+    background: transparent;
+    display: inline-block;
+    height: 198px;
+    width: 198px;
+    border-radius: 50%;
+    z-index: 1;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: $title-font;
+    color: $white-color;
+    line-height: 12px;
+    text-align: center;
+    animation: spin 10s infinite alternate-reverse;
+    &:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        background: transparent;
+        border: 1px solid $white-color;
+        height: calc(100% - 40px);
+        width: calc(100% - 40px);
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+    }
+    span {
+        --rotate-letter: 15deg;
+        height: 65px;
+        position: absolute;
+        width: 21px;
+        left: 42%;
+        top: 17px;
+        transform-origin: bottom center;
+        transform: rotate(var(--rotate-letter));
+        &.char2 {
+            transform: rotate(calc(var(--rotate-letter) * 2));
+        }
+        &.char3 {
+            transform: rotate(calc(var(--rotate-letter) * 3));
+        }
+        &.char4 {
+            transform: rotate(calc(var(--rotate-letter) * 4));
+        }
+        &.char5 {
+            transform: rotate(calc(var(--rotate-letter) * 5));
+        }
+        &.char6 {
+            transform: rotate(calc(var(--rotate-letter) * 6));
+        }
+        &.char7 {
+            transform: rotate(calc(var(--rotate-letter) * 7));
+        }
+        &.char8 {
+            transform: rotate(calc(var(--rotate-letter) * 8));
+        }
+        &.char9 {
+            transform: rotate(calc(var(--rotate-letter) * 9));
+        }
+        &.char10 {
+            transform: rotate(calc(var(--rotate-letter) * 10));
+        }
+        &.char11 {
+            transform: rotate(calc(var(--rotate-letter) * 11));
+        }
+        &.char12 {
+            transform: rotate(calc(var(--rotate-letter) * 12));
+        }
+        &.char13 {
+            transform: rotate(calc(var(--rotate-letter) * 13));
+        }
+        &.char14 {
+            transform: rotate(calc(var(--rotate-letter) * 14));
+        }
+        &.char15 {
+            transform: rotate(calc(var(--rotate-letter) * 15));
+        }
+        &.char16 {
+            transform: rotate(calc(var(--rotate-letter) * 16));
+        }
+        &.char17 {
+            transform: rotate(calc(var(--rotate-letter) * 17));
+        }
+        &.char18 {
+            transform: rotate(calc(var(--rotate-letter) * 18));
+        }
+        &.char19 {
+            transform: rotate(calc(var(--rotate-letter) * 19));
+        }
+        &.char20 {
+            transform: rotate(calc(var(--rotate-letter) * 20));
+        }
+        &.char21 {
+            transform: rotate(calc(var(--rotate-letter) * 21));
+        }
+        &.char22 {
+            transform: rotate(calc(var(--rotate-letter) * 22));
+        }   
+        &.char23 {
+            transform: rotate(calc(var(--rotate-letter) * 23));
+        }            
+        &.char24 {
+            transform: rotate(calc(var(--rotate-letter) * 24));
+        }  
+        &.char25 {
+            transform: rotate(calc(var(--rotate-letter) * 25));
+        }    
+        &.char26 {
+            transform: rotate(calc(var(--rotate-letter) * 26));
+        }   
+        &.char27 {
+            transform: rotate(calc(var(--rotate-letter) * 27));
+        }   
+        &.char28 {
+            transform: rotate(calc(var(--rotate-letter) * 28));
+        }   
+        &.char29 {
+            transform: rotate(calc(var(--rotate-letter) * 29));
+        }   
+        &.char30 {
+            transform: rotate(calc(var(--rotate-letter) * 30));
+        }   
+        &.char31 {
+            transform: rotate(calc(var(--rotate-letter) * 31));
+        }
+        &.char32 {
+            transform: rotate(calc(var(--rotate-letter) * 32));
+        }   
+    }
+}
+
+/* Hero 5 ---------------------------------- */
+.hero-5 {
+    background-size: 100% calc(100% - 120px);
+    background-repeat: no-repeat;
+    .hero-thumb5-1 {
+        border-radius: 40px;
+        overflow: hidden;
+        @include md {
+            border-radius: 20px;
+        }
+    }
+    @include xs {
+        background-size: 100% calc(100% - 70px);
+    }
+}
+.hero-style5 {
+    padding-top: 250px;
+    @include lg {
+        padding-top: 204px;
+    }
+    @include md {
+        padding-top: 145px;
+    }
+    .hero-title {
+        margin-bottom: 20px;
+    }
+    .hero-text {
+        max-width: 630px;
+        margin-inline-start: auto;
+        margin-inline-end: auto;
+        margin-bottom: 60px;
+    }
+   
+    @include xs {
+        .hero-text {
+            margin-bottom: 40px;
+        }
+    }
+}
+
+/* ======================== Hero One css Start =============================== */
+.banner-one {
+    &__inner {
+        padding: 364px 0 286px;
+        @media (max-width: 991px) {
+            padding: 200px 0 120px;
+        }
+    }
+    &-thumb {
+        position: absolute;
+        inset-inline-end: 0;
+       inset-block-end: 0px;
+        @media (max-width: 1399px) {
+            max-width: 580px;
+        }
+        @media (max-width: 1299px) {
+            max-width: 500px;
+        }
+    }
+
+    &.banner-two {
+        .banner-one {
+            &__inner {
+                padding: 274px 0 224px;
+                @media (max-width: 991px) {
+                    padding: 200px 0 120px;
+                }
+            }
+        }
+    }
+}
+.banner-content {
+    &__desc {
+        max-width: 480px;
+
+    }
+}
+
+.half-moon {
+    position: absolute;
+    inset-block-end: 30%;
+    inset-inline-start: 5%;
+    animation: rotatation infinite 8s;
+    max-width: 10% !important;
+    &.shape2 {
+        inset-inline-start: 47%;
+        inset-block-start: 20%;
+        animation-delay: 1s;
+    }
+    &.shape3 {
+        inset-inline-start: auto;
+       inset-inline-end: 51px;
+        inset-block-start: auto;
+        inset-block-end: 70px;
+        animation-delay: 2s;
+    }
+}
+
+@keyframes rotatation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.service-amount {
+    position: absolute;
+   inset-inline-end: 12%;
+    inset-block-start: 18%;
+    @media (max-width: 1399px) {
+        inset-inline-end: 0%;
+    }
+    @media (max-width: 1299px) {
+        inset-inline-end: 0%;
+    }
+    &__content {
+        position: absolute;
+        inset-inline-start: 50%;
+        inset-block-start: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        text-align: center;
+    }
+}
+.star-shape {
+    animation: rotated infinite 20s linear;
+}
+
+@keyframes rotated{
+    0% {
+      transform:rotate(0deg);
+    }
+    
+    100% {
+      transform:rotate(360deg);
+    }
+  }
+/* ======================== Hero One css End =============================== */

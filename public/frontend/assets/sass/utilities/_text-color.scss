@@ -1,0 +1,37 @@
+@each $textColorsMap, $value in $textColorsMap {
+  .text-#{$textColorsMap} {
+    color: #{$value} !important;
+  }
+}
+
+.text-inherit {
+  color: inherit;
+  &:hover {
+    color: $theme-color2;
+  }
+}
+
+.hover-text-neutral-700 {
+  &:hover { 
+    color: var(--neutral-700) !important;
+  }
+}
+
+a.text-theme,
+.text-reset {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@each $color, $shade in $neutral {
+  .bg-neutral-#{$color} {
+    background-color: var(--neutral-#{$color}) !important;
+  }
+}
+
+@each $color, $shade in $neutral {
+  .text-neutral-#{$color} {
+    color: var(--neutral-#{$color}) !important;
+  }
+}

@@ -1,0 +1,233 @@
+$neutral: (
+  "10": #FAFAFB,
+  "20": #F5F6F7,
+  "30": #EBECEF,
+  "40": #DFE0E4,
+  "50": #C1C4CC,
+  "60": #B2B6BF,
+  "70": #A6AAB5,
+  "80": #979CA8,
+  "90": #888E9C,
+  "100": #798090,
+  "200": #6A7283,
+  "300": #5B6477,
+  "400": #4F586D,
+  "500": #404A60,
+  "600": #343E56,
+  "700": #222E48,
+  "800": #13203B,
+  "900": #071431
+);
+
+$spaces: (
+  "2": 2px,
+  "4": 4px,
+  "6": 6px,
+  "8": 8px,
+  "10": 10px,
+  "11": 11px,
+  "12": 12px,
+  "13": 13px,
+  "16": 16px,
+  "20": 20px,
+  "24": 24px,
+  "28": 24px,
+  "32": 32px,
+  "36": 36px,
+  "40": 40px,
+  "44": 44px,
+  "48": 48px,
+  "50": 50px,
+  "56": 56px,
+  "60": 60px,
+  "64": 64px,
+  "72": 72px,
+  "76": 76px,
+  "80": 80px,
+  "86": 86px,
+  "120": 120px,
+  "300": 300px,
+);
+
+
+:root {
+  /* Latest Variable added for home six start */
+  --base: #27b671;
+  --secondary-color: #243f37;
+  --light-gray: #f9f9f9;
+  --gray: #f6f6f6;
+  --footer-bg: #101b20;
+
+  --Mulish: "Mulish", sans-serif;
+  --Nothing: "Nothing You Could Do", cursive;
+  /* Latest Variable added for home six End */
+
+
+
+
+  --theme-color         : #193503;  
+  --theme-color2        : #E1FE6E;  
+  --theme-color3        : #243F37;  
+  --dark-color          : #1A1B13;  
+  --deep-dark-color     : #10140D;  
+  --deep-black-color    : #060606;  
+  --title-color         : #19352D; 
+  --body-color          : #7A7A7A;
+  --smoke-color         : #EBF3EE; 
+  --smoke-color2        : #F6F6F7;
+  --smoke-color3        : #F5F5F6;
+  --smoke-color4        : #F4F4F4;
+  --smoke-color5        : #F0F2F4; 
+  --black-color         : #202420;
+  --gray-color          : #232323;
+  --white-color         : #ffffff; 
+  --light-color         : #9fa2ad;
+  --yellow-color        : #FFB539;
+  --success-color       : #28a745;
+  --error-color         : #dc3545;
+  --border-color        : #E1E1E1;
+  --title-font          : 'Inter', sans-serif;
+  --body-font           : 'Inter', sans-serif;
+  --icon-font           : "Font Awesome 5 Free"; 
+  --main-container      : 1290px;
+  --container-gutters   : 24px;
+  --section-space       : 120px;
+  --section-space-mobile: 80px;
+  --section-title-space : 70px;
+  --ripple-ani-duration : 5s;
+
+  @each $color, $shade in $neutral {
+    --neutral-#{$color}: #{$shade};
+  }
+  @each $property, $value in $spaces {
+    --size-#{$property}: #{$value};
+  }
+
+}
+
+
+// Color Variation
+$theme-color          : var(--theme-color); 
+$theme-color2         : var(--theme-color2);
+$title-color          : var(--title-color);
+$body-color           : var(--body-color);
+$smoke-color          : var(--smoke-color);
+$smoke-color2         : var(--smoke-color2);
+$smoke-color3         : var(--smoke-color3);
+$smoke-color4         : var(--smoke-color4);
+$smoke-color5         : var(--smoke-color5);
+$white-color          : var(--white-color);
+$light-color          : var(--light-color);
+$black-color          : var(--black-color);
+$gray-color           : var(--gray-color);
+$yellow-color         : var(--yellow-color);
+$success-color        : var(--success-color);
+$error-color          : var(--error-color);
+$border-color         : var(--border-color);
+
+// Font Variation
+$icon-font   : var(--icon-font);
+
+// Typography
+$title-font      : var(--title-font);
+$body-font       : var(--body-font);
+$body-font-size  : 16px;
+$body-line-Height: 26px;
+$body-font-weight: 400;
+$p-line-Height   : 1.75;
+
+// Device Variation
+$hd: 1921px; // Large Device Than 1920
+$xxl: 1500px; // Extra large Device
+$ml: 1399px; // Medium Large Device
+$xl: 1299px; // Medium Large Device
+$lg: 1199px; // Large Device (Laptop)
+$md: 991px; // Medium Device (Tablet)
+$sm: 767px; // Small Device
+$xs: 575px; // Extra Small Device
+$vxs: 375px; // Extra Small Device
+
+// Spacing Count with 5x
+$space-count: 10;
+
+// Section Space  For large Device
+$space         : var(--section-space);
+$space-extra   : calc(var(--section-space) - 30px);
+$space-extra2   : calc(var(--section-space) - 40px);
+
+// Section Space On small Device
+$space-mobile         : var(--section-space-mobile);
+$space-mobile-extra: calc(var(--section-space-mobile) - 30px);
+
+
+// BG Color Mapping 
+$bgcolorMap  : ();
+$bgcolorMap  : map-merge((
+  "theme"    : $theme-color,
+  "theme2"    : $theme-color2,
+  "smoke"    : $smoke-color,
+  "smoke2"   : $smoke-color2,
+  "smoke3"   : $smoke-color3,
+  "smoke4"   : $smoke-color4,
+  "smoke5"   : $smoke-color5,
+  "white"    : $white-color,
+  "black"    : $black-color,
+  "title"    : $title-color, 
+), $bgcolorMap);
+
+
+// Overlay Color Mapping 
+$overlaycolorMap : ();
+$overlaycolorMap : map-merge((
+  "theme"        : $theme-color,  
+  "title"        : $title-color,
+  "white"        : $white-color,
+  "black"        : $black-color,
+  "overlay1"     : #131B23,
+), $overlaycolorMap);
+
+
+// Text Color Mapping 
+$textColorsMap : ();
+$textColorsMap : map-merge((
+  "theme"      : $theme-color,
+  "theme2"     : $theme-color2,
+  "title"      : $title-color,
+  "body"       : $body-color,
+  "white"      : $white-color,
+  "light"      : $light-color,
+  "yellow"     : $yellow-color,
+  "success"    : $success-color,
+  "error"      : $error-color), 
+$textColorsMap);
+
+
+// Font Mapping 
+$fontsMap    : ();
+$fontsMap    : map-merge((
+  "icon"     : $icon-font,
+  "title"    : $title-font,
+  "body"     : $body-font,
+), $fontsMap); 
+
+
+
+/*-- Responsive --*/
+$xs: "(max-width: 575px)";
+$xs-to-sm-max: "(max-width: 767px)";
+$xs-to-sm-min: "(min-width: 576px)";
+
+$xs-to-md-max: "(max-width: 991px)";
+$xs-to-md-min: "(min-width: 991px)";
+
+$xs-to-lg-max: "(max-width: 1199px)";
+$xs-to-lg-min: "(min-width: 1199px)";
+
+$xs-to-xl-max: "(max-width: 1399px)";
+$xs-to-xl-min: "(min-width: 1399px)";
+
+$xs-to-xxl-max: "(max-width: 1599px)";
+$xs-to-xxl-min: "(min-width: 1599px)";
+
+$xs-to-xxxl-max: "(max-width: 1699px)";
+$xs-to-xxxl-min: "(min-width: 1699px)";

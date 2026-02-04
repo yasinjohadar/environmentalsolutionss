@@ -1,0 +1,118 @@
+/*---------------------------------------------
+    :: Service
+-----------------------------------------------*/
+
+.service-area{
+    padding-top: 110px;
+    padding-bottom: 120px;
+    @media #{$xs-to-md-max} {
+        padding-top: 60px;
+        padding-bottom: 70px;
+    }
+    .section-title{
+        max-width: 890px;
+        text-align: center;
+        margin: auto;
+        margin-bottom: 67px;
+        @media #{$xs-to-md-max} {
+            margin-bottom: 35px;
+        }
+        .highlight-title{
+            margin-bottom: 10px;
+        }
+    }
+    .single-service{
+        background: transparent;
+        position: relative;
+        height: 100%;
+        cursor: pointer;
+        transition: .3s linear;
+        @media #{$xs-to-md-max} {
+            margin-bottom: 40px;
+        }
+        &:hover .service-icon{
+            background-color: var(--secondary-color);
+        }
+        .service-image{
+            position: relative;
+            overflow: hidden;
+            &:hover img{
+                transition: .8s linear;
+                transform: scale3d(1.1, 1.1, 1);
+            }
+            &::before {
+                z-index: 1;
+              }
+            img{
+                border-radius: 5px;
+                width: 100%;
+                transition: .8s linear;
+            }
+            &::before{
+                content: "";
+                background: rgba(0, 0, 0, 0.30);
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-radius: 5px;
+            }
+        }
+        .service-icon{
+            width: 73px;
+            height: 63px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px 5px 0px 0px;
+            background-color: var(--base);
+            position: absolute;
+            inset-inline-start: 20px;
+            inset-block-end: 30px;
+            z-index: 2;
+            transition: .3s linear;
+        }
+        .service-mini-card{
+            background-color: var(--white-color);
+            box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+            padding: 16px 24px;  
+            padding-bottom: 36px;   
+            .service-content{
+                .title{
+                    font-size: 24px;
+                    font-weight: 600;
+                    line-height: 2.29;
+                    letter-spacing: -0.72px;
+                    color: var(--secondary-color);
+                    margin-bottom: 0px;
+                    @media #{$xs-to-md-max} {
+                        font-size: 16px;
+                    }
+                }
+                .pera{
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 1.62;
+                    @extend .text-para; 
+                    @media #{$xs-to-md-max} {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        .service-bottom-wrapper{
+            position: relative;
+            width: 90%;
+            margin-top: -30px;
+            z-index: 2;
+            .button-section{
+                position: absolute;
+                inset-inline-end: 0;
+                .btn-primary{
+                    border-radius: 2px;
+                }
+            }
+        }
+    }
+}

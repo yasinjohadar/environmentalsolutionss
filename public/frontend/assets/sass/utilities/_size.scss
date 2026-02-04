@@ -1,0 +1,130 @@
+
+
+  @each $property, $value in $spaces {
+    .w-#{$property}-px {
+      width: $value !important;
+    }
+  }
+
+  @each $property, $value in $spaces {
+    .max-w-#{$property}-px {
+      max-width: $value !important;
+    }
+  }
+  .max-w {
+    &-804 {
+      max-width: 804px;
+    }
+    &-416 {
+      max-width: 416px;
+    }
+    &-306 {
+      max-width: 306px;
+    }
+  }
+  
+  .max-h {
+    &-306 {
+      max-height: 306px;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .h-#{$property}-px {
+      height: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .radius-#{$property}-px {
+      border-radius: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .p-#{$property}-px {
+      padding: $value !important;
+    }
+  }
+
+  @each $property, $value in $spaces {
+    .py-#{$property}-px {
+      padding-top: $value !important;
+      padding-bottom: $value !important;
+    }
+  }
+  
+  @each $property, $value in $spaces {
+    .px-#{$property}-px {
+      padding-left: $value !important;
+      padding-right: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .ps-#{$property}-px {
+      padding-inline-start: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .pe-#{$property}-px {
+      padding-inline-end: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .my-#{$property}-px {
+      margin-top: $value !important;
+      margin-bottom: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .ms-#{$property}-px {
+      margin-inline-start: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .me-#{$property}-px {
+      margin-inline-end: $value !important;
+    }
+  }
+
+  @each $property, $value in $spaces {
+    .mb-#{$property}-px {
+      margin-block-end: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .mt-#{$property}-px {
+      margin-block-start: $value !important;
+    }
+  }
+  
+
+  @each $property, $value in $spaces {
+    .text-#{$property} {
+      font-size: $value !important;
+    }
+  }
+  
+
+.text-80 {
+  font-size: unquote("clamp(2rem, -0.7726rem + 5.7762vw, 5rem)") !important;
+}
+
+.text-120 {
+  font-size: unquote("clamp(2.5rem, -0.7726rem + 5.7762vw, 7.5rem)") !important;
+}

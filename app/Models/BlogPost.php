@@ -194,6 +194,24 @@ class BlogPost extends Model
     // Accessors & Mutators
 
     /**
+     * Get the featured image URL
+     */
+    public function getFeaturedImageUrlAttribute(): string
+    {
+        $path = $this->featured_image;
+        if (empty($path)) {
+            return asset('frontend/assets/img/HomeCone/blog-img1.png');
+        }
+        $path = ltrim($path, '/');
+        // New path: direct public folder (no symlink needed)
+        if (str_starts_with($path, 'frontend/uploads/')) {
+            return asset($path);
+        }
+        // Old path: storage - serve via Laravel route to avoid 403
+        return route('storage.image.serve', ['path' => $path]);
+    }
+
+    /**
      * Get the post's URL
      */
     public function getUrlAttribute(): string

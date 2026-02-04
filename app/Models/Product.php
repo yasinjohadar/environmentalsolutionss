@@ -181,24 +181,23 @@ class Product extends Model
     /**
      * Get the full URL for the main image.
      */
-    public function getMainImageUrlAttribute()
+    public function getMainImageUrlAttribute(): ?string
     {
+        $path = null;
         if ($this->main_image) {
-            return Storage::url($this->main_image);
+            $path = $this->main_image;
+        } else {
+            $mainImage = $this->images()->where('is_main', true)->first();
+            $path = $mainImage?->image_path ?? $this->images()->first()?->image_path;
         }
-        
-        // Try to get from images relationship
-        $mainImage = $this->images()->where('is_main', true)->first();
-        if ($mainImage) {
-            return Storage::url($mainImage->image_path);
+        if (!$path) {
+            return asset('frontend/assets/img/HomeCone/portfolio-img1.png');
         }
-        
-        $firstImage = $this->images()->first();
-        if ($firstImage) {
-            return Storage::url($firstImage->image_path);
+        $path = ltrim($path, '/');
+        if (str_starts_with($path, 'frontend/uploads/')) {
+            return asset($path);
         }
-        
-        return null;
+        return route('storage.image.serve', ['path' => $path]);
     }
 
     /**

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,wFAAwF;AAEnF,AAAD,4BAAS,CAAC;EACN,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,MAAM,EAAE,GAAG,CAAC,KAAK,CAAC,WAAW;CAChC;;AAQL,sFAAsF",
+    "sources": [
+        "../sass/template/sections/upcoming-event.scss"
+    ],
+    "names": [],
+    "file": "upcoming-event.css"
+}

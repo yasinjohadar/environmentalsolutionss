@@ -234,7 +234,7 @@
                                                        class="form-control form-control-color" 
                                                        value="{{ $color->hex_code ?? '#000000' }}">
                                                 @if($color->image)
-                                                    <img src="{{ Storage::url($color->image) }}" alt="{{ $color->name }}" 
+                                                    <img src="{{ route('storage.image.serve', ['path' => $color->image]) }}" alt="{{ $color->name }}" 
                                                          style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                                                 @endif
                                                 <input type="file" name="colors[{{ $index }}][image]" class="form-control" accept="image/*">
@@ -335,7 +335,7 @@
                                                 <div class="col-md-12">
                                                     <label class="form-label small">صورة التباين</label>
                                                     @if($variant->image)
-                                                        <img src="{{ Storage::url($variant->image) }}" alt="صورة التباين" 
+                                                        <img src="{{ route('storage.image.serve', ['path' => $variant->image]) }}" alt="صورة التباين" 
                                                              style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px; display: block; margin-bottom: 5px;">
                                                     @endif
                                                     <input type="file" name="variants[{{ $index }}][image]" class="form-control form-control-sm" accept="image/*">
@@ -382,7 +382,7 @@
                                     <div class="mb-3">
                                         @foreach($product->images as $image)
                                             <div class="gallery-item">
-                                                <img src="{{ Storage::url($image->image_path) }}" alt="{{ $image->alt_text }}">
+                                                <img src="{{ $image->image_url }}" alt="{{ $image->alt_text }}">
                                                 <button type="button" class="remove-btn" 
                                                         onclick="deleteImage({{ $product->id }}, {{ $image->id }})">×</button>
                                             </div>
@@ -482,7 +482,7 @@
                                 <div>
                                     <label class="form-label">صورة Open Graph</label>
                                     @if($product->og_image)
-                                        <img src="{{ Storage::url($product->og_image) }}" alt="صورة OG الحالية" class="image-preview mb-2">
+                                        <img src="{{ route('storage.image.serve', ['path' => $product->og_image]) }}" alt="صورة OG الحالية" class="image-preview mb-2">
                                     @endif
                                     <input type="file" class="form-control @error('og_image') is-invalid @enderror" 
                                            name="og_image" accept="image/*" onchange="previewImage(this, 'og-image-preview-new')">

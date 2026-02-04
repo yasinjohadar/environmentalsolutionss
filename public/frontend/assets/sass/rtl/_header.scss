@@ -1,0 +1,28 @@
+.header-links li:not(:last-child) {
+    margin: 0 0 0 35px;
+}
+.header-links li > i {
+    margin-inline-start: 10px;
+    margin-inline-end: 0;
+}
+.main-menu > ul >li:first-child {
+    margin-inline-end: 0 !important;
+    margin-inline-start: 11px !important;
+}
+.main-menu > ul > li:last-child {
+    margin-inline-end: 11px !important;
+    margin-inline-start: 0 !important;
+}
+.main-menu ul li.menu-item-has-children > a:after {
+    margin-inline-start: 0px;
+    margin-inline-end: 5px;
+}
+/* Header 1 ---------------------------------- */
+.header-layout1 .header-wrapper .simple-icon:not(:last-child) {
+    border-inline-start: 1px solid rgba(25, 53, 45, 0.4);
+    padding-inline-start: 25px;
+    margin-inline-start: 0px;
+    border-inline-end: 0;
+    padding-inline-end: 0;
+    margin-inline-end: 0;
+}

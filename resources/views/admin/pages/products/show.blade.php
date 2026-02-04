@@ -79,7 +79,7 @@
                                 <div class="row">
                                     @foreach($product->images as $image)
                                         <div class="col-md-3 mb-3">
-                                            <img src="{{ Storage::url($image->image_path) }}" alt="{{ $image->alt_text }}" 
+                                            <img src="{{ $image->image_url }}" alt="{{ $image->alt_text }}" 
                                                  class="img-fluid rounded" style="max-height: 200px;">
                                             @if($image->is_main)
                                                 <span class="badge bg-success mt-2">صورة رئيسية</span>
@@ -104,7 +104,7 @@
                                             @if($color->hex_code)
                                                 <div class="color-preview" style="background-color: {{ $color->hex_code }}; width: 60px; height: 60px; border-radius: 8px; border: 2px solid #dee2e6;"></div>
                                             @elseif($color->image)
-                                                <img src="{{ Storage::url($color->image) }}" alt="{{ $color->name }}" 
+                                                <img src="{{ route('storage.image.serve', ['path' => $color->image]) }}" alt="{{ $color->name }}" 
                                                      style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px;">
                                             @endif
                                             <p class="mt-2 mb-0"><strong>{{ $color->name }}</strong></p>

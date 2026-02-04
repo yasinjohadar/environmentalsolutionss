@@ -11,12 +11,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Services\Storage\StorageHelperService;
 
 class BlogPostController extends Controller
 {
     protected StorageHelperService $storageHelper;
+
+    /** Upload path for blog images - direct public folder (no storage symlink) */
+    protected string $blogImagePath = 'frontend/uploads/blog-images';
 
     public function __construct(StorageHelperService $storageHelper)
     {
@@ -146,7 +150,7 @@ class BlogPostController extends Controller
 
             // Handle featured image upload
             if ($request->hasFile('featured_image')) {
-                $validated['featured_image'] = $this->storageHelper->storeUploadedFile('public', 'blog/images', $request->file('featured_image'), 'image');
+                $validated['featured_image'] = $this->uploadBlogImage($request->file('featured_image'));
             }
 
             // Set published_at if status is published and not set
@@ -330,11 +334,8 @@ class BlogPostController extends Controller
 
             // Handle featured image upload
             if ($request->hasFile('featured_image')) {
-                // Delete old image
-                if ($post->featured_image && $this->storageHelper->fileExists('public', $post->featured_image)) {
-                    $this->storageHelper->deleteFile('public', $post->featured_image);
-                }
-                $validated['featured_image'] = $this->storageHelper->storeUploadedFile('public', 'blog/images', $request->file('featured_image'), 'image');
+                $this->deleteBlogImage($post->featured_image);
+                $validated['featured_image'] = $this->uploadBlogImage($request->file('featured_image'));
             }
 
             // Set published_at if status changed to published
@@ -418,9 +419,7 @@ class BlogPostController extends Controller
             $tagIds = $post->tags->pluck('id')->toArray();
 
             // Delete featured image
-            if ($post->featured_image && $this->storageHelper->fileExists('public', $post->featured_image)) {
-                $this->storageHelper->deleteFile('public', $post->featured_image);
-            }
+            $this->deleteBlogImage($post->featured_image);
 
             // Delete post (will auto-detach tags due to cascade)
             $post->delete();
@@ -492,8 +491,8 @@ class BlogPostController extends Controller
      */
     public function deleteFeaturedImage(Request $request, BlogPost $post)
     {
-        if ($post->featured_image && $this->storageHelper->fileExists('public', $post->featured_image)) {
-            $this->storageHelper->deleteFile('public', $post->featured_image);
+        if ($post->featured_image) {
+            $this->deleteBlogImage($post->featured_image);
             $post->featured_image = null;
             $post->featured_image_alt = null;
             $post->save();
@@ -518,5 +517,37 @@ class BlogPostController extends Controller
         }
 
         return back()->with('error', 'لا توجد صورة لحذفها');
+    }
+
+    /**
+     * Upload blog image to public/frontend/uploads/blog-images/
+     */
+    protected function uploadBlogImage($file): string
+    {
+        $dir = public_path($this->blogImagePath);
+        if (!File::isDirectory($dir)) {
+            File::makeDirectory($dir, 0755, true);
+        }
+        $imageName = time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move($dir, $imageName);
+        return $this->blogImagePath . '/' . $imageName;
+    }
+
+    /**
+     * Delete blog image - supports both public path and old storage path
+     */
+    protected function deleteBlogImage(?string $path): void
+    {
+        if (!$path) {
+            return;
+        }
+        if (str_starts_with($path, 'frontend/uploads/')) {
+            $fullPath = public_path($path);
+            if (File::exists($fullPath)) {
+                File::delete($fullPath);
+            }
+        } elseif (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
+        }
     }
 }

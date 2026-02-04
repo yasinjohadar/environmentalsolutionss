@@ -1,0 +1,122 @@
+/* ========================= Video Brand Css Start ========================= */
+.video-brand {
+    &::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 60%;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
+        background: var(--theme-color);
+        z-index: -1;
+        opacity: .6;
+    }
+}
+
+.video-content {
+    &__title {
+        color: #ffffff73;
+        position: absolute;
+        inset-block-end: 36px;
+        inset-inline-start: 50%;
+        transform: translateX(-50%);
+    }
+    img {
+        height: 586px;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+
+.play-button {
+    color: var(--dark-color);
+    font-size: 36px;
+    background-color: var(--theme-color2);
+    width: 140px;
+    height: 140px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 18px;
+    position: relative;
+    @media (max-width: 1399px) {
+        height: 100px;
+        width: 100px;
+        font-size: 30px !important;
+    }
+    @media (max-width: 768px) {
+        height: 70px;
+        width: 70px;
+        font-size: 24px !important;
+    }
+    &::before {
+        position: absolute;
+        content: "";
+        width: inherit;
+        height: inherit;
+        background-color: inherit;
+        border-radius: 50%;
+        inset-inline-start: 0;
+        inset-block-start: 0;
+        z-index: -1;
+        -webkit-animation: animate 2.3s ease-out infinite;
+        animation: animate 2.3s ease-out infinite;
+    }
+}
+
+@keyframes animate {
+    0% {
+      -webkit-transform: scale(0);
+              transform: scale(0);
+      opacity: 1;
+    }
+    30% {
+      -webkit-transform: scale(0.6);
+              transform: scale(0.6);
+      opacity: 1;
+    }
+    60% {
+      -webkit-transform: scale(1.5);
+              transform: scale(1.5);
+      opacity: .9;
+    }
+    100% {
+      -webkit-transform: scale(2);
+              transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+
+/* Brand Section Css */
+.brand-item {
+    padding: 32px;
+    height: 150px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        opacity: .5;
+    }
+    @media (max-width: 1199px) {
+        height: 100px;
+    }
+    @media (max-width: 768px) {
+        height: 70px;
+    }
+    &:not(:last-child) {
+        border-inline-end: 1px solid #ffffff25;
+    }
+    &-wrapper {
+        border: 1px solid #ffffff25;
+    }
+}
+/* ========================= Video Brand Css End ========================= */

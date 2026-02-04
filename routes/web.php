@@ -4,10 +4,28 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\BlogImageController;
+
+// Serve images from storage (blog, products, etc.)
+Route::get('/storage-image/{path}', [BlogImageController::class, 'show'])
+    ->where('path', '.*')
+    ->name('storage.image.serve');
+Route::get('/blog-image/{path}', [BlogImageController::class, 'show'])->where('path', '.*')->name('blog.image.serve'); // backward compat
+
+// Route::get('/', function () {
+//     return view('admin.dashboard');
+// })->middleware('auth');
 
 Route::get('/', function () {
-    return view('admin.dashboard');
-})->middleware('auth');
+    $heroSlides = \App\Models\HeroSlide::active()->ordered()->get();
+    $blogPosts = \App\Models\BlogPost::published()->with('author')->latest('published_at')->take(6)->get();
+    $products = \App\Models\Product::active()->with('images')->latest()->take(8)->get();
+    return view('frontend.pages.index', compact('heroSlides', 'blogPosts', 'products'));
+})->name('home');
+
+Route::get('/blog', [BlogController::class, 'index'])->name('frontend.blog.index');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('frontend.blog.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

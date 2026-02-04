@@ -1,0 +1,31 @@
+/* ====================== Footer Css start ============================ */
+.hover-action {
+    position: relative;
+    transition: .4s;
+    &:hover {
+        padding-inline-start: 20px;
+        &::before {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+    &::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        @extend .bg-base-two;
+        visibility: hidden;
+        opacity: 0;
+        transition: .4s;
+    }
+}
+
+.bottom-footer {
+    border-top: 1px solid #e1fe6e26 !important;
+}
+/* ====================== Footer Css End ============================ */

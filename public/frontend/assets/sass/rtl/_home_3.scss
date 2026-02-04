@@ -1,0 +1,20 @@
+.header-layout3 .header-top-bg-shape {
+    inset-inline-start: 0;
+   inset-inline-end: auto;
+    clip-path: polygon(0 0%, calc(100% - 18px) 0%, 100% 100%, 0% 100%);
+}
+.header-layout3 .header-top-bg-shape:after {
+    clip-path: polygon(0 0%, calc(100% - 18px) 0%, 100% 100%, 0% 100%);
+    inset-inline-start: 0;
+   inset-inline-end: auto;
+}
+.skill-feature.style2 .progress .progress-value {
+    transform: translate(100%, 0);
+}
+.link-btn i {
+    margin-inline-end: 5px;
+    margin-inline-start: 0;
+}
+.team-card.style2 .team-card_wrapp .team-social .global-social {
+    padding: 0;
+}

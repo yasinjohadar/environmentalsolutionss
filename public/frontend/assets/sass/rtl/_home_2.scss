@@ -1,0 +1,28 @@
+.hero-2 {
+    direction: ltr;
+}
+
+.hero-style2 {
+    direction: rtl;
+}
+.hero-client-box {
+    direction: rtl;
+}
+.service-title-area {
+    margin-inline-end: auto;
+    margin-inline-start: 0;
+}
+.testimonial-area-2.arrow-wrap .slick-arrow {
+   inset-inline-end: auto;
+}
+.testimonial-area-2.arrow-wrap .slick-arrow.slick-next {
+   inset-inline-end: 28%;
+}
+.event-shape {
+    inset-inline-start: 0;
+   inset-inline-end: auto;
+}
+.blog-box .blog-meta a img {
+    margin-inline-start: 9px;
+    margin-inline-end: 0;
+}

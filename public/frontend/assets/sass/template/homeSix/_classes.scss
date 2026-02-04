@@ -1,0 +1,135 @@
+
+
+.gradient-bg {
+    background: linear-gradient(180deg, #005151 0%, var(--base) 100%);
+}
+.mulish-font {
+    h1, h2, h3, h4, h5, h5{
+        font-family: "Mulish", sans-serif;
+        color: #131e1b;
+    }
+}
+
+/* Font Family */
+.font {
+    &-nothing {
+        font-family: "Nothing You Could Do", cursive;
+    }
+}
+
+/* text Color */
+.text {
+    &-baseee {
+        color: var(--base) !important;
+    }
+    &-heading {
+        color: #131e1b !important;
+    }
+    &-para {
+        color: #747474 !important;
+    }
+}
+
+/* hover text Color */
+.hover-text {
+    &-baseee {
+        &:hover {
+            color: var(--base) !important;
+        }
+    }
+    &-white {
+        &:hover {
+            color: #fff !important;
+        }
+    }
+}
+
+/* Bg Color */
+.bg {
+    &-baseee {
+        background-color: var(--base) !important;
+    }
+    &-white {
+        background-color: var(--white-color) !important;
+    }
+    &-secondary {
+        background-color: var(--secondary-color) !important;
+    }
+}
+
+/* hover Bg Color */
+.hover {
+    &-bg-baseee {
+        &:hover {
+            background-color: var(--base) !important;
+        }
+    }
+    &-bg-white {
+        &:hover {
+            background-color: var(--white-color) !important;
+        }
+    }
+    &-bg-secondary {
+        &:hover {
+            background-color: var(--secondary-color) !important;
+        }
+    }
+}
+
+/* Font Size */
+.text-xxs {
+    font-size: 0.625rem; /* 10px */
+}
+.text-xs {
+    font-size: 0.75rem; /* 12px */
+}
+.text-sm {
+    font-size: 0.875rem; /* 14px */
+}
+.text-md {
+    font-size: 1rem; /* 16px */
+}
+.text-lg {
+    font-size: 1.125rem; /* 18px */
+}
+.text-xl {
+    font-size: 1.25rem; /* 20px */
+}
+.text-2xl {
+    font-size: 1.5rem; /* 24px */
+}
+
+
+/* Margin Css Class */
+.mb-70 {
+    margin-bottom: 70px;
+    @media (max-width: 1199px) {
+        margin-bottom: 56px;
+    }
+    @media (max-width: 991px) {
+        margin-bottom: 40px;
+    }
+}
+
+/* Border Classes */
+.border {
+    &-baseee {
+        border-color: var(--base) !important;
+    }
+}
+
+.hover-border {
+    &-baseee {
+        &:hover {
+            border-color: var(--base) !important;
+        }
+    }
+}
+
+.focus-border {
+    &-baseee {
+        &:focus {
+            border-color: var(--base) !important;
+        }
+    }
+}

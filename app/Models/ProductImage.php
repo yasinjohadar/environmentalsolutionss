@@ -32,13 +32,17 @@ class ProductImage extends Model
     }
 
     /**
-     * Get the full URL for the image.
+     * Get the full URL for the image (via Laravel route to avoid 403).
      */
-    public function getImageUrlAttribute()
+    public function getImageUrlAttribute(): ?string
     {
-        if ($this->image_path) {
-            return Storage::url($this->image_path);
+        if (!$this->image_path) {
+            return null;
         }
-        return null;
+        $path = ltrim($this->image_path, '/');
+        if (str_starts_with($path, 'frontend/uploads/')) {
+            return asset($path);
+        }
+        return route('storage.image.serve', ['path' => $path]);
     }
 }

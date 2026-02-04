@@ -1,0 +1,33 @@
+/* ========================== Attorney Section css start ========================== */
+.attorney-item {
+    max-width: 380px;
+    max-height: 380px;
+    &:hover {
+        .attorney-item {
+            &__content {
+                background-color: var(--theme-color2);
+            }
+            &__title, &__designation {
+                color: var(--black-color) !important;
+            }
+        }
+    }
+    &__thumb {
+        max-width: inherit;
+        max-height: inherit;
+        padding: 10px;
+        border: 1px solid var(--theme-color2);
+        aspect-ratio: 1;
+    }
+    &__content {
+        background-color: var(--theme-color);
+        transition: .2s linear;
+        clip-path: polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%, 5% 50%);
+        padding: 12px;
+        inset-block-end: 32px;
+    }
+    &__title, &__designation{
+        transition: .2s linear;
+    }
+}
+/* ========================== Attorney Section css end ========================== */
