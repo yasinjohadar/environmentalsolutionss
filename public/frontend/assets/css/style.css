@@ -19517,6 +19517,22 @@ li.trackback {
   position: relative;
 }
 
+.expert-team-item__thumb .d-block,
+.expert-team-item__thumb > div {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.expert-team-item__thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center;
+  display: block;
+}
+
 .expert-team-item__thumb::before {
   position: absolute;
   content: "";

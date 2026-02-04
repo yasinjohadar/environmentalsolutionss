@@ -226,7 +226,7 @@
                                     <label class="form-label">الألوان المتاحة</label>
                                     <div id="colors-container">
                                         <div class="color-item mb-2 d-flex align-items-center gap-2">
-                                            <input type="text" name="colors[0][name]" class="form-control" placeholder="اسم اللون" required>
+                                            <input type="text" name="colors[0][name]" class="form-control" placeholder="اسم اللون (اختياري)">
                                             <input type="color" name="colors[0][hex_code]" class="form-control form-control-color" value="#000000" title="اختر اللون">
                                             <input type="file" name="colors[0][image]" class="form-control" accept="image/*">
                                             <button type="button" class="btn btn-sm btn-danger remove-color">حذف</button>
@@ -240,7 +240,7 @@
                                     <label class="form-label">المقاسات المتاحة</label>
                                     <div id="sizes-container">
                                         <div class="size-item mb-2 d-flex align-items-center gap-2">
-                                            <input type="text" name="sizes[0][name]" class="form-control" placeholder="اسم المقاس" required>
+                                            <input type="text" name="sizes[0][name]" class="form-control" placeholder="اسم المقاس (اختياري)">
                                             <input type="number" name="sizes[0][order]" class="form-control" placeholder="الترتيب" value="0" min="0" style="width: 100px;">
                                             <button type="button" class="btn btn-sm btn-danger remove-size">حذف</button>
                                         </div>
@@ -454,7 +454,7 @@
             const div = document.createElement('div');
             div.className = 'color-item mb-2 d-flex align-items-center gap-2';
             div.innerHTML = `
-                <input type="text" name="colors[${colorIndex}][name]" class="form-control" placeholder="اسم اللون" required>
+                <input type="text" name="colors[${colorIndex}][name]" class="form-control" placeholder="اسم اللون (اختياري)">
                 <input type="color" name="colors[${colorIndex}][hex_code]" class="form-control form-control-color" value="#000000">
                 <input type="file" name="colors[${colorIndex}][image]" class="form-control" accept="image/*">
                 <button type="button" class="btn btn-sm btn-danger remove-color">حذف</button>
@@ -476,7 +476,7 @@
             const div = document.createElement('div');
             div.className = 'size-item mb-2 d-flex align-items-center gap-2';
             div.innerHTML = `
-                <input type="text" name="sizes[${sizeIndex}][name]" class="form-control" placeholder="اسم المقاس" required>
+                <input type="text" name="sizes[${sizeIndex}][name]" class="form-control" placeholder="اسم المقاس (اختياري)">
                 <input type="number" name="sizes[${sizeIndex}][order]" class="form-control" placeholder="الترتيب" value="${sizeIndex}" min="0" style="width: 100px;">
                 <button type="button" class="btn btn-sm btn-danger remove-size">حذف</button>
             `;

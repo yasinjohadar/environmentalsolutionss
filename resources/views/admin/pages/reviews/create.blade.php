@@ -114,6 +114,26 @@
                                         @enderror
                                     </div>
 
+                                    <div class="col-md-6">
+                                        <label class="form-label">اسم العميل للعرض</label>
+                                        <input type="text" class="form-control @error('client_name') is-invalid @enderror" 
+                                               name="client_name" value="{{ old('client_name') }}" placeholder="للعرض في الشهادات">
+                                        <small class="text-muted">اختياري - للزوار أو عند اختلاف الاسم المعروض</small>
+                                        @error('client_name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">المسمى الوظيفي</label>
+                                        <input type="text" class="form-control @error('client_title') is-invalid @enderror" 
+                                               name="client_title" value="{{ old('client_title') }}" placeholder="مثال: مدير مؤسسة">
+                                        <small class="text-muted">اختياري - للعرض في الشهادات</small>
+                                        @error('client_title')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
                                     <div class="col-md-12">
                                         <label class="form-label">التعليق</label>
                                         <textarea class="form-control @error('comment') is-invalid @enderror" 

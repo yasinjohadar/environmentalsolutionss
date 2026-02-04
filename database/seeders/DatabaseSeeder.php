@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             PermissionSeeder::class,
             AdminUserSeeder::class,
             CategoryAndProductSeeder::class,
+            ReviewSeeder::class,
+            TeamMemberSeeder::class,
+            SiteSettingSeeder::class,
         ]);
 
         // إنشاء مستخدم تجريبي إضافي

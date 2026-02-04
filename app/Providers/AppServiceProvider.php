@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\SiteSetting;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\View;
 use App\Events\WhatsAppMessageReceived;
 use App\Listeners\AutoReplyWhatsAppListener;
 
@@ -24,6 +26,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+        View::composer(['frontend.pages.*', 'frontend.layouts.*'], function ($view) {
+            try {
+                $view->with('siteSettings', SiteSetting::getSettings());
+            } catch (\Throwable $e) {
+                $view->with('siteSettings', null);
+            }
+        });
         
         // تسجيل PermissionServiceProvider
         $this->app->register(PermissionServiceProvider::class);

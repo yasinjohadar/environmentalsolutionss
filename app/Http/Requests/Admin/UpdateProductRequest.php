@@ -46,9 +46,9 @@ class UpdateProductRequest extends FormRequest
             ],
             'short_description' => 'nullable|string|max:500',
             'description' => 'nullable|string',
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'images' => 'nullable|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             
             'price' => 'required|numeric|min:0',
             'sale_price' => 'nullable|numeric|min:0|lt:price',
@@ -68,17 +68,17 @@ class UpdateProductRequest extends FormRequest
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
             'meta_keywords' => 'nullable|string|max:500',
-            'og_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'og_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             
             // Colors
             'colors' => 'nullable|array',
-            'colors.*.name' => 'required_with:colors|string|max:255',
+            'colors.*.name' => 'nullable|string|max:255',
             'colors.*.hex_code' => 'nullable|string|max:7|regex:/^#[0-9A-Fa-f]{6}$/',
-            'colors.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'colors.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             
             // Sizes
             'sizes' => 'nullable|array',
-            'sizes.*.name' => 'required_with:sizes|string|max:255',
+            'sizes.*.name' => 'nullable|string|max:255',
             'sizes.*.order' => 'nullable|integer|min:0',
             
             // Variants
@@ -89,7 +89,7 @@ class UpdateProductRequest extends FormRequest
             'variants.*.price' => 'nullable|numeric|min:0',
             'variants.*.sale_price' => 'nullable|numeric|min:0',
             'variants.*.stock_quantity' => 'nullable|integer|min:0',
-            'variants.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'variants.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ];
     }
 
@@ -114,14 +114,12 @@ class UpdateProductRequest extends FormRequest
             'status.required' => 'حالة المنتج مطلوبة',
             'status.in' => 'حالة المنتج غير صحيحة',
             'main_image.image' => 'يجب أن يكون الملف صورة',
-            'main_image.mimes' => 'نوع الصورة غير مدعوم. يجب أن يكون: jpeg, png, jpg, gif',
+            'main_image.mimes' => 'نوع الصورة غير مدعوم. يجب أن يكون: jpeg, png, jpg, gif, webp',
             'main_image.max' => 'حجم الصورة يجب أن يكون أقل من 2 ميجابايت',
             'images.*.image' => 'يجب أن يكون الملف صورة',
             'images.*.mimes' => 'نوع الصورة غير مدعوم',
             'images.*.max' => 'حجم الصورة يجب أن يكون أقل من 2 ميجابايت',
-            'colors.*.name.required_with' => 'اسم اللون مطلوب',
             'colors.*.hex_code.regex' => 'كود اللون غير صحيح (يجب أن يكون بصيغة #RRGGBB)',
-            'sizes.*.name.required_with' => 'اسم المقاس مطلوب',
         ];
     }
 }

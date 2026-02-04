@@ -29,6 +29,7 @@
                     <li><a href="service.html">الخدمات</a></li>
                     <li><a href="project.html">المشاريع</a></li>
                     <li><a href="{{ route('frontend.blog.index') }}">المدونة</a></li>
+                    <li><a href="{{ route('frontend.ewaste.request') }}">طلب جمع / تبرع</a></li>
                     <li><a href="contact.html">اتصل بنا</a></li>
                 </ul>
             </div>
@@ -50,6 +51,7 @@
                                 <li><a href="service.html">الخدمات</a></li>
                                 <li><a href="project.html">المشاريع</a></li>
                                 <li><a href="{{ route('frontend.blog.index') }}">المدونة</a></li>
+                                <li><a href="{{ route('frontend.ewaste.request') }}">طلب جمع / تبرع</a></li>
                                 <li><a href="contact.html">اتصل بنا</a></li>
                             </ul>
                         </nav>

@@ -21,11 +21,21 @@ Route::get('/', function () {
     $heroSlides = \App\Models\HeroSlide::active()->ordered()->get();
     $blogPosts = \App\Models\BlogPost::published()->with('author')->latest('published_at')->take(6)->get();
     $products = \App\Models\Product::active()->with('images')->latest()->take(8)->get();
-    return view('frontend.pages.index', compact('heroSlides', 'blogPosts', 'products'));
+    $testimonials = \App\Models\Review::approved()
+        ->featured()
+        ->with('user')
+        ->orderBy('created_at', 'desc')
+        ->take(8)
+        ->get();
+    $teamMembers = \App\Models\TeamMember::active()->ordered()->get();
+    return view('frontend.pages.index', compact('heroSlides', 'blogPosts', 'products', 'testimonials', 'teamMembers'));
 })->name('home');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('frontend.blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('frontend.blog.show');
+
+Route::get('/ewaste/request', [\App\Http\Controllers\Frontend\EwasteRequestController::class, 'create'])->name('frontend.ewaste.request');
+Route::post('/ewaste', [\App\Http\Controllers\Frontend\EwasteRequestController::class, 'store'])->name('frontend.ewaste.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

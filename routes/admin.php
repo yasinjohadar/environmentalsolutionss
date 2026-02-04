@@ -20,6 +20,9 @@ use App\Http\Controllers\Admin\WhatsAppWebController;
 use App\Http\Controllers\Admin\WhatsAppWebSettingsController;
 use App\Http\Controllers\Admin\WhatsAppWebhookController;
 use App\Http\Controllers\Admin\HeroSlideController;
+use App\Http\Controllers\Admin\TeamMemberController;
+use App\Http\Controllers\Admin\SiteSettingController;
+use App\Http\Controllers\Admin\EwasteRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +38,9 @@ use App\Http\Controllers\Admin\HeroSlideController;
 Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.')->group(function () {
     // Hero Slider routes
     Route::resource('hero-slides', HeroSlideController::class);
+
+    // Team members routes
+    Route::resource('team-members', TeamMemberController::class);
 
     // Categories routes
     Route::resource('categories', CategoryController::class);
@@ -73,6 +79,16 @@ Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.'
     });
 
 
+
+    // ========== E-waste Requests Routes ==========
+    Route::resource('ewaste-requests', EwasteRequestController::class)->only(['index', 'show']);
+    Route::put('ewaste-requests/{id}/status', [EwasteRequestController::class, 'updateStatus'])->name('ewaste-requests.update-status');
+
+    // ========== Site Settings Routes ==========
+    Route::prefix('settings/site')->name('settings.site.')->group(function () {
+        Route::get('/', [SiteSettingController::class, 'edit'])->name('edit');
+        Route::put('/', [SiteSettingController::class, 'update'])->name('update');
+    });
 
     // ========== Email Settings Routes ==========
     Route::prefix('settings/email')->name('settings.email.')->group(function () {

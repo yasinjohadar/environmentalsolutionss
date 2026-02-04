@@ -15,6 +15,8 @@ class Review extends Model
         'user_id',
         'rating',
         'title',
+        'client_name',
+        'client_title',
         'comment',
         'status',
         'is_verified_purchase',
@@ -175,10 +177,51 @@ class Review extends Model
         if (!$this->images || !is_array($this->images)) {
             return [];
         }
-        
-        return array_map(function($image) {
-            return Storage::url($image);
+
+        return array_map(function ($image) {
+            $path = ltrim($image, '/');
+            if (str_starts_with($path, 'frontend/uploads/')) {
+                return asset($path);
+            }
+            return route('storage.image.serve', ['path' => $path]);
         }, $this->images);
+    }
+
+    /**
+     * Get avatar URL for testimonial display (first image or default).
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->images && is_array($this->images) && !empty($this->images)) {
+            $path = ltrim($this->images[0], '/');
+            if (str_starts_with($path, 'frontend/uploads/')) {
+                return asset($path);
+            }
+            return route('storage.image.serve', ['path' => $path]);
+        }
+        return asset('frontend/assets/img/HomeCone/user-img.png');
+    }
+
+    /**
+     * Get display name for testimonial (client_name, user name, or default).
+     */
+    public function getDisplayNameAttribute(): string
+    {
+        if (!empty($this->client_name)) {
+            return $this->client_name;
+        }
+        if ($this->user) {
+            return $this->user->name;
+        }
+        return 'عميل';
+    }
+
+    /**
+     * Get display title for testimonial (client_title or empty).
+     */
+    public function getDisplayTitleAttribute(): string
+    {
+        return $this->client_title ?? '';
     }
 
     /**

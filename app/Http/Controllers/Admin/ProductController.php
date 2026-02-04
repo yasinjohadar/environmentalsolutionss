@@ -14,7 +14,10 @@ use App\Http\Requests\Admin\StoreProductRequest;
 use App\Http\Requests\Admin\UpdateProductRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Http\UploadedFile;
 
 class ProductController extends Controller
 {
@@ -141,16 +144,19 @@ class ProductController extends Controller
             // معالجة الألوان
             if ($request->has('colors') && is_array($request->colors)) {
                 foreach ($request->colors as $colorData) {
+                    $colorName = trim($colorData['name'] ?? '');
+                    if ($colorName === '') continue;
+
                     $colorImagePath = null;
                     if (isset($colorData['image']) && $colorData['image']) {
                         $colorImage = $colorData['image'];
-                        $colorImageName = time() . '_color_' . Str::slug($colorData['name']) . '.' . $colorImage->getClientOriginalExtension();
+                        $colorImageName = time() . '_color_' . Str::slug($colorName) . '.' . $colorImage->getClientOriginalExtension();
                         $colorImagePath = $colorImage->storeAs('products/colors', $colorImageName, 'public');
                     }
                     
                     ProductColor::create([
                         'product_id' => $product->id,
-                        'name' => $colorData['name'],
+                        'name' => $colorName,
                         'hex_code' => $colorData['hex_code'] ?? null,
                         'image' => $colorImagePath,
                     ]);
@@ -160,9 +166,12 @@ class ProductController extends Controller
             // معالجة المقاسات
             if ($request->has('sizes') && is_array($request->sizes)) {
                 foreach ($request->sizes as $index => $sizeData) {
+                    $sizeName = trim($sizeData['name'] ?? '');
+                    if ($sizeName === '') continue;
+
                     ProductSize::create([
                         'product_id' => $product->id,
-                        'name' => $sizeData['name'],
+                        'name' => $sizeName,
                         'order' => $sizeData['order'] ?? $index,
                     ]);
                 }
@@ -235,24 +244,44 @@ class ProductController extends Controller
             $product = Product::findOrFail($id);
             $data = $request->validated();
 
+            Log::info('Product update: request received', [
+                'product_id' => $id,
+                'has_main_image' => $request->hasFile('main_image'),
+                'has_og_image' => $request->hasFile('og_image'),
+            ]);
+
+            // استبعاد الملفات من $data قبل التحديث (تجنب حفظ UploadedFile)
+            foreach (['main_image', 'og_image'] as $fileKey) {
+                if (isset($data[$fileKey]) && $data[$fileKey] instanceof UploadedFile) {
+                    unset($data[$fileKey]);
+                }
+            }
+
             // معالجة الصورة الرئيسية
             if ($request->hasFile('main_image')) {
-                // حذف الصورة القديمة
-                if ($product->main_image && Storage::disk('public')->exists($product->main_image)) {
-                    Storage::disk('public')->delete($product->main_image);
-                }
-
                 $mainImage = $request->file('main_image');
+                Log::info('Product image upload: starting', [
+                    'product_id' => $id,
+                    'file_name' => $mainImage->getClientOriginalName(),
+                    'file_size' => $mainImage->getSize(),
+                    'mime_type' => $mainImage->getMimeType(),
+                ]);
+
+                $this->deleteProductImage($product->main_image);
+
                 $mainImageName = time() . '_main_' . Str::slug($data['name']) . '.' . $mainImage->getClientOriginalExtension();
-                $data['main_image'] = $mainImage->storeAs('products/images', $mainImageName, 'public');
+                $storedPath = $mainImage->storeAs('products/images', $mainImageName, 'public');
+                $data['main_image'] = $storedPath;
+
+                Log::info('Product image upload: saved', [
+                    'product_id' => $id,
+                    'stored_path' => $storedPath,
+                ]);
             }
 
             // معالجة صورة Open Graph
             if ($request->hasFile('og_image')) {
-                // حذف الصورة القديمة
-                if ($product->og_image && Storage::disk('public')->exists($product->og_image)) {
-                    Storage::disk('public')->delete($product->og_image);
-                }
+                $this->deleteProductImage($product->og_image);
 
                 $ogImage = $request->file('og_image');
                 $ogImageName = time() . '_og_' . Str::slug($data['name']) . '.' . $ogImage->getClientOriginalExtension();
@@ -288,16 +317,19 @@ class ProductController extends Controller
                 $product->colors()->delete();
                 if (is_array($request->colors)) {
                     foreach ($request->colors as $colorData) {
+                        $colorName = trim($colorData['name'] ?? '');
+                        if ($colorName === '') continue;
+
                         $colorImagePath = null;
                         if (isset($colorData['image']) && $colorData['image']) {
                             $colorImage = $colorData['image'];
-                            $colorImageName = time() . '_color_' . Str::slug($colorData['name']) . '.' . $colorImage->getClientOriginalExtension();
+                            $colorImageName = time() . '_color_' . Str::slug($colorName) . '.' . $colorImage->getClientOriginalExtension();
                             $colorImagePath = $colorImage->storeAs('products/colors', $colorImageName, 'public');
                         }
                         
                         ProductColor::create([
                             'product_id' => $product->id,
-                            'name' => $colorData['name'],
+                            'name' => $colorName,
                             'hex_code' => $colorData['hex_code'] ?? null,
                             'image' => $colorImagePath,
                         ]);
@@ -310,9 +342,12 @@ class ProductController extends Controller
                 $product->sizes()->delete();
                 if (is_array($request->sizes)) {
                     foreach ($request->sizes as $index => $sizeData) {
+                        $sizeName = trim($sizeData['name'] ?? '');
+                        if ($sizeName === '') continue;
+
                         ProductSize::create([
                             'product_id' => $product->id,
-                            'name' => $sizeData['name'],
+                            'name' => $sizeName,
                             'order' => $sizeData['order'] ?? $index,
                         ]);
                     }
@@ -347,10 +382,14 @@ class ProductController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.products.index')
+            return redirect()->route('admin.products.edit', $product->id)
                 ->with('success', 'تم تحديث المنتج بنجاح');
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error('Product update failed: ' . $e->getMessage(), [
+                'product_id' => $id,
+                'trace' => $e->getTraceAsString(),
+            ]);
             return redirect()->back()
                 ->withInput()
                 ->with('error', 'حدث خطأ أثناء تحديث المنتج: ' . $e->getMessage());
@@ -405,6 +444,25 @@ class ProductController extends Controller
             DB::rollBack();
             return redirect()->route('admin.products.index')
                 ->with('error', 'حدث خطأ أثناء حذف المنتج: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Delete product image - supports frontend/uploads/ and storage paths
+     */
+    protected function deleteProductImage(?string $path): void
+    {
+        if (!$path) {
+            return;
+        }
+        $path = ltrim($path, '/');
+        if (str_starts_with($path, 'frontend/uploads/')) {
+            $fullPath = public_path($path);
+            if (File::exists($fullPath)) {
+                File::delete($fullPath);
+            }
+        } elseif (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
         }
     }
 

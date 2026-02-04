@@ -26,6 +26,8 @@ class StoreReviewRequest extends FormRequest
             'user_id' => 'nullable|exists:users,id',
             'rating' => 'required|integer|min:1|max:5',
             'title' => 'nullable|string|max:255',
+            'client_name' => 'nullable|string|max:255',
+            'client_title' => 'nullable|string|max:255',
             'comment' => 'nullable|string',
             'status' => 'required|in:pending,approved,rejected,spam',
             'is_verified_purchase' => 'nullable|boolean',

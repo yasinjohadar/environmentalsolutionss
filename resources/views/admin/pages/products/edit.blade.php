@@ -57,23 +57,38 @@
 @stop
 
 @section('content')
-    @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <ul class="mb-0">
-                @foreach ($errors->all() as $error)
-                    <li class="small">{{ $error }}</li>
-                @endforeach
-            </ul>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="إغلاق"></button>
-        </div>
-    @endif
-
     <div class="main-content app-content">
         <div class="container-fluid">
             <div class="page-header d-flex justify-content-between align-items-center my-4">
                 <h5 class="page-title mb-0">تعديل المنتج: {{ $product->name }}</h5>
                 <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">العودة للقائمة</a>
             </div>
+
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="إغلاق"></button>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="إغلاق"></button>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>يوجد أخطاء في النموذج:</strong>
+                    <ul class="mb-0 mt-2">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="إغلاق"></button>
+                </div>
+            @endif
 
             <form method="POST" action="{{ route('admin.products.update', $product->id) }}" enctype="multipart/form-data" id="productForm">
                 @csrf
@@ -229,7 +244,7 @@
                                         @foreach($product->colors as $index => $color)
                                             <div class="color-item mb-2 d-flex align-items-center gap-2">
                                                 <input type="text" name="colors[{{ $index }}][name]" class="form-control" 
-                                                       value="{{ $color->name }}" placeholder="اسم اللون" required>
+                                                       value="{{ $color->name }}" placeholder="اسم اللون (اختياري)">
                                                 <input type="color" name="colors[{{ $index }}][hex_code]" 
                                                        class="form-control form-control-color" 
                                                        value="{{ $color->hex_code ?? '#000000' }}">
@@ -260,7 +275,7 @@
                                         @foreach($product->sizes as $index => $size)
                                             <div class="size-item mb-2 d-flex align-items-center gap-2">
                                                 <input type="text" name="sizes[{{ $index }}][name]" class="form-control" 
-                                                       value="{{ $size->name }}" placeholder="اسم المقاس" required>
+                                                       value="{{ $size->name }}" placeholder="اسم المقاس (اختياري)">
                                                 <input type="number" name="sizes[{{ $index }}][order]" class="form-control" 
                                                        value="{{ $size->order }}" min="0" style="width: 100px;">
                                                 <button type="button" class="btn btn-sm btn-danger remove-size">حذف</button>
@@ -511,6 +526,12 @@
 
 @section('script')
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success') || session('error') || $errors->any())
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            @endif
+        });
+
         let colorIndex = {{ $product->colors->count() }};
         let sizeIndex = {{ $product->sizes->count() }};
         let variantIndex = {{ $product->variants->count() }};
@@ -567,7 +588,7 @@
             const div = document.createElement('div');
             div.className = 'color-item mb-2 d-flex align-items-center gap-2';
             div.innerHTML = `
-                <input type="text" name="colors[${colorIndex}][name]" class="form-control" placeholder="اسم اللون" required>
+                <input type="text" name="colors[${colorIndex}][name]" class="form-control" placeholder="اسم اللون (اختياري)">
                 <input type="color" name="colors[${colorIndex}][hex_code]" class="form-control form-control-color" value="#000000">
                 <input type="file" name="colors[${colorIndex}][image]" class="form-control" accept="image/*">
                 <button type="button" class="btn btn-sm btn-danger remove-color">حذف</button>
@@ -593,7 +614,7 @@
             const div = document.createElement('div');
             div.className = 'size-item mb-2 d-flex align-items-center gap-2';
             div.innerHTML = `
-                <input type="text" name="sizes[${sizeIndex}][name]" class="form-control" placeholder="اسم المقاس" required>
+                <input type="text" name="sizes[${sizeIndex}][name]" class="form-control" placeholder="اسم المقاس (اختياري)">
                 <input type="number" name="sizes[${sizeIndex}][order]" class="form-control" value="${sizeIndex}" min="0" style="width: 100px;">
                 <button type="button" class="btn btn-sm btn-danger remove-size">حذف</button>
             `;

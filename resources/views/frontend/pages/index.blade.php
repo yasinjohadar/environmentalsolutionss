@@ -1,10 +1,11 @@
+@php $s = $siteSettings ?? null; @endphp
 <!doctype html>
 <html class="no-js" dir="rtl" lang="ar">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>إعادة تدوير النفايات الإلكترونية - حلول بيئية متكاملة</title>
+    <title>{{ $s?->site_name ?? 'إعادة تدوير النفايات الإلكترونية' }} - حلول بيئية متكاملة</title>
     <meta name="description" content="خدمات إعادة تدوير النفايات الإلكترونية بأمان - جمع، إتلاف بيانات، إعادة تدوير وفق المعايير البيئية">
     <meta name="keywords" content="إعادة تدوير، نفايات إلكترونية، التخلص الآمن، السعودية">
     <meta name="robots" content="INDEX,FOLLOW">
@@ -12,8 +13,8 @@
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Favicons - Place favicon.ico in the root directory -->
-    <link rel="icon" type="image/png" sizes="32x32" href="frontend/assets/img/favicons/favicon.png">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ $s?->favicon_url ?? asset('frontend/assets/img/favicons/favicon.png') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
@@ -70,18 +71,42 @@
             <div class="widget  ">
                 <div class="th-widget-about">
                     <div class="about-logo">
-                        <a href="index.html"><img src="{{ asset('frontend/assets/img/logo.svg') }}" alt="Laun"></a>
+                        <a href="{{ route('home') }}"><img src="{{ $s?->logo_url ?? asset('frontend/assets/img/logo.svg') }}" alt="{{ $s?->site_name ?? '' }}"></a>
                     </div>
-                    <p class="about-text">نقدم خدمات متخصصة في إعادة تدوير النفايات الإلكترونية وجمعها والتخلص الآمن منها وفق أعلى المعايير البيئية.</p>
+                    <p class="about-text">{{ $s->footer_description ?? 'نقدم خدمات متخصصة في إعادة تدوير النفايات الإلكترونية وجمعها والتخلص الآمن منها وفق أعلى المعايير البيئية.' }}</p>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://www.whatsapp.com/"><i class="fab fa-whatsapp"></i></a>
+                        @foreach(($s?->social_links ?? []) as $platform => $data)
+                        <a href="{{ $data['url'] }}" target="_blank" rel="noopener"><i class="{{ $data['icon'] }}"></i></a>
+                        @endforeach
+                        @if(empty($s?->social_links))
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        @endif
                     </div>
                 </div>
             </div>
             <div class="side-info mb-30">
+                @if($s?->address)
+                <div class="contact-list mb-20">
+                    <h4>العنوان</h4>
+                    <p>{{ $s->address }}</p>
+                </div>
+                @endif
+                @if($s?->phone)
+                <div class="contact-list mb-20">
+                    <h4>رقم الهاتف</h4>
+                    <p class="mb-0"><a href="tel:{{ preg_replace('/[^0-9+]/', '', $s->phone) }}">{{ $s->phone }}</a></p>
+                </div>
+                @endif
+                @if($s?->email)
+                <div class="contact-list mb-20">
+                    <h4>البريد الإلكتروني</h4>
+                    <p class="mb-0"><a href="mailto:{{ $s->email }}">{{ $s->email }}</a></p>
+                </div>
+                @endif
+                @if(!$s?->address && !$s?->phone && !$s?->email)
                 <div class="contact-list mb-20">
                     <h4>العنوان</h4>
                     <p>المملكة العربية السعودية</p>
@@ -94,6 +119,7 @@
                     <h4>البريد الإلكتروني</h4>
                     <p class="mb-0">info@example.com</p>
                 </div>
+                @endif
             </div>
             <ul class="side-instagram list-wrap">
                 <li><a href="project.html"><img src="{{ asset('frontend/assets/img/gallery/1.jpg') }}" alt=""></a></li>
@@ -117,7 +143,7 @@
     <div class="mobile-menu-wrapper">
         <div class="mobile-menu-area">
             <div class="mobile-logo">
-                <a href="index.html"><img src="{{ asset('frontend/assets/img/logo.svg') }}" alt="Biscox"></a>
+                <a href="{{ route('home') }}"><img src="{{ $s?->logo_url ?? asset('frontend/assets/img/logo.svg') }}" alt="{{ $s?->site_name ?? '' }}"></a>
                 <button class="menu-toggle"><i class="fa fa-times"></i></button>
             </div>
             <div class="mobile-menu">
@@ -138,6 +164,9 @@
                         <a href="{{ route('frontend.blog.index') }}">المدونة</a>
                     </li>
                     <li>
+                        <a href="{{ route('frontend.ewaste.request') }}">طلب جمع / تبرع</a>
+                    </li>
+                    <li>
                         <a href="contact.html">اتصل بنا</a>
                     </li>
                 </ul>
@@ -156,8 +185,8 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
                         <!-- Logo Start -->
-                        <a href="index.html" class="">
-                            <img src="{{ asset('frontend/assets/img/logo-white-2.png') }}" alt="logo">
+                        <a href="{{ route('home') }}" class="">
+                            <img src="{{ $s?->logo_dark_url ?? $s?->logo_url ?? asset('frontend/assets/img/logo-white-2.png') }}" alt="{{ $s?->site_name ?? 'logo' }}">
                         </a>
                         <!-- Logo End -->
                     </div>
@@ -178,6 +207,9 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('frontend.blog.index') }}">المدونة</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('frontend.ewaste.request') }}">طلب جمع / تبرع</a>
                                 </li>
                                 <li>
                                     <a href="contact.html">اتصل بنا</a>
@@ -860,6 +892,7 @@
 
      
     <!-- ================================= Team Section Start =============================== -->
+    @php $teamMembers = $teamMembers ?? collect(); @endphp
     <section class="expert-team space py-120 bg-neutral-20 position-relative">
 
         <h1 class="text-outline-neutral writing-mode position-absolute top-50 translate-y-middle-rotate text-white text-opacity-25 text-uppercase margin-left-80 z-index-2 h-100 text-center start-0">فريقنا</h1>
@@ -875,6 +908,7 @@
                 </div>
                 <div class="">
                     <p class="mb-24 max-w-416">فريقنا هو عماد نجاحنا، مكوّن من خبراء في مجال إعادة التدوير والاستدامة.</p>
+                    @if($teamMembers->isNotEmpty())
                     <div class="slick-arrows d-flex align-items-center gap-3 mt-40 justify-content-start">
                         <button type="button" id="expert-team-prev" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white position-relative top-0 end-0 start-0 mt-0 slick-arrow">
                             <i class="fas fa-arrow-left"></i>
@@ -883,195 +917,39 @@
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
+                    @endif
                 </div>
             </div>
 
             <div class="expert-team-slider">
+                @if($teamMembers->isNotEmpty())
+                    @foreach($teamMembers as $member)
                 <div class="expert-team-item mx-2">
                     <div class="expert-team-item__thumb pb-20 position-relative">
-                        <a href="team-details.html" class="d-block">
+                        <div class="d-block">
+                            <img src="{{ $member->image_url }}" alt="{{ $member->name }}" class="radius-12-px fit-img">
+                        </div>
+                    </div>
+                    <div class="mt-20-px">
+                        <h4 class="mb-3">
+                            <span class="hover-text-brand">{{ $member->name }}</span>
+                        </h4>
+                        <span class="text-neutral-500">{{ $member->title }}</span>
+                    </div>
+                </div>
+                @endforeach
+                @else
+                <div class="expert-team-item mx-2">
+                    <div class="expert-team-item__thumb pb-20 position-relative">
+                        <div class="d-block">
                             <img src="{{ asset('frontend/assets/img/HomeCone/team-img1.png') }}" alt="" class="radius-12-px fit-img">
-                        </a>
-
-                        <div class="social-infos bg-base-two p-1">
-                            <ul class="social-list flex-column gap-12 mb-12-px ps-0 list-unstyled">
-                                <li class="social-list__item">
-                                    <a href="https://www.facebook.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.twitter.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.linkedin.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <button class="social-infos__button d-flex justify-content-center align-items-center w-36-px h-36-px bg-base text-base-two rounded-circle text-lg transition-2" tabindex="0">
-                                <i class="fas fa-plus"></i>
-                            </button>
                         </div>
-
                     </div>
                     <div class="mt-20-px">
-                        <h4 class="mb-3">
-                            <a href="team-details.html" class="hover-text-brand">Shafaq Noor</a>
-                        </h4>
-                        <span class="text-neutral-500">مدير قسم الاستدامة</span>
+                        <p class="text-neutral-500 mb-0">لا يوجد أعضاء حالياً. أضف أعضاء من لوحة التحكم.</p>
                     </div>
                 </div>
-                <div class="expert-team-item mx-2">
-                    <div class="expert-team-item__thumb pb-20 position-relative">
-                        <a href="team-details.html" class="d-block">
-                            <img src="{{ asset('frontend/assets/img/HomeCone/team-img2.png') }}" alt="" class="radius-12-px fit-img">
-                        </a>
-
-                        <div class="social-infos bg-base-two p-1">
-                            <ul class="social-list flex-column gap-12 mb-12-px ps-0 list-unstyled">
-                                <li class="social-list__item">
-                                    <a href="https://www.facebook.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.twitter.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.linkedin.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <button class="social-infos__button d-flex justify-content-center align-items-center w-36-px h-36-px bg-base text-base-two rounded-circle text-lg transition-2" tabindex="0">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="mt-20-px">
-                        <h4 class="mb-3">
-                            <a href="team-details.html" class="hover-text-brand">Floyd Miles</a>
-                        </h4>
-                        <span class="text-neutral-500">مدير العمليات</span>
-                    </div>
-                </div>
-                <div class="expert-team-item mx-2">
-                    <div class="expert-team-item__thumb pb-20 position-relative">
-                        <a href="team-details.html" class="d-block">
-                            <img src="{{ asset('frontend/assets/img/HomeCone/team-img3.png') }}" alt="" class="radius-12-px fit-img">
-                        </a>
-
-                        <div class="social-infos bg-base-two p-1">
-                            <ul class="social-list flex-column gap-12 mb-12-px ps-0 list-unstyled">
-                                <li class="social-list__item">
-                                    <a href="https://www.facebook.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.twitter.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.linkedin.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <button class="social-infos__button d-flex justify-content-center align-items-center w-36-px h-36-px bg-base text-base-two rounded-circle text-lg transition-2" tabindex="0">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="mt-20-px">
-                        <h4 class="mb-3">
-                            <a href="team-details.html" class="hover-text-brand">Wardah Shafi</a>
-                        </h4>
-                        <span class="text-neutral-500">خبير إعادة التدوير</span>
-                    </div>
-                </div>
-                <div class="expert-team-item mx-2">
-                    <div class="expert-team-item__thumb pb-20 position-relative">
-                        <a href="team-details.html" class="d-block">
-                            <img src="{{ asset('frontend/assets/img/HomeCone/team-img4.png') }}" alt="" class="radius-12-px fit-img">
-                        </a>
-
-                        <div class="social-infos bg-base-two p-1">
-                            <ul class="social-list flex-column gap-12 mb-12-px ps-0 list-unstyled">
-                                <li class="social-list__item">
-                                    <a href="https://www.facebook.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.twitter.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.linkedin.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <button class="social-infos__button d-flex justify-content-center align-items-center w-36-px h-36-px bg-base text-base-two rounded-circle text-lg transition-2" tabindex="0">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="mt-20-px">
-                        <h4 class="mb-3">
-                            <a href="team-details.html" class="hover-text-brand">Courtney Henry</a>
-                        </h4>
-                        <span class="text-neutral-500">الرئيس التنفيذي</span>
-                    </div>
-                </div>
-                <div class="expert-team-item mx-2">
-                    <div class="expert-team-item__thumb pb-20 position-relative">
-                        <a href="team-details.html" class="d-block">
-                            <img src="{{ asset('frontend/assets/img/HomeCone/team-img3.png') }}" alt="" class="radius-12-px fit-img">
-                        </a>
-
-                        <div class="social-infos bg-base-two p-1">
-                            <ul class="social-list flex-column gap-12 mb-12-px ps-0 list-unstyled">
-                                <li class="social-list__item">
-                                    <a href="https://www.facebook.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.twitter.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="social-list__item">
-                                    <a href="https://www.linkedin.com" class=" d-flex justify-content-center align-items-center text-base-two w-36 h-36-px rounded-circle text-xl bg-base hover-text-base hover-bg-base-two">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <button class="social-infos__button d-flex justify-content-center align-items-center w-36-px h-36-px bg-base text-base-two rounded-circle text-lg transition-2" tabindex="0">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-                    <div class="mt-20-px">
-                        <h4 class="mb-3">
-                            <a href="team-details.html" class="hover-text-brand">Wardah Shafi</a>
-                        </h4>
-                        <span class="text-neutral-500">خبير إعادة التدوير</span>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </section>
@@ -1153,6 +1031,7 @@
     
     
     <!-- ================================= Testimonials Section Start =============================== -->
+    @php $testimonials = $testimonials ?? collect(); @endphp
     <section class="homeC-testimonial space overflow-hidden position-relative bg-neutral-20">
 
       <h1 class="text-outline-neutral writing-mode position-absolute top-50 translate-y-middle-rotate text-white text-opacity-25 text-uppercase margin-left-80 z-index-2 h-100 text-center start-0">أراء العملاء</h1>
@@ -1171,40 +1050,36 @@
                 <div class="col-lg-7">
                     <div class="position-relative">
                         <div class="homeC-testimonial-slider">
+                            @if($testimonials->isNotEmpty())
+                                @foreach($testimonials as $review)
+                                <div class="homeC-testimonial-item">
+                                    <ul class="d-flex align-items-center gap-2 list-unstyled mb-24">
+                                        @for($i = 1; $i <= 5; $i++)
+                                        <li class="{{ $i <= $review->rating ? 'text-yellow' : 'text-neutral-300' }}"><i class="fas fa-star"></i></li>
+                                        @endfor
+                                    </ul>
+                                    <p class="text-neutral-700 text-2xl fw-medium">"{{ $review->comment ?? '' }}"</p>
+                                    <div class="d-flex align-items-center gap-4">
+                                        <img src="{{ $review->avatar_url }}" alt="{{ $review->display_name }}" class="w-60-px h-60-px rounded-circle">
+                                        <div class="">
+                                            <h6 class="text-20 mb-10-px">{{ $review->display_name }}</h6>
+                                            <span class="text-neutral-700">{{ $review->display_title ?: 'شريك تعاون' }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            @else
                             <div class="homeC-testimonial-item">
-                                <ul class="d-flex align-items-center gap-2 list-unstyled mb-24">
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                </ul>
-                                <p class="text-neutral-700 text-2xl fw-medium">"نفخر بمشاركة قصص نجاح عملائنا. ملاحظاتهم تعكس التزامنا بالتميز وجودة خدماتنا في إعادة تدوير النفايات الإلكترونية."</p>
+                                <p class="text-neutral-700 text-2xl fw-medium">لا توجد آراء مميزة لعرضها حالياً. يمكنك إضافة آراء وتحديدها كـ "رأي مميز" من لوحة التحكم لعرضها هنا.</p>
                                 <div class="d-flex align-items-center gap-4">
-                                    <img src="{{ asset('frontend/assets/img/HomeCone/user-img.png') }}" alt="" class="w-60-px h-60-px rounded-circle ">
+                                    <img src="{{ asset('frontend/assets/img/HomeCone/user-img.png') }}" alt="" class="w-60-px h-60-px rounded-circle">
                                     <div class="">
-                                        <h6 class="text-20 mb-10-px">مدير مؤسسة</h6>
-                                        <span class="text-neutral-700">شريك تعاون</span>
+                                        <h6 class="text-20 mb-10-px">لوحة التحكم</h6>
+                                        <span class="text-neutral-700">آراء العملاء</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="homeC-testimonial-item">
-                                <ul class="d-flex align-items-center gap-2 list-unstyled mb-24">
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                    <li class="text-yellow"><i class="fas fa-star"></i></li>
-                                </ul>
-                                <p class="text-neutral-700 text-2xl fw-medium">"نفخر بمشاركة قصص نجاح عملائنا. ملاحظاتهم تعكس التزامنا بالتميز وجودة خدماتنا في إعادة تدوير النفايات الإلكترونية."</p>
-                                <div class="d-flex align-items-center gap-4">
-                                    <img src="{{ asset('frontend/assets/img/HomeCone/user-img.png') }}" alt="" class="w-60-px h-60-px rounded-circle ">
-                                    <div class="">
-                                        <h6 class="text-20 mb-10-px">مدير مؤسسة</h6>
-                                        <span class="text-neutral-700">شريك تعاون</span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endif
                         </div>
     
                         <div class="slick-arrows position-absolute end-0 bottom-0 d-flex align-items-center gap-3 justify-content-start">
@@ -1220,7 +1095,7 @@
                 <div class="col-lg-5">
                     <div class="homeC-testimonial__thumb circle-border position-relative ps-lg-5">
                         <div class="position-relative max-w-306 max-h-306">
-                            <img src="{{ asset('frontend/assets/img/HomeCone/testimonial-image.png') }}" alt="" class="fit-img rounded-circle">
+                            <img src="{{ $testimonials->isNotEmpty() ? $testimonials->first()->avatar_url : asset('frontend/assets/img/HomeCone/testimonial-image.png') }}" alt="" class="fit-img rounded-circle">
                             <span class="w-72-px h-72-px border border-white rounded-circle bg-base text-32 text-base-two d-inline-block d-flex justify-content-center align-items-center position-absolute top-50 end-0 translate-middle-y end--36">
                                 <i class="fas fa-quote-right"></i>
                             </span>
@@ -1319,7 +1194,7 @@
 
      
     <!-- ================================= Footer Section Start =============================== -->
-    <section class="homeCone-footer bg-img bg-overlay style-three position-relative z-index-3" data-background-image="frontend/assets/img/HomeCone/footer-bg.png">
+    <section class="homeCone-footer bg-img bg-overlay style-three position-relative z-index-3" data-background-image="{{ $s?->footer_background_url ?? asset('frontend/assets/img/HomeCone/footer-bg.png') }}">
 
         <ul class="animation-line d-none d-md-flex justify-content-between">
             <li class="animation-line__item"></li>
@@ -1333,23 +1208,22 @@
                 <div class="row gy-5">
                     <div class="col-lg-3">
                         <div class="">
-                            <a href="index.html" class="d-inline-block mb-4">
-                                <img src="{{ asset('frontend/assets/img/logo-white-2.png') }}" alt="">
+                            <a href="{{ route('home') }}" class="d-inline-block mb-4">
+                                <img src="{{ $s?->logo_dark_url ?? $s?->logo_url ?? asset('frontend/assets/img/logo-white-2.png') }}" alt="{{ $s?->site_name ?? '' }}">
                             </a>
-                            <p class="text-neutral-20">نقدم خدمات متكاملة لجمع وإعادة تدوير النفايات الإلكترونية بطرق آمنة وصديقة للبيئة.</p>
+                            <p class="text-neutral-20">{{ $s?->footer_description ?? 'نقدم خدمات متكاملة لجمع وإعادة تدوير النفايات الإلكترونية بطرق آمنة وصديقة للبيئة.' }}</p>
                             <ul class="mt-32-px ps-0 list-unstyled d-flex align-content-center gap-12">
+                                @foreach(($s?->social_links ?? []) as $platform => $data)
                                 <li>
-                                    <a href="https://www.facebook.com" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="{{ $data['url'] }}" target="_blank" rel="noopener" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="{{ $data['icon'] }}"></i></a>
                                 </li>
-                                <li>
-                                    <a href="https://www.facebook.com" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="fab fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="https://www.facebook.com" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="fab fa-pinterest"></i></a>
-                                </li>
-                                <li>
-                                    <a href="https://www.facebook.com" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="fab fa-skype"></i></a>
-                                </li>
+                                @endforeach
+                                @if(empty($s?->social_links))
+                                <li><a href="#" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="fab fa-pinterest"></i></a></li>
+                                <li><a href="#" class="w-36-px h-36-px rounded-circle border border-base-two text-base-two text-xl d-inline-block d-flex justify-content-center align-items-center hover-bg-base-two hover-text-neutral-700"><i class="fab fa-skype"></i></a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -1379,24 +1253,44 @@
                         <div class="footer-item">
                             <h4 class="title text-white mb-4">تواصل معنا</h4>
                             <div class="d-flex flex-column gap-3">
+                                @if($s?->phone)
                                 <div class="d-flex align-items-center gap-3">
                                     <span class="w-40-px h-40-px rounded-circle d-flex justify-content-center align-items-center border border-base-two text-base-two text-xl">
                                         <i class="fas fa-phone-volume"></i>
                                     </span>
-                                    <a href="tel:316-555-0116" class="text-neutral-30 hover-text-base-two">(205) 555-0100</a>
+                                    <a href="tel:{{ preg_replace('/[^0-9+]/', '', $s->phone) }}" class="text-neutral-30 hover-text-base-two">{{ $s->phone }}</a>
                                 </div>
+                                @endif
+                                @if($s?->email)
                                 <div class="d-flex align-items-center gap-3">
                                     <span class="w-40-px h-40-px rounded-circle d-flex justify-content-center align-items-center border border-base-two text-base-two text-xl">
                                         <i class="far fa-envelope-open"></i>
                                     </span>
-                                    <a href="mailto:info@example.com" class="text-neutral-30 hover-text-base-two">info@example.com</a>
+                                    <a href="mailto:{{ $s->email }}" class="text-neutral-30 hover-text-base-two">{{ $s->email }}</a>
                                 </div>
+                                @endif
+                                @if($s?->address)
                                 <div class="d-flex align-items-center gap-3">
                                     <span class="w-40-px h-40-px rounded-circle d-flex justify-content-center align-items-center border border-base-two text-base-two text-xl">
                                         <i class="fas fa-map-marker-alt"></i>
                                     </span>
+                                    <span class="text-neutral-30">{{ $s->address }}</span>
+                                </div>
+                                @endif
+                                @if(!$s?->phone && !$s?->email && !$s?->address)
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="w-40-px h-40-px rounded-circle d-flex justify-content-center align-items-center border border-base-two text-base-two text-xl"><i class="fas fa-phone-volume"></i></span>
+                                    <a href="tel:316-555-0116" class="text-neutral-30 hover-text-base-two">(205) 555-0100</a>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="w-40-px h-40-px rounded-circle d-flex justify-content-center align-items-center border border-base-two text-base-two text-xl"><i class="far fa-envelope-open"></i></span>
+                                    <a href="mailto:info@example.com" class="text-neutral-30 hover-text-base-two">info@example.com</a>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <span class="w-40-px h-40-px rounded-circle d-flex justify-content-center align-items-center border border-base-two text-base-two text-xl"><i class="fas fa-map-marker-alt"></i></span>
                                     <span class="text-neutral-30">المملكة العربية السعودية</span>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -1417,7 +1311,7 @@
 
             <!-- Bottom Footer -->
             <div class="bottom-footer py-32-px d-flex align-items-center justify-content-between flex-wrap">
-                <p class="text-neutral-20">جميع الحقوق محفوظة &copy; 2024 <span class="fw-semibold text-base-two">إعادة تدوير النفايات الإلكترونية</span></p>
+                <p class="text-neutral-20">جميع الحقوق محفوظة &copy; {{ date('Y') }} <span class="fw-semibold text-base-two">{{ $s?->site_name ?? 'إعادة تدوير النفايات الإلكترونية' }}</span></p>
                 <div class="d-flex align-items-center gap-4 flex-wrap">
                     <a href="javascript:void(0)" class="text-white hover-text-base">المساعدة</a>
                     <a href="javascript:void(0)" class="text-white hover-text-base">سياسة الخصوصية</a>
