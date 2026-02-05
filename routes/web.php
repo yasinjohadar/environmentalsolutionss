@@ -28,14 +28,23 @@ Route::get('/', function () {
         ->take(8)
         ->get();
     $teamMembers = \App\Models\TeamMember::active()->ordered()->get();
-    return view('frontend.pages.index', compact('heroSlides', 'blogPosts', 'products', 'testimonials', 'teamMembers'));
+    $homeContent = \App\Models\HomePageSetting::getContent();
+    return view('frontend.pages.index', compact('heroSlides', 'blogPosts', 'products', 'testimonials', 'teamMembers', 'homeContent'));
 })->name('home');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('frontend.blog.index');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('frontend.blog.show');
 
+Route::get('/products', [\App\Http\Controllers\Frontend\ProductController::class, 'index'])->name('frontend.products.index');
+Route::get('/products/{slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('frontend.products.show');
+Route::get('/categories', [\App\Http\Controllers\Frontend\CategoryController::class, 'index'])->name('frontend.categories.index');
+Route::get('/about', [\App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('frontend.about.index');
+
 Route::get('/ewaste/request', [\App\Http\Controllers\Frontend\EwasteRequestController::class, 'create'])->name('frontend.ewaste.request');
 Route::post('/ewaste', [\App\Http\Controllers\Frontend\EwasteRequestController::class, 'store'])->name('frontend.ewaste.store');
+
+Route::get('/contact', [\App\Http\Controllers\Frontend\ContactController::class, 'index'])->name('frontend.contact.index');
+Route::post('/contact', [\App\Http\Controllers\Frontend\ContactController::class, 'store'])->name('frontend.contact.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

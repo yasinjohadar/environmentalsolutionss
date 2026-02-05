@@ -66,6 +66,14 @@ class Category extends Model
     }
 
     /**
+     * Get the products in this category.
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
      * Get all descendants (recursive).
      */
     public function descendants()
@@ -102,10 +110,14 @@ class Category extends Model
      */
     public function getImageUrlAttribute()
     {
-        if ($this->image) {
-            return Storage::url($this->image);
+        if (!$this->image) {
+            return null;
         }
-        return null;
+        $path = ltrim($this->image, '/');
+        if (str_starts_with($path, 'frontend/uploads/')) {
+            return asset($path);
+        }
+        return route('storage.image.serve', ['path' => $path]);
     }
 
     /**
@@ -113,10 +125,23 @@ class Category extends Model
      */
     public function getCoverImageUrlAttribute()
     {
-        if ($this->cover_image) {
-            return Storage::url($this->cover_image);
+        if (!$this->cover_image) {
+            return null;
         }
-        return null;
+        $path = ltrim($this->cover_image, '/');
+        if (str_starts_with($path, 'frontend/uploads/')) {
+            return asset($path);
+        }
+        return route('storage.image.serve', ['path' => $path]);
+    }
+
+    /**
+     * Get display image URL (cover or image or default placeholder).
+     */
+    public function getDisplayImageUrlAttribute()
+    {
+        $url = $this->cover_image_url ?? $this->image_url;
+        return $url ?? asset('frontend/assets/img/HomeCone/portfolio-img1.png');
     }
 
     /**

@@ -9,6 +9,8 @@ class EwasteRequest extends Model
 {
     use HasFactory;
 
+    protected $table = 'e_waste_requests';
+
     const REQUEST_TYPES = [
         'donation' => 'تبرع بنفايات إلكترونية',
         'collection' => 'طلب خدمة جمع نفايات إلكترونية',

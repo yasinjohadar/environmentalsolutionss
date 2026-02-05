@@ -182,6 +182,11 @@
                                     <label class="form-label">العنوان</label>
                                     <textarea name="address" class="form-control" rows="2">{{ old('address', $settings->address) }}</textarea>
                                 </div>
+                                <div class="col-12">
+                                    <label class="form-label">رابط تضمين خريطة الموقع (Google Maps Embed)</label>
+                                    <input type="text" name="map_embed_src" class="form-control" value="{{ old('map_embed_src', $settings->getMeta('map_embed_src')) }}" placeholder="https://www.google.com/maps/embed?pb=...">
+                                    <small class="text-muted">من Google Maps: مشاركة → تضمين خريطة → نسخ رابط iframe (src)</small>
+                                </div>
                             </div>
                         </div>
                     </div>

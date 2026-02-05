@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class ProductColor extends Model
 {
@@ -34,13 +33,17 @@ class ProductColor extends Model
     }
 
     /**
-     * Get the full URL for the color image.
+     * Get the full URL for the color image (storage path served via storage.image.serve).
      */
     public function getImageUrlAttribute()
     {
-        if ($this->image) {
-            return Storage::url($this->image);
+        if (!$this->image) {
+            return null;
         }
-        return null;
+        $path = ltrim($this->image, '/');
+        if (str_starts_with($path, 'frontend/uploads/')) {
+            return asset($path);
+        }
+        return route('storage.image.serve', ['path' => $path]);
     }
 }

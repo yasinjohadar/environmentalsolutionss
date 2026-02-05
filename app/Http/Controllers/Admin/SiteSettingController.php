@@ -48,12 +48,13 @@ class SiteSettingController extends Controller
             'email' => 'nullable|email|max:255',
             'email_2' => 'nullable|email|max:255',
             'address' => 'nullable|string|max:500',
+            'map_embed_src' => 'nullable|string|max:1000',
             'meta' => 'nullable|string', // JSON string
         ]);
 
         $settings = SiteSetting::getSettings();
 
-        $data = collect($validated)->except(['logo', 'logo_dark', 'favicon', 'footer_background', 'meta'])->toArray();
+        $data = collect($validated)->except(['logo', 'logo_dark', 'favicon', 'footer_background', 'meta', 'map_embed_src'])->toArray();
 
         if ($request->hasFile('logo')) {
             $this->deleteImage($settings->logo);
@@ -72,10 +73,15 @@ class SiteSettingController extends Controller
             $data['footer_background'] = $this->uploadImage($request->file('footer_background'), 'footer_bg');
         }
 
-        if (array_key_exists('meta', $validated)) {
-            $decoded = json_decode(trim($validated['meta'] ?? ''), true);
-            $data['meta'] = is_array($decoded) ? $decoded : [];
+        $meta = is_array($settings->meta) ? $settings->meta : [];
+        if (array_key_exists('meta', $validated) && trim($validated['meta'] ?? '') !== '') {
+            $decoded = json_decode(trim($validated['meta']), true);
+            if (is_array($decoded)) {
+                $meta = $decoded;
+            }
         }
+        $meta['map_embed_src'] = $request->input('map_embed_src');
+        $data['meta'] = $meta;
 
         $settings->update($data);
         SiteSetting::clearCache();

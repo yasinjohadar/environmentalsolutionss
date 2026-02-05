@@ -27,7 +27,15 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrapFive();
 
-        View::composer(['frontend.pages.*', 'frontend.layouts.*'], function ($view) {
+        View::composer([
+            'frontend.pages.*',
+            'frontend.layouts.*',
+            'frontend.blog.*',
+            'frontend.ewaste.*',
+            'frontend.products.*',
+            'frontend.categories.*',
+            'frontend.partials.*',
+        ], function ($view) {
             try {
                 $view->with('siteSettings', SiteSetting::getSettings());
             } catch (\Throwable $e) {

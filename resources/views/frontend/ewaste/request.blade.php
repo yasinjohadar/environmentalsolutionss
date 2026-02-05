@@ -2,7 +2,7 @@
 
 @section('title', 'طلب جمع / التبرع بالنفايات الإلكترونية')
 @section('content')
-<section class="space py-60">
+<section class="space py-60" style="padding-top: 120px !important;">
     <div class="container">
         <div class="section-heading max-w-804 mx-auto text-center mb-50">
             <h2 class="mb-24">طلب جمع أو التبرع بالنفايات الإلكترونية</h2>

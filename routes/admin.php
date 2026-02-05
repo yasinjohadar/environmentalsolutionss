@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\HeroSlideController;
 use App\Http\Controllers\Admin\TeamMemberController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\EwasteRequestController;
+use App\Http\Controllers\Admin\HomePageContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,12 @@ Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.'
     // ========== E-waste Requests Routes ==========
     Route::resource('ewaste-requests', EwasteRequestController::class)->only(['index', 'show']);
     Route::put('ewaste-requests/{id}/status', [EwasteRequestController::class, 'updateStatus'])->name('ewaste-requests.update-status');
+
+    // ========== Home Page Content ==========
+    Route::prefix('home-page')->name('home-page.')->group(function () {
+        Route::get('/', [HomePageContentController::class, 'edit'])->name('edit');
+        Route::put('/', [HomePageContentController::class, 'update'])->name('update');
+    });
 
     // ========== Site Settings Routes ==========
     Route::prefix('settings/site')->name('settings.site.')->group(function () {
