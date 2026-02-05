@@ -19542,6 +19542,28 @@ li.trackback {
 }
 
 /* Portfolio Css End */
+/* Product & category card image: fixed size + cover (site-wide) */
+.product-card-img-box,
+.category-card-img-box {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  display: block;
+}
+.product-card-img-box a,
+.category-card-img-box a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.product-card-img-box img,
+.category-card-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
 /* ============== Home Current About Css Start ======================== */
 .homeC-about__bg {
   width: 100vw;

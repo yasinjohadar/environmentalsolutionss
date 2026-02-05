@@ -826,53 +826,40 @@
         ]
     });  
 
-    // Service Slider
-    $('.homeC-portfolio-slider').slick({
+    // Our Products Slider (منتجاتنا - 10 منتجات، 3 ظاهرين، مع الأسهم)
+    $('.home-our-products-slider').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: false,
-        autoplaySpeed: 2000,
-        speed: 1500,
         dots: false,
         pauseOnHover: true,
         arrows: true,
+        appendArrows: '.home-our-products-arrows',
         draggable: true,
         rtl: $('html').attr('dir') === 'rtl' ? true : false,
         speed: 900,
         infinite: true,
-        nextArrow: '#homeC-portfolio-next',
-        prevArrow: '#homeC-portfolio-prev',
+        nextArrow: '#home-our-products-next',
+        prevArrow: '#home-our-products-prev',
         responsive: [
-        {
-            breakpoint: 1599,
-            settings: {
-            slidesToShow: 2,
-            arrows: false,
-            }
-        },
         {
             breakpoint: 991,
             settings: {
             slidesToShow: 2,
-            arrows: false,
-            }
-        },
-        {
-            breakpoint: 767,
-            settings: {
-            slidesToShow: 2,
-            arrows: false,
+            arrows: true,
+            appendArrows: '.home-our-products-arrows',
             }
         },
         {
             breakpoint: 575,
             settings: {
             slidesToShow: 1,
-            arrows: false,
+            arrows: true,
+            appendArrows: '.home-our-products-arrows',
             }
         },
         ]
-    });  
+    });
 
 
     

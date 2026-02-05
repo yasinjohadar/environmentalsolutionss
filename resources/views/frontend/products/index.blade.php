@@ -51,15 +51,15 @@
                 @foreach($products as $product)
                 <div class="col-lg-4 col-md-6">
                     <div class="scale-hover-item bg-neutral-20 radius-12-px overflow-hidden h-100 border border-neutral-100">
-                        <div class="overflow-hidden position-relative">
-                            <a href="{{ route('frontend.products.show', $product->slug) }}" class="d-block">
-                                <img src="{{ $product->main_image_url }}" alt="{{ $product->name }}" class="w-100 fit-img transition-2" style="height: 220px; object-fit: cover;">
+                        <div class="product-card-img-box overflow-hidden position-relative">
+                            <a href="{{ route('frontend.products.show', $product->slug) }}">
+                                <img src="{{ $product->main_image_url }}" alt="{{ $product->name }}" class="fit-img transition-2">
                             </a>
-                            @if($product->category)
-                                <span class="badge bg-base-two position-absolute top-0 end-0 m-3">{{ $product->category->name }}</span>
-                            @endif
                         </div>
                         <div class="p-4">
+                            @if($product->category)
+                                <a href="{{ route('frontend.products.index', ['category' => $product->category->slug]) }}" class="d-inline-block text-base small fw-medium text-neutral-500 hover-text-brand mb-2">{{ $product->category->name }}</a>
+                            @endif
                             <h4 class="mb-3">
                                 <a href="{{ route('frontend.products.show', $product->slug) }}" class="link text-line-2 hover-text-brand text-dark">{{ $product->name }}</a>
                             </h4>

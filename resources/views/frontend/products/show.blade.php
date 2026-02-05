@@ -297,9 +297,9 @@
                         @foreach($relatedProducts as $item)
                             <div class="px-2">
                                 <div class="scale-hover-item bg-neutral-20 radius-12-px overflow-hidden h-100 border border-neutral-100">
-                                    <div class="overflow-hidden position-relative">
-                                        <a href="{{ route('frontend.products.show', $item->slug) }}" class="d-block">
-                                            <img src="{{ $item->main_image_url }}" alt="{{ $item->name }}" class="w-100 fit-img transition-2" style="height: 220px; object-fit: cover;">
+                                    <div class="product-card-img-box overflow-hidden position-relative">
+                                        <a href="{{ route('frontend.products.show', $item->slug) }}">
+                                            <img src="{{ $item->main_image_url }}" alt="{{ $item->name }}" class="fit-img transition-2">
                                         </a>
                                         @if($item->category)
                                             <span class="badge bg-base-two position-absolute top-0 end-0 m-3">{{ $item->category->name }}</span>

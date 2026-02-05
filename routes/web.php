@@ -20,7 +20,6 @@ Route::get('/blog-image/{path}', [BlogImageController::class, 'show'])->where('p
 Route::get('/', function () {
     $heroSlides = \App\Models\HeroSlide::active()->ordered()->get();
     $blogPosts = \App\Models\BlogPost::published()->with('author')->latest('published_at')->take(6)->get();
-    $products = \App\Models\Product::active()->with('images')->latest()->take(8)->get();
     $testimonials = \App\Models\Review::approved()
         ->featured()
         ->with('user')
@@ -29,7 +28,7 @@ Route::get('/', function () {
         ->get();
     $teamMembers = \App\Models\TeamMember::active()->ordered()->get();
     $homeContent = \App\Models\HomePageSetting::getContent();
-    return view('frontend.pages.index', compact('heroSlides', 'blogPosts', 'products', 'testimonials', 'teamMembers', 'homeContent'));
+    return view('frontend.pages.index', compact('heroSlides', 'blogPosts', 'testimonials', 'teamMembers', 'homeContent'));
 })->name('home');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('frontend.blog.index');

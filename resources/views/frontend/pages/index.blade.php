@@ -190,9 +190,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                         <a href="{{ route('frontend.about.index') }}">من نحن</a>
                     </li>
                     <li>
-                        <a href="service.html">الخدمات</a>
-                    </li>
-                    <li>
                         <a href="project.html">المشاريع</a>
                     </li>
                     <li>
@@ -239,9 +236,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                                 </li>
                                 <li>
                                     <a href="{{ route('frontend.about.index') }}">من نحن</a>
-                                </li>
-                                <li>
-                                    <a href="service.html">الخدمات</a>
                                 </li>
                                 <li>
                                     <a href="project.html">المشاريع</a>
@@ -348,7 +342,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
     </section>
     @else
     <section class="homeCone-banner bg-overlay gradient-overlay overflow-hidden bg-img" data-background-image="{{ $homeUrl('banner_fallback.image', 'frontend/assets/img/slider/slide1.webp') }}" style="height: 750px; min-height: 750px;">
-        <h1 class="text-outline-white writing-mode position-absolute top-50 translate-y-middle-rotate text-white text-opacity-25 text-uppercase margin-left-80 z-index-2">إعادة التدوير</h1>
         <img src="{{ $homeUrl('banner_fallback.cross_shape', 'frontend/assets/img/HomeCone/shape/cross-shape.png') }}" alt="" class="cross-shape position-absolute top-50 translate-middle-y end-20">
         <ul class="animation-line d-none d-md-flex justify-content-between">
             <li class="animation-line__item"></li>
@@ -488,10 +481,70 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
      </section>
     <!-- ================================= Service Section End =============================== -->
 
+    <!-- ================================= منتجاتنا Section Start =============================== -->
+    @php $products = $products ?? collect(); @endphp
+    <section class="home-our-products space py-120 bg-neutral-20">
+        <div class="container">
+            <div class="section-heading max-w-804 mx-auto text-center mb-60 animate-on-scroll">
+                <div class="d-inline-flex align-items-center gap-2 text-base mb-3">
+                    <img src="{{ $homeUrl('services.arrow_icon', 'frontend/assets/img/HomeCone/icon/arrow-icon-two.png') }}" alt="">
+                    <h4 class="mb-0 text-base">تشكيلة مختارة</h4>
+                </div>
+                <h2 class="mb-24">منتجاتنا</h2>
+                <p class="mb-0">نعرض لكم تشكيلة من منتجاتنا وخدماتنا في مجال إعادة تدوير النفايات الإلكترونية والتي تعكس التزامنا بالجودة والاستدامة.</p>
+            </div>
+            @if($products->isNotEmpty())
+            <div class="home-our-products-slider animate-on-scroll" data-animate-delay="80">
+                @foreach($products->take(10) as $product)
+                <div class="px-3">
+                    <div class="scale-hover-item bg-white radius-12-px overflow-hidden h-100 border border-neutral-100 shadow-sm">
+                        <div class="product-card-img-box overflow-hidden">
+                            <a href="{{ route('frontend.products.show', $product->slug) }}">
+                                <img src="{{ $product->main_image_url }}" alt="{{ $product->name }}" class="fit-img transition-2">
+                            </a>
+                        </div>
+                        <div class="p-4">
+                            @if($product->category)
+                                <a href="{{ route('frontend.products.index', ['category' => $product->category->slug]) }}" class="d-inline-block text-base small fw-medium text-neutral-500 hover-text-brand mb-2">{{ $product->category->name }}</a>
+                            @endif
+                            <h4 class="mb-3">
+                                <a href="{{ route('frontend.products.show', $product->slug) }}" class="link text-line-2 hover-text-brand text-dark">{{ $product->name }}</a>
+                            </h4>
+                            <p class="text-neutral-500 mb-3">{{ Str::limit($product->short_description ?? strip_tags($product->description ?? ''), 100) }}</p>
+                            <a href="{{ route('frontend.products.show', $product->slug) }}" class="fw-semibold text-base d-inline-flex align-items-center gap-2 hover-text-brand">
+                                عرض التفاصيل <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="home-our-products-arrows slick-arrows d-flex align-items-center gap-3 mt-40 justify-content-center">
+                <button type="button" id="home-our-products-prev" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button type="button" id="home-our-products-next" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{{ route('frontend.products.index') }}" class="global-btn arrow-btn fw-bold style2 text-base-two px-5 radius-8 d-inline-flex align-items-center gap-2">
+                    عرض جميع المنتجات <i class="fas fa-arrow-right rotate-icon"></i>
+                </a>
+            </div>
+            @else
+            <div class="text-center py-5">
+                <p class="text-muted mb-3">لا توجد منتجات لعرضها حالياً.</p>
+                <a href="{{ route('frontend.products.index') }}" class="btn btn-primary">عرض المنتجات</a>
+            </div>
+            @endif
+        </div>
+    </section>
+    <!-- ================================= منتجاتنا Section End =============================== -->
+
      
     <!-- ================================= Choose Us Section Start =============================== -->
      <section class="homeC-choose-us space bg-neutral-20 position-relative">
-        <h1 class="text-outline-neutral writing-mode position-absolute top-50 translate-middle-y text-white text-opacity-25 text-uppercase margin-right-80 z-index-2 h-100 text-center right-0">لماذا نحن</h1>
 
         <div class="container">
             <div class="row gy-4">
@@ -639,131 +692,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
      </section>
     <!-- ================================= Choose Us Section End =============================== -->
 
-     
-    <!-- ================================= Portfolio / Products Section Start =============================== -->
-    @php $products = $products ?? collect(); @endphp
-     <section class="homeC-portfolio space">
-        <div class="container">
-            <div class="d-flex flex-wrap justify-content-between mb-60 animate-on-scroll">
-                <div class="section-heading max-w-804 ms-0 text-start">
-                    <div class="d-inline-flex align-items-center gap-2 text-base mb-3">
-                        <img src="{{ $homeUrl('services.arrow_icon', 'frontend/assets/img/HomeCone/icon/arrow-icon-two.png') }}" alt="" class="">
-                        <h4 class="mb-0 text-base">معرض منتجاتنا</h4>
-                    </div>
-                    <h2 class="mb-0">منتجات وإنجازات إعادة التدوير</h2>
-                </div>
-                <div class="">
-                    <p class="mb-24 max-w-416">نعرض لكم تشكيلة من منتجاتنا وخدماتنا في مجال إعادة تدوير النفايات الإلكترونية والتي تعكس التزامنا بالجودة والاستدامة.</p>
-                    <a href="{{ route('frontend.products.index') }}" class="global-btn arrow-btn fw-bold style2 text-base-two px-5 radius-8 d-inline-flex align-items-center gap-2">
-                        عرض جميع المنتجات <i class="fas fa-arrow-right rotate-icon"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="homeC-portfolio__inner d-flex position-relative overflow-hidden">    
-            <div class="homeC-portfolio__left d-md-block d-none animate-on-scroll animate-from-end" data-animate-delay="100">
-                <img src="{{ $homeUrl('portfolio.bg_image') }}" alt="" class="homeC-portfolio__bg">
-                <div class="homeC-portfolio__data bg-base-two p-32-px">
-                    <img src="{{ $homeUrl('portfolio.play_icon') }}" alt="">
-                    <p class="text-neutral-700 mt-20 mb-0">{{ $homeText('portfolio.description', 'نعمل معكم بشكل وثيق لتطوير حلول متكاملة لإدارة النفايات الإلكترونية وتحقيق أهداف الاستدامة.') }}</p>
-                </div>
-            </div>
-            <div class="homeC-portfolio__right z-index-3 ps-md-4 animate-on-scroll animate-from-start" data-animate-delay="150">
-                <div class="padding-from-left d-flex align-items-center gap-1 mb-40">
-                    <ul class="d-flex align-items-center gap-2 list-unstyled mb-0 p-0">
-                        <li class="text-yellow"><i class="fas fa-star"></i></li>
-                        <li class="text-yellow"><i class="fas fa-star"></i></li>
-                        <li class="text-yellow"><i class="fas fa-star"></i></li>
-                        <li class="text-yellow"><i class="fas fa-star"></i></li>
-                        <li class="text-yellow"><i class="fas fa-star"></i></li>
-                    </ul>
-                    <span class="text-neutral-700 text-lg">(تقييمات العملاء)</span>
-                </div>
-
-                @if($products->isNotEmpty())
-                <div class="homeC-portfolio-slider">
-                    @foreach($products as $product)
-                    <div class="mx-2">
-                        <div class="homeC-portfolio__item radius-12-px overflow-hidden border border-neutral-100 bg-white">
-                            <h4 class="mb-0 p-4 pb-0">{{ $product->name }}</h4>
-                            <div class="p-4 pe-0 position-relative">
-                                <a href="{{ route('frontend.products.show', $product->slug) }}" class="d-block">
-                                    <img src="{{ $product->main_image_url }}" alt="{{ $product->name }}" class="w-100" style="height: 220px; object-fit: cover;">
-                                </a>
-                                <p class="p-4 me-4 text-neutral-700 bg-neutral-20 position-absolute start-0 bottom-0 mb--4 rounded-top-right-8">{{ Str::limit($product->short_description ?? $product->description, 80) }}</p>
-                            </div>
-                            <div class="p-4 pt-5">
-                                <a href="{{ route('frontend.products.show', $product->slug) }}" class="fw-semibold text-base d-flex align-items-center gap-2 hover-text-brand" tabindex="0">
-                                    اقرأ المزيد
-                                    <i class="fas fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                @else
-                <div class="homeC-portfolio-slider">
-                    <div class="mx-2">
-                        <div class="homeC-portfolio__item radius-12-px overflow-hidden border border-neutral-100 bg-white">
-                            <h4 class="mb-0 p-4 pb-0">إعادة تدوير الحواسيب</h4>
-                            <div class="p-4 pe-0 position-relative">
-                                <a href="{{ route('frontend.products.index') }}" class="d-block">
-                                    <img src="{{ $homeUrl('portfolio.image1', 'frontend/assets/img/HomeCone/portfolio-img1.png') }}" alt="" class="w-100">
-                                </a>
-                                <p class="p-4 me-4 text-neutral-700 bg-neutral-20 position-absolute start-0 bottom-0 mb--4 rounded-top-right-8">جمع وإعادة تدوير الحواسيب والأجهزة الإلكترونية القديمة بشكل آمن وصديق للبيئة.</p>
-                            </div>
-                            <div class="p-4 pt-5">
-                                <a href="{{ route('frontend.products.index') }}" class="fw-semibold text-base d-flex align-items-center gap-2 hover-text-brand">اقرأ المزيد <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mx-2">
-                        <div class="homeC-portfolio__item radius-12-px overflow-hidden border border-neutral-100 bg-white">
-                            <h4 class="mb-0 p-4 pb-0">تدوير الهواتف والأجهزة اللوحية</h4>
-                            <div class="p-4 pe-0 position-relative">
-                                <a href="{{ route('frontend.products.index') }}" class="d-block">
-                                    <img src="{{ $homeUrl('portfolio.image2', 'frontend/assets/img/HomeCone/portfolio-img2.png') }}" alt="" class="w-100">
-                                </a>
-                                <p class="p-4 me-4 text-neutral-700 bg-neutral-20 position-absolute start-0 bottom-0 mb--4 rounded-top-right-8">التخلص الآمن من الهواتف مع ضمان إتلاف البيانات وإعادة تدوير المكونات.</p>
-                            </div>
-                            <div class="p-4 pt-5">
-                                <a href="{{ route('frontend.products.index') }}" class="fw-semibold text-base d-flex align-items-center gap-2 hover-text-brand">اقرأ المزيد <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mx-2">
-                        <div class="homeC-portfolio__item radius-12-px overflow-hidden border border-neutral-100 bg-white">
-                            <h4 class="mb-0 p-4 pb-0">تدوير الأجهزة الكهربائية</h4>
-                            <div class="p-4 pe-0 position-relative">
-                                <a href="{{ route('frontend.products.index') }}" class="d-block">
-                                    <img src="{{ $homeUrl('portfolio.image3', 'frontend/assets/img/HomeCone/portfolio-img3.png') }}" alt="" class="w-100">
-                                </a>
-                                <p class="p-4 me-4 text-neutral-700 bg-neutral-20 position-absolute start-0 bottom-0 mb--4 rounded-top-right-8">معالجة الأجهزة الكهربائية المنزلية والتجارية وفق المعايير البيئية.</p>
-                            </div>
-                            <div class="p-4 pt-5">
-                                <a href="{{ route('frontend.products.index') }}" class="fw-semibold text-base d-flex align-items-center gap-2 hover-text-brand">اقرأ المزيد <i class="fas fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-
-                <div class="padding-from-left slick-arrows d-flex align-items-center gap-3 mt-40 justify-content-start">
-                    <button type="button" id="homeC-portfolio-prev" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white position-relative top-0 end-0 start-0 mt-0 slick-arrow">
-                        <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <button type="button" id="homeC-portfolio-next" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white position-relative top-0 end-0 start-0 mt-0 slick-arrow">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-     </section>
-    <!-- ================================= Portfolio Section End =============================== -->
-
     <!-- ================================= About Section Start =============================== -->
     <section class="homeC-about space overflow-hidden">
         <div class="container">
@@ -833,7 +761,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
     @php $teamMembers = $teamMembers ?? collect(); @endphp
     <section class="expert-team space py-120 bg-neutral-20 position-relative">
 
-        <h1 class="text-outline-neutral writing-mode position-absolute top-50 translate-y-middle-rotate text-white text-opacity-25 text-uppercase margin-left-80 z-index-2 h-100 text-center start-0">فريقنا</h1>
         
         <div class="container">
             <div class="d-flex flex-wrap justify-content-between mb-60 animate-on-scroll">
@@ -896,7 +823,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
 
     <!-- ================================= Working Process Section Start =============================== -->
     <section class="homeC-work-process space overflow-hidden position-relative">
-        <h1 class="text-outline-neutral writing-mode position-absolute top-50 translate-middle-y text-white text-opacity-25 text-uppercase margin-right-80 z-index-2 h-100 text-center right-0">How Its Works</h1>
         
         <div class="container">
             <div class="section-heading max-w-804 mx-auto text-center mb-60 animate-on-scroll">
@@ -972,7 +898,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
     @php $testimonials = $testimonials ?? collect(); @endphp
     <section class="homeC-testimonial space overflow-hidden position-relative bg-neutral-20">
 
-      <h1 class="text-outline-neutral writing-mode position-absolute top-50 translate-y-middle-rotate text-white text-opacity-25 text-uppercase margin-left-80 z-index-2 h-100 text-center start-0">أراء العملاء</h1>
         
         <div class="container">
             <div class="section-heading max-w-804 mx-auto text-center mb-60 animate-on-scroll">
@@ -1050,7 +975,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
     @php $blogPosts = $blogPosts ?? collect(); @endphp
     <section class="homeCone-blog space py-120 position-relative">
 
-        <h1 class="text-outline-neutral writing-mode position-absolute top-50 translate-y-middle-rotate text-white text-opacity-25 text-uppercase margin-left-80 z-index-2 h-100 text-center start-0">آخر الأخبار</h1>
         
         <div class="container">
             <div class="d-flex flex-wrap justify-content-between mb-60 animate-on-scroll">

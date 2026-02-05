@@ -45,9 +45,9 @@
                 @foreach($categories as $category)
                 <div class="col-lg-4 col-md-6">
                     <div class="scale-hover-item bg-neutral-20 radius-12-px overflow-hidden h-100 border border-neutral-100">
-                        <div class="overflow-hidden position-relative">
-                            <a href="{{ route('frontend.products.index', ['category' => $category->slug]) }}" class="d-block">
-                                <img src="{{ $category->display_image_url }}" alt="{{ $category->name }}" class="w-100 fit-img transition-2" style="height: 220px; object-fit: cover;">
+                        <div class="category-card-img-box overflow-hidden position-relative">
+                            <a href="{{ route('frontend.products.index', ['category' => $category->slug]) }}">
+                                <img src="{{ $category->display_image_url }}" alt="{{ $category->name }}" class="fit-img transition-2">
                             </a>
                             @if($category->parent)
                                 <span class="badge bg-secondary position-absolute top-0 end-0 m-3">{{ $category->parent->name }}</span>
