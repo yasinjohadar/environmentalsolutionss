@@ -81,7 +81,7 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
 
 </head>
 
-<body class="body-white bg-white">
+<body class="body-white bg-white page-home">
     <!--********************************
    		Code Start From Here 
 	******************************** -->
@@ -190,9 +190,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                         <a href="{{ route('frontend.about.index') }}">من نحن</a>
                     </li>
                     <li>
-                        <a href="project.html">المشاريع</a>
-                    </li>
-                    <li>
                         <a href="{{ route('frontend.products.index') }}">المنتجات</a>
                     </li>
                     <li>
@@ -236,9 +233,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                                 </li>
                                 <li>
                                     <a href="{{ route('frontend.about.index') }}">من نحن</a>
-                                </li>
-                                <li>
-                                    <a href="project.html">المشاريع</a>
                                 </li>
                                 <li>
                                     <a href="{{ route('frontend.products.index') }}">المنتجات</a>
@@ -485,13 +479,25 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
     @php $products = $products ?? collect(); @endphp
     <section class="home-our-products space py-120 bg-neutral-20">
         <div class="container">
-            <div class="section-heading max-w-804 mx-auto text-center mb-60 animate-on-scroll">
-                <div class="d-inline-flex align-items-center gap-2 text-base mb-3">
-                    <img src="{{ $homeUrl('services.arrow_icon', 'frontend/assets/img/HomeCone/icon/arrow-icon-two.png') }}" alt="">
-                    <h4 class="mb-0 text-base">تشكيلة مختارة</h4>
+            <div class="position-relative mb-60 animate-on-scroll">
+                <div class="section-heading max-w-804 mx-auto text-center">
+                    <div class="d-inline-flex align-items-center gap-2 text-base mb-3">
+                        <img src="{{ $homeUrl('services.arrow_icon', 'frontend/assets/img/HomeCone/icon/arrow-icon-two.png') }}" alt="">
+                        <h4 class="mb-0 text-base">تشكيلة مختارة</h4>
+                    </div>
+                    <h2 class="mb-24">منتجاتنا</h2>
+                    <p class="mb-0 mx-auto" style="max-width: 416px;">نعرض لكم تشكيلة من منتجاتنا وخدماتنا في مجال إعادة تدوير النفايات الإلكترونية والتي تعكس التزامنا بالجودة والاستدامة.</p>
                 </div>
-                <h2 class="mb-24">منتجاتنا</h2>
-                <p class="mb-0">نعرض لكم تشكيلة من منتجاتنا وخدماتنا في مجال إعادة تدوير النفايات الإلكترونية والتي تعكس التزامنا بالجودة والاستدامة.</p>
+                @if($products->isNotEmpty())
+                <div class="slick-arrows d-flex align-items-center gap-3 position-absolute start-0 top-0">
+                    <button type="button" id="home-our-products-prev" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white position-relative top-0 end-0 start-0 mt-0 slick-arrow">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button type="button" id="home-our-products-next" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white position-relative top-0 end-0 start-0 mt-0 slick-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                @endif
             </div>
             @if($products->isNotEmpty())
             <div class="home-our-products-slider animate-on-scroll" data-animate-delay="80">
@@ -518,14 +524,6 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                     </div>
                 </div>
                 @endforeach
-            </div>
-            <div class="home-our-products-arrows slick-arrows d-flex align-items-center gap-3 mt-40 justify-content-center">
-                <button type="button" id="home-our-products-prev" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <button type="button" id="home-our-products-next" class="w-48-px h-48-px radius-8-px d-flex justify-content-center align-items-center border border-base text-base text-lg hover-bg-base bg-transparent hover-text-white">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
             </div>
             <div class="text-center mt-4">
                 <a href="{{ route('frontend.products.index') }}" class="global-btn arrow-btn fw-bold style2 text-base-two px-5 radius-8 d-inline-flex align-items-center gap-2">

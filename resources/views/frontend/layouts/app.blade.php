@@ -15,7 +15,7 @@
     @stack('styles')
     @stack('meta')
 </head>
-<body class="body-white bg-white">
+<body class="body-white bg-white @yield('body_class')">
     <div class="preloader">
         <div class="preloader-inner">
             <span class="loader"></span>
@@ -32,7 +32,6 @@
                 <ul>
                     <li><a href="{{ route('home') }}">الرئيسية</a></li>
                     <li><a href="{{ route('frontend.about.index') }}">من نحن</a></li>
-                    <li><a href="project.html">المشاريع</a></li>
                     <li><a href="{{ route('frontend.products.index') }}">المنتجات</a></li>
                     <li><a href="{{ route('frontend.categories.index') }}">التصنيفات</a></li>
                     <li><a href="{{ route('frontend.blog.index') }}">المدونة</a></li>
@@ -55,7 +54,6 @@
                             <ul>
                                 <li><a href="{{ route('home') }}">الرئيسية</a></li>
                                 <li><a href="{{ route('frontend.about.index') }}">من نحن</a></li>
-                                <li><a href="project.html">المشاريع</a></li>
                                 <li><a href="{{ route('frontend.products.index') }}">المنتجات</a></li>
                                 <li><a href="{{ route('frontend.categories.index') }}">التصنيفات</a></li>
                                 <li><a href="{{ route('frontend.blog.index') }}">المدونة</a></li>

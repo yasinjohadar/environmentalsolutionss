@@ -826,7 +826,7 @@
         ]
     });  
 
-    // Our Products Slider (منتجاتنا - 10 منتجات، 3 ظاهرين، مع الأسهم)
+    // Our Products Slider (منتجاتنا - نفس أزرار قسم المدونة)
     $('.home-our-products-slider').slick({
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -834,7 +834,6 @@
         dots: false,
         pauseOnHover: true,
         arrows: true,
-        appendArrows: '.home-our-products-arrows',
         draggable: true,
         rtl: $('html').attr('dir') === 'rtl' ? true : false,
         speed: 900,
@@ -847,7 +846,6 @@
             settings: {
             slidesToShow: 2,
             arrows: true,
-            appendArrows: '.home-our-products-arrows',
             }
         },
         {
@@ -855,7 +853,6 @@
             settings: {
             slidesToShow: 1,
             arrows: true,
-            appendArrows: '.home-our-products-arrows',
             }
         },
         ]

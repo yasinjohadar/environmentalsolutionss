@@ -23140,10 +23140,60 @@ li.trackback {
   min-height: 220px;
   background-size: cover !important;
   background-position: center center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position: relative;
+}
+.products-page-banner .container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.products-page-banner .row {
+  width: 100%;
+  margin: 0 !important;
+}
+.products-page-banner [class*="col-"] {
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 @media (min-width: 768px) {
   .products-page-banner {
     min-height: 320px;
+    height: 320px;
+  }
+}
+
+/* =========================== الصفحة الرئيسية: تقليل هوامش الأقسام ================================= */
+.page-home .space,
+.page-home .space-top {
+  padding-top: 60px !important;
+}
+.page-home .space,
+.page-home .space-bottom {
+  padding-bottom: 60px !important;
+}
+.page-home section.space.py-120,
+.page-home .py-120 {
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+}
+@media (max-width: 991px) {
+  .page-home .space,
+  .page-home .space-top {
+    padding-top: 45px !important;
+  }
+  .page-home .space,
+  .page-home .space-bottom {
+    padding-bottom: 45px !important;
+  }
+  .page-home section.space.py-120,
+  .page-home .py-120 {
+    padding-top: 45px !important;
+    padding-bottom: 45px !important;
   }
 }
 
