@@ -56,15 +56,24 @@ class SiteSettingController extends Controller
 
         $data = collect($validated)->except(['logo', 'logo_dark', 'favicon', 'footer_background', 'meta', 'map_embed_src'])->toArray();
 
-        if ($request->hasFile('logo')) {
+        if ($request->boolean('clear_logo') && $settings->logo) {
+            $this->deleteImage($settings->logo);
+            $data['logo'] = null;
+        } elseif ($request->hasFile('logo')) {
             $this->deleteImage($settings->logo);
             $data['logo'] = $this->uploadImage($request->file('logo'), 'logo');
         }
-        if ($request->hasFile('logo_dark')) {
+        if ($request->boolean('clear_logo_dark') && $settings->logo_dark) {
+            $this->deleteImage($settings->logo_dark);
+            $data['logo_dark'] = null;
+        } elseif ($request->hasFile('logo_dark')) {
             $this->deleteImage($settings->logo_dark);
             $data['logo_dark'] = $this->uploadImage($request->file('logo_dark'), 'logo_dark');
         }
-        if ($request->hasFile('favicon')) {
+        if ($request->boolean('clear_favicon') && $settings->favicon) {
+            $this->deleteImage($settings->favicon);
+            $data['favicon'] = null;
+        } elseif ($request->hasFile('favicon')) {
             $this->deleteImage($settings->favicon);
             $data['favicon'] = $this->uploadImage($request->file('favicon'), 'favicon');
         }

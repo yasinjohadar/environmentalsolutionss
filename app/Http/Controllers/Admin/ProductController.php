@@ -27,7 +27,7 @@ class ProductController extends Controller
         $this->middleware('permission:product-list')->only('index');
         $this->middleware('permission:product-create')->only(['create', 'store']);
         $this->middleware('permission:product-edit')->only(['edit', 'update']);
-        $this->middleware('permission:product-delete')->only('destroy');
+        $this->middleware('permission:product-delete')->only(['destroy', 'bulkDestroy']);
         $this->middleware('permission:product-show')->only('show');
     }
 
@@ -72,7 +72,12 @@ class ProductController extends Controller
             $productsQuery->where('price', '<=', $request->input('price_max'));
         }
 
-        $products = $productsQuery->paginate(15);
+        $perPage = (int) $request->input('per_page', 15);
+        $allowed = [10, 15, 25, 50, 100];
+        if (!in_array($perPage, $allowed, true)) {
+            $perPage = 15;
+        }
+        $products = $productsQuery->paginate($perPage)->withQueryString();
         $categories = Category::active()->orderBy('name')->get();
 
         // إذا كان الطلب عبر AJAX، أرجع JSON
@@ -450,6 +455,67 @@ class ProductController extends Controller
             DB::rollBack();
             return redirect()->route('admin.products.index')
                 ->with('error', 'حدث خطأ أثناء حذف المنتج: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * حذف جماعي للمنتجات المحددة
+     */
+    public function bulkDestroy(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'required|integer|exists:products,id',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $ids = $request->input('ids');
+            $deleted = 0;
+
+            foreach ($ids as $id) {
+                $product = Product::find($id);
+                if (!$product) {
+                    continue;
+                }
+
+                if ($product->main_image && Storage::disk('public')->exists($product->main_image)) {
+                    Storage::disk('public')->delete($product->main_image);
+                }
+                if ($product->og_image && Storage::disk('public')->exists($product->og_image)) {
+                    Storage::disk('public')->delete($product->og_image);
+                }
+                foreach ($product->images as $image) {
+                    if (Storage::disk('public')->exists($image->image_path)) {
+                        Storage::disk('public')->delete($image->image_path);
+                    }
+                }
+                foreach ($product->colors as $color) {
+                    if ($color->image && Storage::disk('public')->exists($color->image)) {
+                        Storage::disk('public')->delete($color->image);
+                    }
+                }
+                foreach ($product->variants as $variant) {
+                    if ($variant->image && Storage::disk('public')->exists($variant->image)) {
+                        Storage::disk('public')->delete($variant->image);
+                    }
+                }
+
+                $product->delete();
+                $deleted++;
+            }
+
+            DB::commit();
+
+            $message = $deleted === 1
+                ? 'تم حذف منتج واحد بنجاح'
+                : "تم حذف {$deleted} منتجات بنجاح";
+
+            return redirect()->route('admin.products.index')->with('success', $message);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->route('admin.products.index')
+                ->with('error', 'حدث خطأ أثناء الحذف الجماعي: ' . $e->getMessage());
         }
     }
 

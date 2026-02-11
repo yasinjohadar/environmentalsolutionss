@@ -84,21 +84,39 @@
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">الشعار الرئيسي</label>
                                     @if($settings->logo)
-                                        <img src="{{ $settings->logo_url }}" alt="" class="img-fluid rounded mb-2 d-block" style="max-height: 80px;">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <img src="{{ $settings->logo_url }}" alt="" class="img-fluid rounded d-block" style="max-height: 80px;">
+                                            <label class="form-check mb-0">
+                                                <input type="checkbox" name="clear_logo" value="1" class="form-check-input">
+                                                <span class="form-check-label text-danger small">إزالة الشعار</span>
+                                            </label>
+                                        </div>
                                     @endif
                                     <input type="file" name="logo" class="form-control" accept="image/*">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">الشعار للنمط الداكن</label>
                                     @if($settings->logo_dark)
-                                        <img src="{{ $settings->logo_dark_url }}" alt="" class="img-fluid rounded mb-2 d-block" style="max-height: 80px;">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <img src="{{ $settings->logo_dark_url }}" alt="" class="img-fluid rounded d-block" style="max-height: 80px;">
+                                            <label class="form-check mb-0">
+                                                <input type="checkbox" name="clear_logo_dark" value="1" class="form-check-input">
+                                                <span class="form-check-label text-danger small">إزالة الشعار</span>
+                                            </label>
+                                        </div>
                                     @endif
                                     <input type="file" name="logo_dark" class="form-control" accept="image/*">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">أيقونة المفضلة (Favicon)</label>
                                     @if($settings->favicon)
-                                        <img src="{{ $settings->favicon_url }}" alt="" class="img-fluid mb-2 d-block" style="max-height: 32px;">
+                                        <div class="d-flex align-items-center gap-2 mb-2">
+                                            <img src="{{ $settings->favicon_url }}" alt="" class="img-fluid d-block" style="max-height: 32px;">
+                                            <label class="form-check mb-0">
+                                                <input type="checkbox" name="clear_favicon" value="1" class="form-check-input">
+                                                <span class="form-check-label text-danger small">إزالة الأيقونة</span>
+                                            </label>
+                                        </div>
                                     @endif
                                     <input type="file" name="favicon" class="form-control" accept="image/*">
                                 </div>

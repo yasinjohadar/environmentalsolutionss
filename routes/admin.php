@@ -51,7 +51,8 @@ Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.'
     // Categories routes
     Route::resource('categories', CategoryController::class);
     
-    // Products routes
+    // Products routes (يجب أن يكون bulk-delete قبل resource لتجنب التعارض)
+    Route::post('products/bulk-delete', [ProductController::class, 'bulkDestroy'])->name('products.bulk-destroy');
     Route::resource('products', ProductController::class);
     
     // Product images routes

@@ -48,6 +48,11 @@
                             @can('product-create')
                                 <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm">إضافة منتج جديد</a>
                             @endcan
+                            @can('product-delete')
+                                <button type="button" id="bulk-delete-btn" class="btn btn-danger btn-sm" style="display: none;" title="حذف المنتجات المحددة">
+                                    <i class="bi bi-trash me-1"></i> حذف المحدد (<span id="bulk-selected-count">0</span>)
+                                </button>
+                            @endcan
 
                             <div class="flex-shrink-0 ms-auto">
                                 <form id="filter-form" action="{{ route('admin.products.index') }}" method="GET" class="d-flex align-items-center gap-2">
@@ -76,6 +81,15 @@
                                         <option value="0" {{ request('featured') == '0' ? 'selected' : '' }}>عادي</option>
                                     </select>
 
+                                    <select name="per_page" id="filter-per-page" class="form-select" style="width: 120px" title="عدد المنتجات في الصفحة">
+                                        <option value="10"  {{ request('per_page', 15) == 10 ? 'selected' : '' }}>10</option>
+                                        <option value="15"  {{ request('per_page', 15) == 15 ? 'selected' : '' }}>15</option>
+                                        <option value="25"  {{ request('per_page') == 25 ? 'selected' : '' }}>25</option>
+                                        <option value="50"  {{ request('per_page') == 50 ? 'selected' : '' }}>50</option>
+                                        <option value="100" {{ request('per_page') == 100 ? 'selected' : '' }}>100</option>
+                                    </select>
+                                    <span class="text-muted small align-self-center">/ صفحة</span>
+
                                     <button type="button" id="search-btn" class="btn btn-secondary">بحث</button>
                                     <button type="button" id="clear-btn" class="btn btn-danger">مسح</button>
                                 </form>
@@ -95,6 +109,11 @@
                                     <table class="table table-striped table-hover align-middle table-nowrap mb-0">
                                         <thead class="table-light">
                                             <tr>
+                                                @can('product-delete')
+                                                <th scope="col" style="width: 44px;">
+                                                    <input type="checkbox" id="select-all-products" class="form-check-input" title="تحديد الكل">
+                                                </th>
+                                                @endcan
                                                 <th scope="col" style="width: 40px;">#</th>
                                                 <th scope="col" style="min-width: 100px;">الصورة</th>
                                                 <th scope="col" style="min-width: 200px;">الاسم</th>
@@ -122,6 +141,11 @@
             </div>
         </div>
     </div>
+
+    {{-- نموذج الحذف الجماعي (مخفي، تُضاف ids[] عبر JS قبل الإرسال) --}}
+    <form id="bulk-delete-form" method="POST" action="{{ route('admin.products.bulk-destroy') }}" style="display: none;">
+        @csrf
+    </form>
 
     <!-- Delete Product Modal -->
     <div class="modal fade" id="deleteProductModal" tabindex="-1" aria-labelledby="deleteProductModalLabel" aria-hidden="true">
@@ -164,6 +188,65 @@
 
 @section('script')
     <script>
+        // التحديد المتعدد والحذف الجماعي
+        function bindBulkDeleteEvents() {
+            const selectAll = document.getElementById('select-all-products');
+            const checkboxes = document.querySelectorAll('.product-row-checkbox');
+            const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
+            const bulkCountSpan = document.getElementById('bulk-selected-count');
+            const bulkDeleteForm = document.getElementById('bulk-delete-form');
+            const bulkIdsInput = document.getElementById('bulk-delete-ids-input');
+
+            function updateBulkUI() {
+                const checked = document.querySelectorAll('.product-row-checkbox:checked');
+                const n = checked.length;
+                if (bulkCountSpan) bulkCountSpan.textContent = n;
+                if (bulkDeleteBtn) bulkDeleteBtn.style.display = n ? 'inline-block' : 'none';
+                if (selectAll) selectAll.checked = checkboxes.length > 0 && checked.length === checkboxes.length;
+                if (selectAll) selectAll.indeterminate = n > 0 && n < checkboxes.length;
+            }
+
+            if (selectAll) {
+                selectAll.addEventListener('change', function() {
+                    checkboxes.forEach(cb => { cb.checked = selectAll.checked; });
+                    updateBulkUI();
+                });
+            }
+            document.querySelectorAll('.product-row-checkbox').forEach(cb => {
+                cb.addEventListener('change', updateBulkUI);
+            });
+            updateBulkUI();
+        }
+
+        // زر الحذف الجماعي (مرة واحدة فقط) — نضيف ids[] قبل الإرسال حتى يستقبل الخادم مصفوفة
+        document.addEventListener('DOMContentLoaded', function() {
+            const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
+            const bulkDeleteForm = document.getElementById('bulk-delete-form');
+            if (bulkDeleteBtn && bulkDeleteForm) {
+                bulkDeleteBtn.addEventListener('click', function() {
+                    const ids = Array.from(document.querySelectorAll('.product-row-checkbox:checked')).map(cb => cb.value);
+                    if (ids.length === 0) {
+                        alert('لم تحدد أي منتجات.');
+                        return;
+                    }
+                    if (!confirm('هل أنت متأكد من حذف ' + ids.length + ' منتج/منتجات؟ لا يمكن التراجع عن هذا الإجراء.')) {
+                        return;
+                    }
+                    // إزالة أي ids[] سابقة من النموذج
+                    bulkDeleteForm.querySelectorAll('input[name="ids[]"]').forEach(function(el) { el.remove(); });
+                    // إضافة حقل مخفي لكل معرّف حتى يصل الخادم ids كمصفوفة
+                    ids.forEach(function(id) {
+                        const input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'ids[]';
+                        input.value = id;
+                        bulkDeleteForm.appendChild(input);
+                    });
+                    bulkDeleteForm.submit();
+                });
+            }
+        });
+
         // Handle delete modal
         const deleteProductModal = document.getElementById('deleteProductModal');
         if (deleteProductModal) {
@@ -266,8 +349,9 @@
                         console.error('paginationContainer أو data.pagination غير موجود');
                     }
                     
-                    // إعادة ربط أحداث Pagination
+                    // إعادة ربط أحداث Pagination والتحديد المتعدد
                     bindPaginationEvents();
+                    bindBulkDeleteEvents();
                     
                     // إخفاء مؤشر التحميل
                     if (loadingIndicator) loadingIndicator.style.display = 'none';
@@ -360,9 +444,14 @@
             if (filterFeatured) {
                 filterFeatured.addEventListener('change', performFilter);
             }
+            const filterPerPage = document.getElementById('filter-per-page');
+            if (filterPerPage) {
+                filterPerPage.addEventListener('change', performFilter);
+            }
 
-            // ربط أحداث Pagination عند تحميل الصفحة
+            // ربط أحداث Pagination والتحديد المتعدد عند تحميل الصفحة
             bindPaginationEvents();
+            bindBulkDeleteEvents();
         });
     </script>
 @stop

@@ -1,5 +1,10 @@
 @forelse ($products as $product)
     <tr>
+        @can('product-delete')
+        <td>
+            <input type="checkbox" name="ids[]" value="{{ $product->id }}" class="form-check-input product-row-checkbox">
+        </td>
+        @endcan
         <th scope="row">{{ $loop->iteration + ($products->currentPage() - 1) * $products->perPage() }}</th>
         <td>
             @if($product->main_image_url)
@@ -83,7 +88,7 @@
     </tr>
 @empty
     <tr>
-        <td colspan="9" class="text-center py-4">
+        <td colspan="{{ auth()->user()->can('product-delete') ? 10 : 9 }}" class="text-center py-4">
             <p class="text-muted mb-0">لا توجد منتجات</p>
         </td>
     </tr>
