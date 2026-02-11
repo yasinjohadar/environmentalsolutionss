@@ -47,7 +47,7 @@ Route::get('/contact', [\App\Http\Controllers\Frontend\ContactController::class,
 Route::post('/contact', [\App\Http\Controllers\Frontend\ContactController::class, 'store'])->name('frontend.contact.store');
 
 Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'check.user.active'])->group(function () {
