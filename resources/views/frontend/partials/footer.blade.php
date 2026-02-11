@@ -18,7 +18,7 @@ $footerBgUrl = $s?->footer_background_url ?? asset('frontend/assets/img/HomeCone
                 <div class="col-lg-3">
                     <div class="">
                         <a href="{{ route('home') }}" class="d-inline-block mb-4 text-decoration-none">
-                            @if($s?->logo_dark_url || $s?->logo_url)
+                            @if($s?->logo_dark || $s?->logo)
                                 <img src="{{ $s?->logo_dark_url ?? $s?->logo_url }}" alt="{{ $s?->site_name ?? '' }}">
                             @else
                                 <span class="text-white fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>

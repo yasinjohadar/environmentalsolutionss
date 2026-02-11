@@ -28,7 +28,7 @@
         <div class="mobile-menu-area">
             <div class="mobile-logo">
                 <a href="{{ route('home') }}">
-                    @if($s?->logo_url)
+                    @if($s?->logo)
                         <img src="{{ $s->logo_url }}" alt="{{ $s->site_name ?? '' }}">
                     @else
                         <span class="text-white fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>
@@ -56,7 +56,7 @@
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
                         <a href="{{ route('home') }}" class="text-decoration-none">
-                            @if($s?->logo_dark_url || $s?->logo_url)
+                            @if($s?->logo_dark || $s?->logo)
                                 <img src="{{ $s?->logo_dark_url ?? $s?->logo_url }}" alt="{{ $s?->site_name ?? '' }}">
                             @else
                                 <span class="text-white fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>
