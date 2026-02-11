@@ -104,6 +104,12 @@ class ProductController extends Controller
         try {
             $data = $request->validated();
 
+            // تأكيد وجود الحقول الاختيارية التي قد لا تُرسل مع النموذج
+            $data['featured'] = $request->boolean('featured');
+            if (!isset($data['category_id'])) {
+                $data['category_id'] = null;
+            }
+
             // معالجة الصورة الرئيسية
             if ($request->hasFile('main_image')) {
                 $mainImage = $request->file('main_image');

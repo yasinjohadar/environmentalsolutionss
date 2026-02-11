@@ -16,6 +16,7 @@
     @stack('meta')
 </head>
 <body class="body-white bg-white @yield('body_class')">
+    @php $s = $siteSettings ?? null; @endphp
     @if(trim($__env->yieldContent('body_class')) !== 'page-home')
     <div class="preloader">
         <div class="preloader-inner">
@@ -26,7 +27,7 @@
     <div class="mobile-menu-wrapper">
         <div class="mobile-menu-area">
             <div class="mobile-logo">
-                <a href="{{ route('home') }}"><img src="{{ asset('frontend/assets/img/logo.svg') }}" alt=""></a>
+                <a href="{{ route('home') }}"><img src="{{ $s?->logo_url ?? asset('frontend/assets/img/logo.svg') }}" alt="{{ $s?->site_name ?? '' }}"></a>
                 <button class="menu-toggle"><i class="fa fa-times"></i></button>
             </div>
             <div class="mobile-menu">
@@ -48,7 +49,7 @@
             <div class="container custom-container--xl">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
-                        <a href="{{ route('home') }}"><img src="{{ asset('frontend/assets/img/logo-white-2.png') }}" alt="logo"></a>
+                        <a href="{{ route('home') }}"><img src="{{ $s?->logo_dark_url ?? $s?->logo_url ?? asset('frontend/assets/img/logo-white-2.png') }}" alt="{{ $s?->site_name ?? 'logo' }}"></a>
                     </div>
                     <div class="col-auto">
                         <nav class="main-menu d-none d-lg-inline-block">

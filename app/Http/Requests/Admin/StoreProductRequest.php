@@ -55,7 +55,7 @@ class StoreProductRequest extends FormRequest
             
             // Colors
             'colors' => 'nullable|array',
-            'colors.*.name' => 'required_with:colors|string|max:255',
+            'colors.*.name' => 'nullable|string|max:255',
             'colors.*.hex_code' => 'nullable|string|max:7|regex:/^#[0-9A-Fa-f]{6}$/',
             'colors.*.image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             

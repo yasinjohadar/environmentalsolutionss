@@ -57,6 +57,20 @@
 @stop
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="إغلاق"></button>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="إغلاق"></button>
+        </div>
+    @endif
+
     @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <ul class="mb-0">
@@ -410,6 +424,13 @@
         let colorIndex = 1;
         let sizeIndex = 1;
         let variantIndex = 0;
+
+        // عند وجود رسالة نجاح أو خطأ أو أخطاء تحقق، التمرير لأعلى الصفحة لرؤية الرسالة
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.querySelector('.alert-success') || document.querySelector('.alert-danger') || document.querySelector('.invalid-feedback')) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
 
         // Preview main image
         function previewImage(input, previewId) {
