@@ -27,7 +27,13 @@
     <div class="mobile-menu-wrapper">
         <div class="mobile-menu-area">
             <div class="mobile-logo">
-                <a href="{{ route('home') }}"><img src="{{ $s?->logo_url ?? asset('frontend/assets/img/logo.svg') }}" alt="{{ $s?->site_name ?? '' }}"></a>
+                <a href="{{ route('home') }}">
+                    @if($s?->logo_url)
+                        <img src="{{ $s->logo_url }}" alt="{{ $s->site_name ?? '' }}">
+                    @else
+                        <span class="text-white fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>
+                    @endif
+                </a>
                 <button class="menu-toggle"><i class="fa fa-times"></i></button>
             </div>
             <div class="mobile-menu">
@@ -49,7 +55,13 @@
             <div class="container custom-container--xl">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
-                        <a href="{{ route('home') }}"><img src="{{ $s?->logo_dark_url ?? $s?->logo_url ?? asset('frontend/assets/img/logo-white-2.png') }}" alt="{{ $s?->site_name ?? 'logo' }}"></a>
+                        <a href="{{ route('home') }}" class="text-decoration-none">
+                            @if($s?->logo_dark_url || $s?->logo_url)
+                                <img src="{{ $s?->logo_dark_url ?? $s?->logo_url }}" alt="{{ $s?->site_name ?? '' }}">
+                            @else
+                                <span class="text-white fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>
+                            @endif
+                        </a>
                     </div>
                     <div class="col-auto">
                         <nav class="main-menu d-none d-lg-inline-block">

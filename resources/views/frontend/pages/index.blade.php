@@ -26,7 +26,13 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
             <div class="widget  ">
                 <div class="th-widget-about">
                     <div class="about-logo">
-                        <a href="{{ route('home') }}"><img src="{{ $s?->logo_url ?? asset('frontend/assets/img/logo.svg') }}" alt="{{ $s?->site_name ?? '' }}"></a>
+                        <a href="{{ route('home') }}">
+                            @if($s?->logo_url)
+                                <img src="{{ $s->logo_url }}" alt="{{ $s->site_name ?? '' }}">
+                            @else
+                                <span class="fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>
+                            @endif
+                        </a>
                     </div>
                     <p class="about-text">{{ $s->footer_description ?? 'نقدم خدمات متخصصة في إعادة تدوير النفايات الإلكترونية وجمعها والتخلص الآمن منها وفق أعلى المعايير البيئية.' }}</p>
                     <div class="social-links">
@@ -97,7 +103,13 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
     <div class="mobile-menu-wrapper">
         <div class="mobile-menu-area">
             <div class="mobile-logo">
-                <a href="{{ route('home') }}"><img src="{{ $s?->logo_url ?? asset('frontend/assets/img/logo.svg') }}" alt="{{ $s?->site_name ?? '' }}"></a>
+                <a href="{{ route('home') }}">
+                    @if($s?->logo_url)
+                        <img src="{{ $s->logo_url }}" alt="{{ $s->site_name ?? '' }}">
+                    @else
+                        <span class="fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>
+                    @endif
+                </a>
                 <button class="menu-toggle"><i class="fa fa-times"></i></button>
             </div>
             <div class="mobile-menu">
@@ -139,8 +151,12 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto">
                         <!-- Logo Start -->
-                        <a href="{{ route('home') }}" class="">
-                            <img src="{{ $s?->logo_dark_url ?? $s?->logo_url ?? asset('frontend/assets/img/logo-white-2.png') }}" alt="{{ $s?->site_name ?? 'logo' }}">
+                        <a href="{{ route('home') }}" class="text-decoration-none">
+                            @if($s?->logo_dark_url || $s?->logo_url)
+                                <img src="{{ $s?->logo_dark_url ?? $s?->logo_url }}" alt="{{ $s?->site_name ?? '' }}">
+                            @else
+                                <span class="text-white fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>
+                            @endif
                         </a>
                         <!-- Logo End -->
                     </div>

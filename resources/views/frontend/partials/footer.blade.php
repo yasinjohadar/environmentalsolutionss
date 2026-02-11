@@ -17,8 +17,12 @@ $footerBgUrl = $s?->footer_background_url ?? asset('frontend/assets/img/HomeCone
             <div class="row gy-5">
                 <div class="col-lg-3">
                     <div class="">
-                        <a href="{{ route('home') }}" class="d-inline-block mb-4">
-                            <img src="{{ $s?->logo_dark_url ?? $s?->logo_url ?? asset('frontend/assets/img/logo-white-2.png') }}" alt="{{ $s?->site_name ?? '' }}">
+                        <a href="{{ route('home') }}" class="d-inline-block mb-4 text-decoration-none">
+                            @if($s?->logo_dark_url || $s?->logo_url)
+                                <img src="{{ $s?->logo_dark_url ?? $s?->logo_url }}" alt="{{ $s?->site_name ?? '' }}">
+                            @else
+                                <span class="text-white fw-bold">{{ $s?->site_name ?? 'الرئيسية' }}</span>
+                            @endif
                         </a>
                         <p class="text-neutral-20">{{ $s?->footer_description ?? 'نقدم خدمات متكاملة لجمع وإعادة تدوير النفايات الإلكترونية بطرق آمنة وصديقة للبيئة.' }}</p>
                         <ul class="mt-32-px ps-0 list-unstyled d-flex align-content-center gap-12">
