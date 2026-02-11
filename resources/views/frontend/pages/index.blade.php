@@ -531,14 +531,7 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <ul class="ps-0 d-flex flex-column gap-3">
-                                        @foreach(($h['choose_us']['mission']['items'] ?? ['التزامنا بحماية البيئة والتقليل من البصمة الكربونية', 'إعادة تدوير 100% من النفايات الإلكترونية المستلمة', 'الإتلاف الآمن للبيانات الحساسة وفق أعلى المعايير', 'الشفافية والموثوقية في كل خطوة من العملية']) as $item)
-                                        <li class="d-flex align-items-center gap-2">
-                                            <span class=""><img src="{{ $homeUrl('choose_us.check_icon', 'frontend/assets/img/HomeCone/check-icon.png') }}" alt=""></span>
-                                            <span class="text-neutral-500 text-lg">{{ is_string($item) ? $item : ($item['text'] ?? '') }}</span>
-                                        </li>
-                                        @endforeach
-                                    </ul>
+                                    <p class="text-neutral-500 text-lg mb-0">{{ $homeText('choose_us.mission.text', 'نسعى إلى معالجة أزمة النفايات الإلكترونية من خلال إنشاء آلية منظمة وآمنة للجمع والمعالجة، والحد من المخاطر البيئية والصحية، مع تحويل الأجهزة التالفة إلى موارد تعليمية وتقنية تخدم المجتمع.') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -553,14 +546,7 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <ul class="ps-0 d-flex flex-column gap-3">
-                                        @foreach(($h['choose_us']['approach']['items'] ?? ['جمع النفايات من جميع أنحاء المملكة ودول الخليج', 'عمليات صديقة للبيئة ومعتمدة دولياً', 'توثيق كامل وشهادات التخلص الآمن', 'شراكات استراتيجية مع القطاعين العام والخاص']) as $item)
-                                        <li class="d-flex align-items-center gap-2">
-                                            <span class=""><img src="{{ $homeUrl('choose_us.check_icon', 'frontend/assets/img/HomeCone/check-icon.png') }}" alt=""></span>
-                                            <span class="text-neutral-500 text-lg">{{ is_string($item) ? $item : ($item['text'] ?? '') }}</span>
-                                        </li>
-                                        @endforeach
-                                    </ul>
+                                    <p class="text-neutral-500 text-lg mb-0">{{ $homeText('choose_us.approach.text', 'نعتمد نهجًا متكاملًا يقوم على الجمع المنظم، الفرز والتفكيك الآمن، إعادة التأهيل وإعادة الاستخدام قبل إعادة التدوير، مع الالتزام بمعايير السلامة المهنية وحماية البيانات، مدعومًا بنظام إدارة رقمي يضمن الشفافية والكفاءة.') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -575,14 +561,7 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <ul class="ps-0 d-flex flex-column gap-3">
-                                        @foreach(($h['choose_us']['vision']['items'] ?? ['مستقبل خالٍ من النفايات الإلكترونية الضارة', 'ريادة في الاقتصاد الدائري والاستدامة', 'المساهمة في أهداف التنمية المستدامة 2030', 'التوعية المجتمعية بأهمية إعادة التدوير']) as $item)
-                                        <li class="d-flex align-items-center gap-2">
-                                            <span class=""><img src="{{ $homeUrl('choose_us.check_icon', 'frontend/assets/img/HomeCone/check-icon.png') }}" alt=""></span>
-                                            <span class="text-neutral-500 text-lg">{{ is_string($item) ? $item : ($item['text'] ?? '') }}</span>
-                                        </li>
-                                        @endforeach
-                                    </ul>
+                                    <p class="text-neutral-500 text-lg mb-0">{{ $homeText('choose_us.vision.text', 'نطمح إلى مستقبلٍ تتحول فيه النفايات الإلكترونية من عبء بيئي إلى فرصة للتعلّم والابتكار والتنمية المستدامة، وأن يكون المشروع نموذجًا قابلًا للتوسّع محليًا وإقليميًا.') }}</p>
                                 </div>
                             </div>
                         </div>
