@@ -106,7 +106,7 @@
                             
                             <div id="products-table-container">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-hover align-middle table-nowrap mb-0">
+                                    <table class="table table-striped table-hover align-middle table-nowrap mb-0" id="products-table">
                                         <thead class="table-light">
                                             <tr>
                                                 @can('product-delete')
@@ -188,35 +188,45 @@
 
 @section('script')
     <script>
-        // التحديد المتعدد والحذف الجماعي
-        function bindBulkDeleteEvents() {
-            const selectAll = document.getElementById('select-all-products');
-            const checkboxes = document.querySelectorAll('.product-row-checkbox');
-            const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
+        // التحديد المتعدد والحذف الجماعي — استخدام تفويض الأحداث (delegation) ليعمل "تحديد الكل" بعد تحديث الجدول (مثلاً 100 عنصر)
+        function updateBulkUI() {
+            const tbody = document.getElementById('products-tbody');
+            const checkboxes = tbody ? tbody.querySelectorAll('.product-row-checkbox') : [];
+            const checked = tbody ? tbody.querySelectorAll('.product-row-checkbox:checked') : [];
+            const n = checked.length;
+            const total = checkboxes.length;
             const bulkCountSpan = document.getElementById('bulk-selected-count');
-            const bulkDeleteForm = document.getElementById('bulk-delete-form');
-            const bulkIdsInput = document.getElementById('bulk-delete-ids-input');
-
-            function updateBulkUI() {
-                const checked = document.querySelectorAll('.product-row-checkbox:checked');
-                const n = checked.length;
-                if (bulkCountSpan) bulkCountSpan.textContent = n;
-                if (bulkDeleteBtn) bulkDeleteBtn.style.display = n ? 'inline-block' : 'none';
-                if (selectAll) selectAll.checked = checkboxes.length > 0 && checked.length === checkboxes.length;
-                if (selectAll) selectAll.indeterminate = n > 0 && n < checkboxes.length;
-            }
-
+            const bulkDeleteBtn = document.getElementById('bulk-delete-btn');
+            const selectAll = document.getElementById('select-all-products');
+            if (bulkCountSpan) bulkCountSpan.textContent = n;
+            if (bulkDeleteBtn) bulkDeleteBtn.style.display = n ? 'inline-block' : 'none';
             if (selectAll) {
-                selectAll.addEventListener('change', function() {
-                    checkboxes.forEach(cb => { cb.checked = selectAll.checked; });
-                    updateBulkUI();
-                });
+                selectAll.checked = total > 0 && n === total;
+                selectAll.indeterminate = n > 0 && n < total;
             }
-            document.querySelectorAll('.product-row-checkbox').forEach(cb => {
-                cb.addEventListener('change', updateBulkUI);
+        }
+
+        function bindBulkDeleteEvents() {
+            updateBulkUI();
+            // لا نضيف مستمعين جدد لكل صف — نعتمد على المستمع المفوض على الجدول
+        }
+
+        // مستمع واحد على الجدول (لا يُستبدل عند AJAX) ليعمل مع أي عدد من الصفوف
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.getElementById('products-table');
+            if (!table) return;
+            table.addEventListener('change', function(e) {
+                if (e.target.id === 'select-all-products') {
+                    const tbody = document.getElementById('products-tbody');
+                    const checkboxes = tbody ? tbody.querySelectorAll('.product-row-checkbox') : [];
+                    checkboxes.forEach(function(cb) { cb.checked = e.target.checked; });
+                    updateBulkUI();
+                } else if (e.target.classList && e.target.classList.contains('product-row-checkbox')) {
+                    updateBulkUI();
+                }
             });
             updateBulkUI();
-        }
+        });
 
         // زر الحذف الجماعي (مرة واحدة فقط) — نضيف ids[] قبل الإرسال حتى يستقبل الخادم مصفوفة
         document.addEventListener('DOMContentLoaded', function() {
