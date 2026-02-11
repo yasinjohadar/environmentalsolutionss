@@ -37,6 +37,11 @@ use App\Http\Controllers\Admin\HomePageContentController;
 */
 
 Route::middleware(['auth', 'check.user.active'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard (لوحة التحكم الرئيسية)
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+
     // Hero Slider routes
     Route::resource('hero-slides', HeroSlideController::class);
 

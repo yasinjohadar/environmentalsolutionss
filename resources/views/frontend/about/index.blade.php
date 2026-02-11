@@ -21,7 +21,8 @@
         <div class="row align-items-center g-4 mb-5 pb-5 border-bottom border-neutral-100">
             <div class="col-lg-6 order-2 order-lg-1">
                 <h2 class="h3 mb-4 fw-bold">تأسيسنا</h2>
-                <p class="text-neutral-600 mb-2">تأسست شركتنا بتاريخ <strong>10/12/2025</strong> انطلاقًا من إيماننا بأهمية الإدارة السليمة للنفايات الإلكترونية ودورها الحيوي في حماية البيئة وتعزيز الاستدامة.</p>
+                <p class="text-neutral-600 mb-3">تأسس مشروع E-Parts Library – مكتبة الأجزاء الإلكترونية كمبادرة من فريق E-Parts لإدارة النفايات الإلكترونية، استجابةً للتزايد الكبير في حجم النفايات الإلكترونية وغياب منظومة رسمية لإدارتها محليًا، وما يرافق ذلك من مخاطر بيئية وصحية وهدر للموارد التقنية.</p>
+                <p class="text-neutral-600 mb-0">انطلق المشروع بدعم من مؤسسة الابتكار الإنساني في الميدان – Field Ready for Humanitarian Innovation، وبالشراكة مع منظمة ورلد فيجن إنترناشونال – استجابة سوريا (WVSR) و Response Innovation Lab (RIL)، ليقدّم نموذجًا يجمع بين الحل البيئي، والتعليم التقني، والتمكين المجتمعي عبر نظام متكامل لجمع وفرز وتأهيل الأجزاء الإلكترونية وتحويلها إلى قيمة مستدامة تخدم المجتمع والبيئة معًا.</p>
             </div>
             <div class="col-lg-6 order-1 order-lg-2">
                 <div class="rounded-3 overflow-hidden shadow-sm slideinright" data-scroll-ani>
@@ -33,17 +34,12 @@
         {{-- 2. ما نقدمه (صورة ثم نص) --}}
         <div class="row align-items-center g-4 mb-5 pb-5 border-bottom border-neutral-100">
             <div class="col-lg-6 order-2 order-lg-2">
-                <h2 class="h3 mb-4 fw-bold">ما نقدمه</h2>
-                <p class="text-neutral-600 mb-3">نحن شركة متخصصة في جمع وشراء النفايات الإلكترونية بمختلف أنواعها، ونعمل على تقييمها وفرزها بعناية، حيث يتم:</p>
-                <ul class="list-unstyled text-neutral-600">
-                    <li class="mb-2 d-flex align-items-start gap-2"><i class="fas fa-check text-base mt-1 flex-shrink-0"></i> إعادة إصلاح وتجديد الأجهزة القابلة للاستخدام وطرحها مجددًا في السوق،</li>
-                    <li class="mb-2 d-flex align-items-start gap-2"><i class="fas fa-check text-base mt-1 flex-shrink-0"></i> أو التخلص الآمن والمسؤول من الأجهزة غير القابلة للإصلاح عبر قنوات معتمدة وصديقة للبيئة.</li>
-                </ul>
-                <p class="text-neutral-600 mb-0">تشمل أنشطتنا التعامل مع الأجهزة الإلكترونية المختلفة مثل الحواسيب، الهواتف، الشاشات، المعدات الإلكترونية وملحقاتها، سواء من الأفراد أو الشركات.</p>
+                <h2 class="h3 mb-4 fw-bold">ما نقدّمه</h2>
+                <p class="text-neutral-600 mb-0">نقدّم من خلال مشروع E-Parts Library – مكتبة الأجزاء الإلكترونية نموذجًا عمليًا ومستدامًا للتعامل مع النفايات الإلكترونية، حيث نقوم بجمع الأجهزة التالفة، وفرزها، وتفكيكها بشكل آمن، ثم إعادة تأهيل الأجزاء الصالحة وتحويلها إلى موارد تعليمية وتقنية متاحة للطلاب، والمبتكرين، وروّاد المشاريع الصغيرة. كما نوفر برامج تدريب وبناء قدرات في مجالات التفكيك، الإصلاح، وإعادة الاستخدام الإبداعي (Upcycling)، مع الالتزام الكامل بمعايير السلامة البيئية والمهنية.</p>
             </div>
             <div class="col-lg-6 order-1 order-lg-1">
                 <div class="rounded-3 overflow-hidden shadow-sm slideinleft" data-scroll-ani>
-                    <img src="{{ asset('frontend/assets/img/normal/about_2-1.jpg') }}" alt="ما نقدمه" class="w-100" style="height: 320px; object-fit: cover;">
+                    <img src="{{ asset('frontend/assets/img/normal/about_2-1.jpg') }}" alt="ما نقدّمه" class="w-100" style="height: 320px; object-fit: cover;">
                 </div>
             </div>
         </div>
@@ -52,7 +48,7 @@
         <div class="row align-items-center g-4 mb-5 pb-5 border-bottom border-neutral-100">
             <div class="col-lg-6 order-2 order-lg-1">
                 <h2 class="h3 mb-4 fw-bold">رؤيتنا</h2>
-                <p class="text-neutral-600 mb-0">أن نكون جزءًا فاعلًا في بناء مستقبل أكثر استدامة من خلال تقليل الأثر البيئي للنفايات الإلكترونية وتعزيز ثقافة إعادة الاستخدام والإدارة المسؤولة للموارد التقنية.</p>
+                <p class="text-neutral-600 mb-0">نطمح إلى مستقبلٍ تتحول فيه النفايات الإلكترونية من عبءٍ بيئي وصحي إلى فرصة للتعلّم والابتكار والتنمية المستدامة، وأن تصبح مكتبة الأجزاء الإلكترونية نموذجًا رائدًا محليًا يمكن تعميمه في سوريا والمنطقة، يربط بين حماية البيئة، والتعليم التقني، والتمكين المجتمعي.</p>
             </div>
             <div class="col-lg-6 order-1 order-lg-2">
                 <div class="rounded-3 overflow-hidden shadow-sm slideinright" data-scroll-ani>
@@ -65,13 +61,7 @@
         <div class="row align-items-center g-4 mb-5 pb-5 border-bottom border-neutral-100">
             <div class="col-lg-6 order-2 order-lg-2">
                 <h2 class="h3 mb-4 fw-bold">رسالتنا</h2>
-                <p class="text-neutral-600 mb-3">نسعى إلى تقديم حلول عملية وموثوقة في مجال إدارة النفايات الإلكترونية، عبر:</p>
-                <ul class="list-unstyled text-neutral-600">
-                    <li class="mb-2 d-flex align-items-start gap-2"><i class="fas fa-arrow-left text-base mt-1 flex-shrink-0"></i> جمعها بطرق منظمة ومسؤولة،</li>
-                    <li class="mb-2 d-flex align-items-start gap-2"><i class="fas fa-arrow-left text-base mt-1 flex-shrink-0"></i> إعادة تأهيل الأجهزة القابلة للإصلاح وإعادتها إلى دورة الاستخدام،</li>
-                    <li class="mb-2 d-flex align-items-start gap-2"><i class="fas fa-arrow-left text-base mt-1 flex-shrink-0"></i> والتخلص الآمن من الأجهزة غير الصالحة،</li>
-                </ul>
-                <p class="text-neutral-600 mb-0">بما يحقق التوازن بين حماية البيئة وتلبية احتياجات المجتمع.</p>
+                <p class="text-neutral-600 mb-0">رسالتنا هي تقليل الأثر البيئي للنفايات الإلكترونية عبر حلول عملية ومبتكرة، وتعزيز الوعي المجتمعي بمخاطرها، وتوفير بدائل آمنة ومستدامة تُمكّن الشباب والطلاب من الوصول إلى موارد تقنية منخفضة التكلفة، مع ضمان إدارة شفافة ومسؤولة لجميع مراحل الجمع والمعالجة وإعادة الاستخدام.</p>
             </div>
             <div class="col-lg-6 order-1 order-lg-1">
                 <div class="rounded-3 overflow-hidden shadow-sm slideinleft" data-scroll-ani>
@@ -84,27 +74,27 @@
         <div class="row align-items-center g-4 mb-0">
             <div class="col-lg-6 order-2 order-lg-1">
                 <h2 class="h3 mb-4 fw-bold">قيمنا</h2>
-                <p class="text-neutral-600 mb-4">نلتزم في جميع أعمالنا بمجموعة من القيم الأساسية، أبرزها:</p>
+                <p class="text-neutral-600 mb-4">نؤمن بأن العمل البيئي الناجح يقوم على:</p>
                 <ul class="list-unstyled text-neutral-600">
                     <li class="mb-3">
-                        <strong class="d-block mb-1">المسؤولية البيئية:</strong>
-                        <span>الالتزام بالممارسات التي تحافظ على البيئة وتحد من التلوث.</span>
+                        <strong class="d-block mb-1">الاستدامة:</strong>
+                        <span>حلول طويلة الأمد تحمي البيئة وتدعم المجتمع.</span>
                     </li>
                     <li class="mb-3">
-                        <strong class="d-block mb-1">الاستدامة:</strong>
-                        <span>دعم إعادة الاستخدام وتقليل الهدر الإلكتروني.</span>
+                        <strong class="d-block mb-1">السلامة:</strong>
+                        <span>أولوية قصوى للصحة المهنية والبيئية في جميع مراحل العمل.</span>
                     </li>
                     <li class="mb-3">
                         <strong class="d-block mb-1">الشفافية:</strong>
-                        <span>الوضوح في التعامل مع شركائنا وعملائنا.</span>
+                        <span>توثيق وتتبع واضح لكل جهاز وقطعة.</span>
                     </li>
                     <li class="mb-3">
-                        <strong class="d-block mb-1">الجودة:</strong>
-                        <span>الحرص على فحص وإصلاح الأجهزة وفق معايير مناسبة قبل إعادة طرحها.</span>
+                        <strong class="d-block mb-1">التمكين:</strong>
+                        <span>دعم التعليم التقني والابتكار الشبابي.</span>
                     </li>
                     <li class="mb-0">
-                        <strong class="d-block mb-1">الالتزام المجتمعي:</strong>
-                        <span>المساهمة في نشر الوعي حول مخاطر النفايات الإلكترونية وأهمية إدارتها بشكل صحيح.</span>
+                        <strong class="d-block mb-1">المسؤولية المجتمعية:</strong>
+                        <span>شراكة حقيقية مع الأفراد والمؤسسات المحلية.</span>
                     </li>
                 </ul>
             </div>

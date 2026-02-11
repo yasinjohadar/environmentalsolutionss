@@ -39,6 +39,9 @@ Route::get('/products', [\App\Http\Controllers\Frontend\ProductController::class
 Route::get('/products/{slug}', [\App\Http\Controllers\Frontend\ProductController::class, 'show'])->name('frontend.products.show');
 Route::get('/categories', [\App\Http\Controllers\Frontend\CategoryController::class, 'index'])->name('frontend.categories.index');
 Route::get('/about', [\App\Http\Controllers\Frontend\AboutController::class, 'index'])->name('frontend.about.index');
+Route::get('/work-stages', fn () => view('frontend.pages.work-stages'))->name('frontend.work-stages.index');
+Route::get('/privacy-policy', fn () => view('frontend.pages.privacy'))->name('frontend.privacy.index');
+Route::get('/terms', fn () => view('frontend.pages.terms'))->name('frontend.terms.index');
 
 Route::get('/ewaste/request', [\App\Http\Controllers\Frontend\EwasteRequestController::class, 'create'])->name('frontend.ewaste.request');
 Route::post('/ewaste', [\App\Http\Controllers\Frontend\EwasteRequestController::class, 'store'])->name('frontend.ewaste.store');
@@ -47,7 +50,7 @@ Route::get('/contact', [\App\Http\Controllers\Frontend\ContactController::class,
 Route::post('/contact', [\App\Http\Controllers\Frontend\ContactController::class, 'store'])->name('frontend.contact.store');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'check.user.active'])->group(function () {

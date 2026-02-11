@@ -48,7 +48,7 @@
                     <a class="nav-link" data-bs-toggle="tab" href="#tab-social">وسائل التواصل</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" href="#tab-contact">التواصل</a>
+                    <a class="nav-link" data-bs-toggle="tab" href="#tab-contact">التواصل (هاتف، بريد، عنوان)</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-bs-toggle="tab" href="#tab-footer">الفوتر</a>
@@ -57,6 +57,8 @@
                     <a class="nav-link" data-bs-toggle="tab" href="#tab-meta">JSON للتطوير</a>
                 </li>
             </ul>
+
+            <p class="text-muted small mb-3">لتعديل الهاتف والبريد الإلكتروني والعنوان الظاهرة في الموقع والفوتر، استخدم تبويب <strong>«التواصل (هاتف، بريد، عنوان)»</strong> أعلاه.</p>
 
             <div class="tab-content">
                 {{-- عام --}}

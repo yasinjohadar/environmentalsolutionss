@@ -16,6 +16,7 @@
     @stack('meta')
 </head>
 <body class="body-white bg-white @yield('body_class')">
+    @if(trim($__env->yieldContent('body_class')) !== 'page-home')
     <div class="preloader">
         <div class="preloader-inner">
             <span class="loader"></span>
@@ -69,6 +70,7 @@
             </div>
         </div>
     </header>
+    @endif
 
     @yield('content')
 

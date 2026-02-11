@@ -4,91 +4,10 @@ $h = $homeContent ?? [];
 $homeUrl = function($key, $default = '') use ($h) { $path = data_get($h, $key); return $path ? \App\Models\HomePageSetting::imageUrl($path) : ($default ? asset($default) : null); };
 $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
 @endphp
-<!doctype html>
-<html class="no-js" dir="rtl" lang="ar">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{ $s?->site_name ?? 'إعادة تدوير النفايات الإلكترونية' }} - حلول بيئية متكاملة</title>
-    <meta name="description" content="خدمات إعادة تدوير النفايات الإلكترونية بأمان - جمع، إتلاف بيانات، إعادة تدوير وفق المعايير البيئية">
-    <meta name="keywords" content="إعادة تدوير، نفايات إلكترونية، التخلص الآمن، السعودية">
-    <meta name="robots" content="INDEX,FOLLOW">
-
-    <!-- Mobile Specific Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ $s?->favicon_url ?? asset('frontend/assets/img/favicons/favicon.png') }}">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="theme-color" content="#ffffff">
-
-    <!--==============================
-	  Google Fonts
-	============================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
-
-
-
-    <!--==============================
-	    All CSS File
-	============================== -->
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="frontend/assets/css/bootstrap.min.css">
-    <!-- Fontawesome Icon -->
-    <link rel="stylesheet" href="frontend/assets/css/fontawesome.min.css">
-    <!-- Magnific Popup -->
-    <link rel="stylesheet" href="frontend/assets/css/magnific-popup.min.css">
-    <!-- Slick Slider -->
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/slick.min.css') }}">
-    <!-- Swiper -->
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/swiper.css') }}">
-    <!-- Theme Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
-    <style>
-    /* حركات بسيطة عند التمرير */
-    .animate-on-scroll {
-        opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .animate-on-scroll.animate-in {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    .animate-on-scroll.animate-from-start {
-        transform: translateY(24px) translateX(20px);
-    }
-    .animate-on-scroll.animate-from-start.animate-in {
-        transform: translateY(0) translateX(0);
-    }
-    .animate-on-scroll.animate-from-end {
-        transform: translateY(24px) translateX(-20px);
-    }
-    .animate-on-scroll.animate-from-end.animate-in {
-        transform: translateY(0) translateX(0);
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .animate-on-scroll, .animate-on-scroll.animate-in,
-        .animate-on-scroll.animate-from-start, .animate-on-scroll.animate-from-start.animate-in,
-        .animate-on-scroll.animate-from-end, .animate-on-scroll.animate-from-end.animate-in {
-            transition: none; opacity: 1; transform: none;
-        }
-    }
-    </style>
-
-</head>
-
-<body class="body-white bg-white page-home">
-    <!--********************************
-   		Code Start From Here 
-	******************************** -->
-
-
-
-
+@extends('frontend.layouts.app')
+@section('title', ($s?->site_name ?? 'إعادة تدوير النفايات الإلكترونية') . ' - حلول بيئية متكاملة')
+@section('body_class', 'page-home')
+@section('content')
     <!--==============================
      Preloader
     ==============================-->
@@ -1051,47 +970,54 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
         </div>
     </section>
     <!-- ================================= Blog Section End =============================== -->
+@endsection
 
-    @include('frontend.partials.footer')
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/magnific-popup.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/slick.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/swiper.css') }}">
+    <style>
+    /* حركات بسيطة عند التمرير */
+    .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .animate-on-scroll.animate-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .animate-on-scroll.animate-from-start {
+        transform: translateY(24px) translateX(20px);
+    }
+    .animate-on-scroll.animate-from-start.animate-in {
+        transform: translateY(0) translateX(0);
+    }
+    .animate-on-scroll.animate-from-end {
+        transform: translateY(24px) translateX(-20px);
+    }
+    .animate-on-scroll.animate-from-end.animate-in {
+        transform: translateY(0) translateX(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .animate-on-scroll, .animate-on-scroll.animate-in,
+        .animate-on-scroll.animate-from-start, .animate-on-scroll.animate-from-start.animate-in,
+        .animate-on-scroll.animate-from-end, .animate-on-scroll.animate-from-end.animate-in {
+            transition: none; opacity: 1; transform: none;
+        }
+    }
+    </style>
+@endpush
 
-    <!--********************************
-			Code End  Here 
-	******************************** -->
-
-    <!-- Scroll To Top -->
-    <div class="scroll-top">
-        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"
-                style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;">
-            </path>
-        </svg>
-    </div>
-
-    <!--==============================
-    All Js File
-    ============================== -->
-    <!-- Jquery -->
-    <script src="frontend/assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <!-- Slick Slider -->   
-    <script src="frontend/assets/js/slick.min.js"></script>
-    <!-- Range Slider -->
-    <script src="frontend/assets/js/jquery-ui.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="frontend/assets/js/bootstrap.min.js"></script>
-    <!-- Magnific Popup -->
-    <script src="frontend/assets/js/jquery.magnific-popup.min.js"></script>
-    <!-- Counter Up -->
-    <script src="frontend/assets/js/jquery.counterup.min.js"></script>
-    <!-- Marquee -->
-    <script src="frontend/assets/js/jquery.marquee.min.js"></script>
-    <!-- Isotope Filter -->
-    <script src="frontend/assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="frontend/assets/js/isotope.pkgd.min.js"></script>
-
-    <!-- Swiper -->
+@push('scripts')
+    <script src="{{ asset('frontend/assets/js/slick.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/jquery.marquee.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/swiper.js') }}"></script>
-    <!-- Main Js File -->
-    <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
     <script>
     (function() {
         var els = document.querySelectorAll('.animate-on-scroll');
@@ -1127,6 +1053,4 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
         });
     </script>
     @endif
-</body>
-
-</html>
+@endpush

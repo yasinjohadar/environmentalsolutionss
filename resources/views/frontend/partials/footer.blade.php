@@ -1,6 +1,9 @@
-@php $s = $siteSettings ?? null; @endphp
+@php
+$s = $siteSettings ?? null;
+$footerBgUrl = $s?->footer_background_url ?? asset('frontend/assets/img/HomeCone/footer-bg.png');
+@endphp
 <!-- ================================= Footer Section Start =============================== -->
-<section class="homeCone-footer bg-img bg-overlay style-three position-relative z-index-3" data-background-image="{{ $s?->footer_background_url ?? asset('frontend/assets/img/HomeCone/footer-bg.png') }}">
+<section class="homeCone-footer bg-img bg-overlay style-three position-relative z-index-3" data-background-image="{{ $footerBgUrl }}" style="background-image: url('{{ $footerBgUrl }}');">
 
     <ul class="animation-line d-none d-md-flex justify-content-between">
         <li class="animation-line__item"></li>
@@ -42,6 +45,9 @@
                             </li>
                             <li>
                                 <a href="{{ route('frontend.about.index') }}" class="hover-action text-neutral-30 hover-text-base-two">من نحن</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('frontend.work-stages.index') }}" class="hover-action text-neutral-30 hover-text-base-two">مراحل عمل المشروع</a>
                             </li>
                             <li>
                                 <a href="{{ route('frontend.products.index') }}" class="hover-action text-neutral-30 hover-text-base-two">المنتجات</a>
@@ -126,8 +132,8 @@
             <p class="text-neutral-20">جميع الحقوق محفوظة &copy; {{ date('Y') }} <span class="fw-semibold text-base-two">{{ $s?->site_name ?? 'إعادة تدوير النفايات الإلكترونية' }}</span></p>
             <div class="d-flex align-items-center gap-4 flex-wrap">
                 <a href="javascript:void(0)" class="text-white hover-text-base">المساعدة</a>
-                <a href="javascript:void(0)" class="text-white hover-text-base">سياسة الخصوصية</a>
-                <a href="javascript:void(0)" class="text-white hover-text-base">الشروط والأحكام</a>
+                <a href="{{ route('frontend.privacy.index') }}" class="text-white hover-text-base">سياسة الخصوصية</a>
+                <a href="{{ route('frontend.terms.index') }}" class="text-white hover-text-base">الشروط والأحكام</a>
             </div>
         </div>
     </div>

@@ -34,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
             'frontend.ewaste.*',
             'frontend.products.*',
             'frontend.categories.*',
+            'frontend.contact.*',
+            'frontend.about.*',
             'frontend.partials.*',
         ], function ($view) {
             try {
