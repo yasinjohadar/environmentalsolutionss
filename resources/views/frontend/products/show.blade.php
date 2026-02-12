@@ -28,7 +28,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 /* مصغرات أسفل الصورة الرئيسية */
 .product-thumbs {
@@ -64,6 +64,15 @@
   inset-inline-end: auto !important;
   inset-inline-start: auto !important;
   margin-top: 0 !important;
+}
+.btn-whatsapp-inquire {
+  background-color: #25D366 !important;
+  color: #fff !important;
+  border: none !important;
+}
+.btn-whatsapp-inquire:hover {
+  background-color: #20bd5a !important;
+  color: #fff !important;
 }
     </style>
 @endpush
@@ -230,7 +239,15 @@
                     </div>
                 @endif
 
-                <a href="{{ url('contact.html') }}" class="btn btn-primary px-4 rounded-2 global-btn">استفسار عن المنتج</a>
+                @php
+                    $waNumber = $siteSettings?->whatsapp_number ?? $siteSettings?->phone ?? null;
+                    $waDigits = $waNumber ? preg_replace('/[^0-9]/', '', $waNumber) : '';
+                    $waText = rawurlencode('مرحباً، أود الاستفسار عن المنتج: ' . ($product->name ?? ''));
+                    $waLink = $waDigits ? ('https://wa.me/' . $waDigits . ($waText ? '?text=' . $waText : '')) : route('frontend.contact.index');
+                @endphp
+                <a href="{{ $waLink }}" target="{{ $waDigits ? '_blank' : '_self' }}" rel="{{ $waDigits ? 'noopener' : '' }}" class="btn btn-whatsapp-inquire px-4 rounded-2 global-btn d-inline-flex align-items-center gap-2">
+                    <i class="fab fa-whatsapp fs-5"></i> استفسار عن المنتج
+                </a>
             </div>
         </div>
 
