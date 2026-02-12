@@ -495,6 +495,8 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                                 <img src="{{ $homeUrl('choose_us.image1', 'frontend/assets/img/HomeCone/choose-us-img1.png') }}" alt="إعادة تدوير النفايات الإلكترونية" class="choose-us-thumbs__one radius-16-px w-100">
                             </div>
                             <div class="col-sm-4">
+                                {{-- صندوق عدد العملاء — مخفي حالياً، يمكن إظهاره لاحقاً بتفعيل الشرط --}}
+                                @if(false)
                                 <div class="bg-base-two radius-12-px text-center py-32-px px-12-px mb-24 mb-16-px">    
                                     <h2 class="mb-16 d-flex"> <span class="counter-number">75</span>K+</h2>
                                     <span class="text-neutral-700 mb-16-px d-block fw-medium">عميل واثق من خدماتنا</span>
@@ -506,6 +508,7 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                                         @endfor
                                     </div>
                                 </div>
+                                @endif
 
                                 <img src="{{ $homeUrl('choose_us.image2', 'frontend/assets/img/HomeCone/choose-us-img2.png') }}" alt="" class="choose-us-thumbs__two radius-16-px w-100">
                             </div>
@@ -587,15 +590,21 @@ $homeText = fn($key, $default = '') => e(data_get($h, $key) ?: $default);
                         <a href="service.html" class="global-btn arrow-btn fw-bold style2 text-base-two px-4 radius-8 d-flex align-items-center gap-2">
                             اقرأ المزيد <i class="fas fa-arrow-right rotate-icon"></i>
                         </a>
+                        @php
+                            $waNumber = $s?->whatsapp_number ?: $s?->phone;
+                            $waLink = $waNumber ? 'https://wa.me/' . preg_replace('/[^0-9]/', '', $waNumber) : null;
+                        @endphp
+                        @if($waLink)
                         <div class="d-flex align-items-center gap-4">
-                            <span class="w-56-px h-56-px d-flex justify-content-center align-items-center radius-8 bg-brand text-neutral-700 text-2xl">
-                                <i class="fas fa-headset"></i>
-                            </span>
+                            <a href="{{ $waLink }}" target="_blank" rel="noopener" class="w-56-px h-56-px d-flex justify-content-center align-items-center radius-8 bg-brand text-neutral-700 text-2xl hover-text-base-two" title="واتساب">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
                             <div class="">
                                 <span class="text-neutral-700 d-block">تواصل معنا</span>
-                                <a href="tel:205-555-0100" class="text-neutral-700 fw-semibold text-lg d-block hover-text-brand">(205) 555-0100</a>
+                                <a href="{{ $waLink }}" target="_blank" rel="noopener" class="text-neutral-700 fw-semibold text-lg d-block hover-text-brand">{{ $s?->whatsapp_number ?: $s?->phone }}</a>
                             </div>
                         </div>
+                        @endif
                     </div>
 
                 </div>
